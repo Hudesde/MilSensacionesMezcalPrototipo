@@ -77,13 +77,19 @@
         }
 
         // =====================================================================
-        // 2. MOMENTO EXCLUSIVO EN PROCESO.HTML: ESCENARIO 3D "DEL MAGUEY A LA COPA"
-        //    (Único lugar donde vive el motor 3D de 7 esculturas MezcalParticleStage)
+        // 2. MOMENTO EN PROCESO.HTML: GUÍA SCROLLYTELLING "DEL MAGUEY A LA COPA"
+        //    (Nota: Las animaciones con partículas 3D MezcalParticleStage han sido
+        //    desactivadas y comentadas por rendimiento para asegurar fluidez y bajo consumo).
         // =====================================================================
         const journeySection = document.querySelector('[data-journey]');
         const journeyCanvas = document.getElementById('journey-particle-canvas');
 
-        if (journeySection && journeyCanvas && typeof window.MezcalParticleStage === 'function') {
+        if (journeySection) {
+            /* =================================================================
+             * CONFIGURACIÓN Y MOTOR DE PARTÍCULAS 3D (DESACTIVADO POR RENDIMIENTO)
+             * Para reactivar: descomentar este bloque, el script particles-stage.js
+             * y el elemento canvas en proceso.html
+             * =================================================================
             const DESKTOP_PANELS = [
                 { pose: 0, x: 0.0, y:  0.02, scale: 1.24, rx: 0.18, ry: -0.26, rz: -0.06, spin: 0.14, alpha: 0.96 }, // 01 Jima (Maguey)
                 { pose: 1, x: 0.0, y:  0.04, scale: 1.22, rx: 0.24, ry:  0.28, rz: -0.08, spin: 0.12, alpha: 0.96 }, // 02 Cocción (Horno)
@@ -102,10 +108,15 @@
                 alpha: 0.94
             }));
 
-            const stage = new window.MezcalParticleStage(journeyCanvas, {
-                panels: DESKTOP_PANELS,
-                mobilePanels: MOBILE_PANELS
-            });
+            let stage = null;
+            if (journeyCanvas && typeof window.MezcalParticleStage === 'function') {
+                stage = new window.MezcalParticleStage(journeyCanvas, {
+                    panels: DESKTOP_PANELS,
+                    mobilePanels: MOBILE_PANELS
+                });
+            }
+            ================================================================= */
+            const stage = null; // Partículas desactivadas para evitar saturación de CPU/GPU
 
             const chapters = Array.from(journeySection.querySelectorAll('[data-journey-step]'));
             const navPills = Array.from(journeySection.querySelectorAll('[data-journey-pill]'));
@@ -135,6 +146,16 @@
                 ]
             };
 
+            const STAGE_ICONS = [
+                'fa-seedling',           // 01 Jima
+                'fa-fire',               // 02 Horno
+                'fa-gear',               // 03 Molienda
+                'fa-droplet',            // 04 Fermentación
+                'fa-flask',              // 05 Alambique
+                'fa-wine-bottle',        // 06 Envasado
+                'fa-champagne-glasses'   // 07 Copa
+            ];
+
             function setActiveChapterUI(idx, rawProgress) {
                 const clampedIdx = Math.max(0, Math.min(chapters.length - 1, idx));
                 const lang = document.documentElement.lang === 'en' ? 'en' : 'es';
@@ -152,14 +173,22 @@
                     const pct = Math.max(8, Math.min(100, Math.round(rawProgress * 100)));
                     progressBarEl.style.width = `${pct}%`;
                 }
+                const iconEl = document.getElementById('journey-stage-icon');
+                if (iconEl && STAGE_ICONS[clampedIdx]) {
+                    iconEl.className = `fa-solid ${STAGE_ICONS[clampedIdx]} text-3xl sm:text-4xl text-mezcal-gold`;
+                }
+                const stepTagEl = document.getElementById('journey-stage-step-tag');
+                if (stepTagEl) {
+                    stepTagEl.textContent = `Etapa 0${clampedIdx + 1} de 07`;
+                }
             }
 
-            // Clic en las píldoras numeradas (01..07) cambia la escultura al instante y desplaza al capítulo
+            // Clic en las píldoras numeradas (01..07) desplaza al capítulo correspondiente
             navPills.forEach((pill, idx) => {
                 pill.addEventListener('click', () => {
                     const targetChapter = chapters[idx];
                     const p = chapters.length > 1 ? idx / (chapters.length - 1) : 0;
-                    stage.setProgress(p);
+                    // if (stage) stage.setProgress(p); // Partículas desactivadas
                     setActiveChapterUI(idx, p);
                     if (!targetChapter) return;
                     const offset = window.innerWidth < 1024 ? -340 : -130;
@@ -171,11 +200,11 @@
                 });
             });
 
-            // Calcular el progreso exacto y mantener el escenario 3D siguiendo el scroll en todo el recorrido
+            // Calcular el progreso exacto y mantener la tarjeta siguiendo el scroll en todo el recorrido
             const syncJourneyFromScroll = () => {
                 if (!chapters.length) return;
 
-                // En pantallas >= 768px (2 columnas), trasladamos físicamente la tarjeta 3D junto con el scroll
+                // En pantallas >= 768px (2 columnas), trasladamos físicamente la tarjeta junto con el scroll
                 if (journeyRow && stickyStage) {
                     if (window.innerWidth >= 768) {
                         const rowRect = journeyRow.getBoundingClientRect();
@@ -199,7 +228,7 @@
                 const currentOffset = anchorY - (firstRect.top + firstRect.height * 0.5);
                 const p = Math.max(0, Math.min(1, currentOffset / totalSpan));
 
-                stage.setProgress(p);
+                // if (stage) stage.setProgress(p); // Partículas desactivadas
                 const activeIdx = Math.round(p * (chapters.length - 1));
                 setActiveChapterUI(activeIdx, p);
             };
@@ -209,33 +238,37 @@
                     trigger: journeySection,
                     start: 'top bottom',
                     end: 'bottom top',
+                    /* Partículas desactivadas por rendimiento:
                     onEnter: () => {
-                        stage.start();
-                        stage.burst();
+                        if (stage) { stage.start(); stage.burst(); }
                     },
-                    onEnterBack: () => stage.start(),
-                    onLeave: () => stage.stop(),
-                    onLeaveBack: () => stage.stop(),
+                    onEnterBack: () => { if (stage) stage.start(); },
+                    onLeave: () => { if (stage) stage.stop(); },
+                    onLeaveBack: () => { if (stage) stage.stop(); },
+                    */
                     onUpdate: () => syncJourneyFromScroll()
                 });
             }
 
             window.addEventListener('scroll', syncJourneyFromScroll, { passive: true });
-            stage.start();
+            // if (stage) stage.start(); // Partículas desactivadas
             syncJourneyFromScroll();
 
             window.addEventListener('resize', () => {
-                stage.resize();
+                // if (stage) stage.resize(); // Partículas desactivadas
                 syncJourneyFromScroll();
             }, { passive: true });
+
+            /* Partículas desactivadas por rendimiento:
             if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
                 journeySection.addEventListener('pointermove', (e) => {
                     const rect = journeySection.getBoundingClientRect();
                     const px = (e.clientX - rect.left) / Math.max(1, rect.width) - 0.5;
                     const py = (e.clientY - rect.top) / Math.max(1, rect.height) - 0.5;
-                    stage.setPointer(px, py);
+                    if (stage) stage.setPointer(px, py);
                 }, { passive: true });
             }
+            */
         }
 
         // =====================================================================

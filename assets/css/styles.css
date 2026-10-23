@@ -870,12 +870,14 @@ dialog.mezcal-dialog::backdrop {
     }
 }
 
+/* Animación de partículas comentada por rendimiento:
 #journey-particle-canvas {
     width: 100%;
     height: 100%;
     display: block;
     mix-blend-mode: screen;
 }
+*/
 
 /* Capítulo activo del Scrollytelling en proceso.html */
 [data-journey-step] {
