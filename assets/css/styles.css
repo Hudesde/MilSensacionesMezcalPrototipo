@@ -1,0 +1,952 @@
+/* ==========================================================================
+   Mezcal Artesanal "Mil Sensaciones" — Hoja de Estilos Global
+   Desarrollado por: Ing. en Computación Jose Ramon Aragon Toledo
+   Sistema de 4 Paletas Demostrativas Intercambiables:
+     1. natural (Principal: Equilibrio Tierra, Verde Maguey y Madera)
+     2. tierra  (Enfocada 100% en Tierra Oaxaqueña, Adobe y Barro de Horno)
+     3. maguey  (Enfocada 100% en Verdes de la Penca del Maguey Silvestre)
+     4. cobre   (Enfocada 100% en Cobre de Alambique y Madera de Barricas)
+   Tipografía Oficial: Script "Great Vibes" (Mezcal) + Serif "Cormorant Garamond" (Mil SENSACIONES)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&display=swap');
+
+/* 1. Cross-Document View Transitions (MPA) */
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    }
+
+    ::view-transition-old(root) {
+        animation: 0.35s ease-in both mezcal-fade-out;
+    }
+
+    ::view-transition-new(root) {
+        animation: 0.45s ease-out both mezcal-fade-in;
+    }
+}
+
+@keyframes mezcal-fade-out {
+    to {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes mezcal-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+}
+
+/* ==========================================================================
+   2. SISTEMA DE 4 PALETAS DEMOSTRATIVAS INTERCAMBIABLES
+   ========================================================================== */
+
+/* PALETA 1 (PRINCIPAL): Equilibrio Natural (Tierra, Verde Maguey y Madera) */
+:root,
+html[data-palette="natural"] {
+    color-scheme: dark;
+    --mezcal-dark: #160f09;
+    --mezcal-wood: #281910;
+    --mezcal-wood-border: #4a2f1d;
+    --mezcal-charcoal: #23160e;
+    --mezcal-earth: #8b5a2b;
+    --mezcal-earth-deep: #5c3a21;
+    --mezcal-agave: #4b6043;
+    --mezcal-agave-light: #6c8663;
+    --mezcal-agave-deep: #2d4028;
+    --mezcal-gold: #d4af37;
+    --mezcal-light: #f4f1ea;
+    --vignette-top: rgba(22, 15, 9, 0.92);
+    --vignette-mid-a: rgba(38, 24, 15, 0.30);
+    --vignette-mid-b: rgba(45, 64, 40, 0.24);
+}
+
+/* PALETA 2: Tierra Oaxaqueña (Barro Cocido, Arcilla de Horno Cónico y Ocre) */
+html[data-palette="tierra"] {
+    color-scheme: dark;
+    --mezcal-dark: #1b0f0a;
+    --mezcal-wood: #311b11;
+    --mezcal-wood-border: #633722;
+    --mezcal-charcoal: #26140c;
+    --mezcal-earth: #a85d34;
+    --mezcal-earth-deep: #6e381c;
+    --mezcal-agave: #8c4622;
+    --mezcal-agave-light: #b05c30;
+    --mezcal-agave-deep: #4d2410;
+    --mezcal-gold: #df9a57;
+    --mezcal-light: #f7efe6;
+    --vignette-top: rgba(27, 15, 10, 0.92);
+    --vignette-mid-a: rgba(77, 36, 16, 0.34);
+    --vignette-mid-b: rgba(140, 70, 34, 0.25);
+}
+
+/* PALETA 3: Penca de Maguey (Verdes Botánicos de Agave y Sierra Sur) */
+html[data-palette="maguey"] {
+    color-scheme: dark;
+    --mezcal-dark: #0a150f;
+    --mezcal-wood: #12261b;
+    --mezcal-wood-border: #254f38;
+    --mezcal-charcoal: #0e1e15;
+    --mezcal-earth: #3b7a52;
+    --mezcal-earth-deep: #214d32;
+    --mezcal-agave: #2d6e42;
+    --mezcal-agave-light: #44915d;
+    --mezcal-agave-deep: #173b23;
+    --mezcal-gold: #a6c96a;
+    --mezcal-light: #eef6f0;
+    --vignette-top: rgba(10, 21, 15, 0.92);
+    --vignette-mid-a: rgba(23, 59, 35, 0.34);
+    --vignette-mid-b: rgba(45, 110, 66, 0.26);
+}
+
+/* PALETA 4: Cobre de Alambique y Madera de Barrica (Palenque Tradicional) */
+html[data-palette="cobre"] {
+    color-scheme: dark;
+    --mezcal-dark: #160c07;
+    --mezcal-wood: #2c160c;
+    --mezcal-wood-border: #693318;
+    --mezcal-charcoal: #211009;
+    --mezcal-earth: #a84e24;
+    --mezcal-earth-deep: #6b2e11;
+    --mezcal-agave: #b85a27;
+    --mezcal-agave-light: #d67139;
+    --mezcal-agave-deep: #59260d;
+    --mezcal-gold: #e58e49;
+    --mezcal-light: #f9f1e9;
+    --vignette-top: rgba(22, 12, 7, 0.92);
+    --vignette-mid-a: rgba(89, 38, 13, 0.35);
+    --vignette-mid-b: rgba(184, 90, 39, 0.25);
+}
+
+html {
+    overflow-x: clip;
+}
+
+body {
+    background-color: var(--mezcal-dark);
+    color: var(--mezcal-light);
+    overflow-x: clip;
+    transition: background-color 0.45s ease, color 0.35s ease;
+}
+
+/* Vinculación reactiva de clases Tailwind a las variables de la paleta activa */
+.bg-mezcal-dark {
+    background-color: var(--mezcal-dark) !important;
+    transition: background-color 0.45s ease;
+}
+
+.bg-mezcal-wood {
+    background-color: var(--mezcal-wood) !important;
+    transition: background-color 0.45s ease;
+}
+
+.bg-mezcal-charcoal {
+    background-color: var(--mezcal-charcoal) !important;
+    background-image:
+        radial-gradient(circle at 15% 20%, color-mix(in oklab, var(--mezcal-earth) 25%, transparent) 0%, transparent 55%),
+        radial-gradient(circle at 85% 80%, color-mix(in oklab, var(--mezcal-agave) 24%, transparent) 0%, transparent 55%);
+    transition: background-color 0.45s ease;
+}
+
+.bg-mezcal-agave {
+    background-color: var(--mezcal-agave) !important;
+    transition: background-color 0.35s ease;
+}
+
+.hover\:bg-mezcal-agave-light:hover {
+    background-color: var(--mezcal-agave-light) !important;
+}
+
+.bg-mezcal-gold {
+    background-color: var(--mezcal-gold) !important;
+    transition: background-color 0.35s ease;
+}
+
+.bg-mezcal-earth {
+    background-color: var(--mezcal-earth) !important;
+    transition: background-color 0.35s ease;
+}
+
+.text-mezcal-gold {
+    color: var(--mezcal-gold) !important;
+    transition: color 0.35s ease;
+}
+
+.hover\:text-mezcal-gold:hover {
+    color: var(--mezcal-gold) !important;
+}
+
+.text-mezcal-agave,
+.text-mezcal-agave-light {
+    color: var(--mezcal-agave-light) !important;
+    transition: color 0.35s ease;
+}
+
+.text-mezcal-earth {
+    color: var(--mezcal-earth) !important;
+    transition: color 0.35s ease;
+}
+
+.border-mezcal-gold {
+    border-color: var(--mezcal-gold) !important;
+}
+
+.border-mezcal-earth {
+    border-color: var(--mezcal-earth) !important;
+}
+
+.border-mezcal-agave {
+    border-color: var(--mezcal-agave) !important;
+}
+
+/* ==========================================================================
+   2A. Conmutador de Paletas en Barra de Navegación (Estilo Selector Idioma)
+   ========================================================================== */
+.palette-switcher-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.22rem 0.55rem;
+    border-radius: 9999px;
+    background: color-mix(in oklab, var(--mezcal-wood) 85%, transparent);
+    border: 1px solid color-mix(in oklab, var(--mezcal-gold) 42%, transparent);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.palette-switcher-wrap:hover {
+    border-color: var(--mezcal-gold);
+}
+
+.palette-cycle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mezcal-gold);
+    padding-right: 0.25rem;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.palette-dots-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28rem;
+}
+
+.palette-dot-btn {
+    width: 14px;
+    height: 14px;
+    border-radius: 9999px;
+    border: 1.5px solid rgba(244, 241, 234, 0.35);
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    padding: 0;
+}
+
+.palette-dot-btn:hover {
+    transform: scale(1.2);
+    border-color: #ffffff;
+}
+
+.palette-dot-btn.active-palette-dot {
+    transform: scale(1.22);
+    border-color: #ffffff;
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--mezcal-gold) 70%, transparent);
+}
+
+/* Colores fijos representativos de cada uno de los 4 botones de paleta */
+.palette-dot-btn[data-palette-target="natural"] {
+    background: linear-gradient(135deg, #4b6043 0%, #8b5a2b 55%, #281910 100%);
+}
+.palette-dot-btn[data-palette-target="tierra"] {
+    background: linear-gradient(135deg, #df9a57 0%, #a85d34 55%, #311b11 100%);
+}
+.palette-dot-btn[data-palette-target="maguey"] {
+    background: linear-gradient(135deg, #a6c96a 0%, #2d6e42 55%, #0e2417 100%);
+}
+.palette-dot-btn[data-palette-target="cobre"] {
+    background: linear-gradient(135deg, #e58e49 0%, #b85a27 55%, #2c160c 100%);
+}
+
+/* Notificación flotante (Toast) al alternar paleta en la demostración */
+#palette-demo-toast {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 1.25rem;
+    z-index: 95;
+    padding: 0.65rem 1rem;
+    border-radius: 0.85rem;
+    background: color-mix(in oklab, var(--mezcal-wood) 92%, black 8%);
+    border: 1px solid var(--mezcal-gold);
+    color: var(--mezcal-light);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 0.75rem;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#palette-demo-toast.show-toast {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+body.locked {
+    overflow: hidden;
+}
+
+#main-content {
+    transition: filter 0.5s ease;
+}
+
+#main-content.blurred {
+    filter: blur(12px);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ==========================================================================
+   2B. Tipografía Oficial del Reel ("Mezcal" Script + "Mil" + "SENSACIONES")
+   ========================================================================== */
+.brand-lockup {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    line-height: 1;
+}
+
+.brand-script-mezcal {
+    font-family: 'Great Vibes', cursive;
+    font-weight: 400;
+    color: var(--mezcal-light);
+    line-height: 0.88;
+    letter-spacing: 0.01em;
+    text-shadow: 0 6px 24px rgba(0, 0, 0, 0.75);
+    display: block;
+}
+
+.brand-serif-mil {
+    font-family: 'Cormorant Garamond', 'Cinzel', Georgia, serif;
+    font-weight: 500;
+    color: var(--mezcal-light);
+    letter-spacing: 0.06em;
+    line-height: 1.05;
+    text-transform: none;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.75);
+    display: block;
+}
+
+.brand-serif-sensaciones {
+    font-family: 'Cormorant Garamond', 'Cinzel', Georgia, serif;
+    font-weight: 500;
+    color: var(--mezcal-light);
+    letter-spacing: 0.09em;
+    line-height: 1.02;
+    text-transform: uppercase;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow-wrap: normal;
+    hyphens: none;
+    text-shadow: 0 6px 24px rgba(0, 0, 0, 0.8);
+    display: block;
+}
+
+.brand-botanical-divider {
+    width: min(100%, 430px);
+    height: auto;
+    margin-top: 0.65rem;
+    color: rgba(244, 241, 234, 0.82);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.65));
+}
+
+/* Versión compacta para el Navbar */
+.navbar-brand-lockup {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    white-space: nowrap;
+}
+
+.navbar-brand-lockup .nav-script {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--mezcal-gold);
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.navbar-brand-lockup .nav-mil {
+    font-family: 'Cormorant Garamond', 'Cinzel', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--mezcal-light);
+    text-transform: none;
+    letter-spacing: 0.04em;
+}
+
+.navbar-brand-lockup .nav-sensaciones {
+    font-family: 'Cormorant Garamond', 'Cinzel', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--mezcal-light);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+}
+
+/* 3. Animaciones Scroll Reveal (60 FPS Hardware Accelerated) */
+.reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes slideDown {
+    0% { transform: translateY(-100%); }
+    50% { transform: translateY(100%); }
+    100% { transform: translateY(100%); }
+}
+
+/* 4. Tarjetas Glassmorphism Reactivas a la Paleta Seleccionada */
+.glass-card {
+    background: linear-gradient(
+        155deg,
+        color-mix(in oklab, var(--mezcal-wood) 84%, var(--mezcal-earth) 16%) 0%,
+        color-mix(in oklab, var(--mezcal-dark) 86%, var(--mezcal-agave-deep) 14%) 100%
+    );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in oklab, var(--mezcal-earth) 52%, var(--mezcal-agave) 35%);
+    box-shadow: 0 14px 34px -10px rgba(8, 5, 3, 0.78);
+    transition: background 0.45s ease, border-color 0.45s ease, box-shadow 0.4s ease;
+}
+
+.glass-card-hover {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.4s ease,
+                box-shadow 0.4s ease;
+}
+
+.glass-card-hover:hover {
+    transform: translateY(-6px);
+    border-color: color-mix(in oklab, var(--mezcal-agave-light) 55%, var(--mezcal-gold) 45%);
+    box-shadow: 0 22px 44px -15px rgba(8, 5, 3, 0.85),
+                0 0 26px color-mix(in oklab, var(--mezcal-agave) 35%, transparent);
+}
+
+/* Máscara orgánica para botellas y fotos para evitar "efecto sobrepuesto" */
+.organic-image-blend {
+    mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
+}
+
+.letter-anim {
+    display: inline-block;
+    transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.4s ease-out;
+}
+
+/* 5. Nativos <dialog> con Light-Dismiss */
+dialog.mezcal-dialog {
+    background: var(--mezcal-wood);
+    color: var(--mezcal-light);
+    border: 1px solid var(--mezcal-earth);
+    border-radius: 1rem;
+    padding: 0;
+    max-width: 48rem;
+    width: calc(100% - 2rem);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+}
+
+dialog.mezcal-dialog::backdrop {
+    background-color: rgba(14, 9, 5, 0.82);
+    backdrop-filter: blur(6px);
+}
+
+/* 6. Validación de Formularios (:user-valid y :user-invalid + Fallbacks) */
+.mezcal-input:user-invalid,
+.mezcal-input.user-invalid-fallback {
+    border-color: #ef4444 !important;
+    background-color: rgba(127, 29, 29, 0.18) !important;
+}
+
+.mezcal-input:user-valid,
+.mezcal-input.user-valid-fallback {
+    border-color: var(--mezcal-agave-light) !important;
+}
+
+.field-error-msg {
+    display: none;
+    color: #f87171;
+    font-size: 0.75rem;
+    margin-top: 0.35rem;
+}
+
+.mezcal-field:has(.mezcal-input:user-invalid) .field-error-msg,
+.mezcal-field:has(.mezcal-input.user-invalid-fallback) .field-error-msg {
+    display: block;
+}
+
+/* 7. Scrollbar personalizada reactiva a la paleta */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--mezcal-dark); }
+::-webkit-scrollbar-thumb { background: var(--mezcal-agave); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--mezcal-earth); }
+
+/* ==========================================================================
+   8. Liquid, Fluid UI & Glassmorphism Reactivo a las 4 Paletas
+   ========================================================================== */
+.glass-panel {
+    background: color-mix(in oklab, var(--mezcal-wood) 78%, transparent);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid color-mix(in oklab, var(--mezcal-earth) 45%, transparent);
+}
+
+.glass-panel-fluid {
+    background: radial-gradient(circle at 12% 20%, color-mix(in oklab, var(--mezcal-agave) 36%, transparent) 0%, transparent 45%),
+                radial-gradient(circle at 88% 80%, color-mix(in oklab, var(--mezcal-earth) 32%, transparent) 0%, transparent 45%),
+                color-mix(in oklab, var(--mezcal-wood) 86%, transparent);
+    backdrop-filter: blur(24px) saturate(190%);
+    -webkit-backdrop-filter: blur(24px) saturate(190%);
+    border: 1px solid color-mix(in oklab, var(--mezcal-earth) 50%, var(--mezcal-agave) 30%);
+}
+
+.liquid-blob {
+    position: absolute;
+    filter: blur(40px);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.38;
+    animation: liquidMove 10s ease-in-out infinite alternate;
+}
+
+@keyframes liquidMove {
+    0% { transform: scale(1) translate(0px, 0px); }
+    50% { transform: scale(1.15) translate(25px, -15px); }
+    100% { transform: scale(0.95) translate(-20px, 20px); }
+}
+
+/* ==========================================================================
+   9. Carrito Slidebar (Drawer)
+   ========================================================================== */
+#cart-drawer {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+}
+
+#cart-drawer.translate-x-full {
+    transform: translateX(100%);
+    pointer-events: none;
+}
+
+#cart-drawer:not(.translate-x-full) {
+    transform: translateX(0%);
+    pointer-events: auto;
+}
+
+/* ==========================================================================
+   10. Cintilla de Cookies Flotante
+   ========================================================================== */
+#cookie-banner {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+#cookie-banner.hidden-banner {
+    transform: translateY(120%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   11. Tap Targets Móviles y Touch Optimizations (>= 48px)
+   ========================================================================== */
+.touch-target {
+    min-height: 48px;
+    min-width: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    button, a.btn, input, select {
+        min-height: 44px;
+    }
+}
+
+/* ==========================================================================
+   12. Protección anti-partición tipográfica de marca (Mezcal Mil SENSACIONES)
+   ========================================================================== */
+#hero-title {
+    word-break: keep-all;
+    overflow-wrap: normal;
+    hyphens: none;
+}
+
+#hero-title .hero-word {
+    display: inline-block;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow-wrap: normal;
+    hyphens: none;
+}
+
+@media (max-width: 640px) {
+    .brand-serif-sensaciones {
+        font-size: clamp(2rem, 8.8vw, 3.4rem) !important;
+    }
+}
+
+/* ==========================================================================
+   13. Capa Intermedia de Videos Verticales al 40% sobre Fondos de la Paleta
+   ========================================================================== */
+.ambient-video-section {
+    position: relative !important;
+    overflow: hidden !important;
+    background-color: var(--mezcal-dark);
+    transition: background-color 0.45s ease;
+}
+
+.ambient-video-layer {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    overflow: hidden !important;
+    opacity: 0.40 !important;
+}
+
+.ambient-video-layer video {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    filter: contrast(1.05) saturate(0.95) sepia(0.10);
+}
+
+.ambient-video-vignette {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+    background: linear-gradient(
+        to bottom,
+        var(--vignette-top) 0%,
+        var(--vignette-mid-a) 22%,
+        var(--vignette-mid-b) 78%,
+        var(--vignette-top) 100%
+    );
+    transition: background 0.45s ease;
+}
+
+.ambient-video-section > .container,
+.ambient-video-section > main,
+.ambient-video-section > div:not(.ambient-video-layer):not(.ambient-video-vignette) {
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+/* Caja de texto translúcida reactiva a la paleta activa */
+.section-text-backdrop {
+    background: linear-gradient(
+        145deg,
+        color-mix(in oklab, var(--mezcal-wood) 82%, transparent) 0%,
+        color-mix(in oklab, var(--mezcal-dark) 80%, transparent) 65%,
+        color-mix(in oklab, var(--mezcal-agave-deep) 48%, transparent) 100%
+    );
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid color-mix(in oklab, var(--mezcal-earth) 58%, var(--mezcal-agave) 42%);
+    box-shadow: 0 20px 50px rgba(8, 5, 3, 0.75);
+    transition: background 0.45s ease, border-color 0.45s ease;
+}
+
+/* ==========================================================================
+   14. Tarjetas de Galería Inline (Sin Modal Intrusivo)
+   ========================================================================== */
+.inline-caption-overlay {
+    position: absolute;
+    inset-x: 0;
+    bottom: 0;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(
+        to top,
+        color-mix(in oklab, var(--mezcal-dark) 96%, transparent) 0%,
+        color-mix(in oklab, var(--mezcal-wood) 86%, transparent) 70%,
+        transparent 100%
+    );
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.group:hover .inline-caption-overlay,
+.caption-expanded .inline-caption-overlay {
+    transform: translateY(0%);
+    opacity: 1;
+}
+
+/* ==========================================================================
+   15. Tablas Responsivas con Container Queries y Encabezados Sticky
+   ========================================================================== */
+.table-wrapper {
+    overflow: auto;
+    max-inline-size: 100%;
+    max-block-size: min(560px, 80vh);
+    container-type: inline-size;
+}
+
+.table-wrapper table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-wrapper thead {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 2;
+}
+
+.table-wrapper tbody th {
+    position: sticky;
+    inset-inline-start: 0;
+    background: var(--mezcal-wood);
+    z-index: 1;
+}
+
+@container (width < 600px) {
+    .table-wrapper table,
+    .table-wrapper thead,
+    .table-wrapper tbody,
+    .table-wrapper tr,
+    .table-wrapper th,
+    .table-wrapper td {
+        display: block;
+    }
+
+    .table-wrapper thead {
+        display: none;
+    }
+
+    .table-wrapper tbody tr {
+        margin-block-end: 1rem;
+        border: 1px solid color-mix(in oklab, var(--mezcal-earth) 55%, transparent);
+        border-radius: 0.85rem;
+        overflow: hidden;
+        background: color-mix(in oklab, var(--mezcal-wood) 85%, transparent);
+    }
+
+    .table-wrapper tbody th {
+        position: sticky;
+        inset-block-start: 0;
+        z-index: 2;
+        background: var(--mezcal-charcoal);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .table-wrapper td:nth-child(2)::before {
+        content: var(--label-2, "") ": ";
+        font-weight: 600;
+        color: var(--mezcal-gold);
+    }
+    .table-wrapper td:nth-child(3)::before {
+        content: var(--label-3, "") ": ";
+        font-weight: 600;
+        color: var(--mezcal-gold);
+    }
+    .table-wrapper td:nth-child(4)::before {
+        content: var(--label-4, "") ": ";
+        font-weight: 600;
+        color: var(--mezcal-gold);
+    }
+    .table-wrapper td:nth-child(5)::before {
+        content: var(--label-5, "") ": ";
+        font-weight: 600;
+        color: var(--mezcal-gold);
+    }
+    .table-wrapper td:nth-child(6)::before {
+        content: var(--label-6, "") ": ";
+        font-weight: 600;
+        color: var(--mezcal-gold);
+    }
+    .table-wrapper td:nth-child(7)::before {
+        content: var(--label-7, "") ": ";
+        font-weight: 600;
+        color: var(--mezcal-gold);
+    }
+}
+
+/* ==========================================================================
+   16. Accesibilidad de Contraste y Forced Colors Mode
+   ========================================================================== */
+@media (prefers-contrast: more) {
+    .glass-card,
+    .section-text-backdrop,
+    .glass-panel,
+    .glass-panel-fluid {
+        border-width: 2px;
+        border-color: var(--mezcal-gold);
+    }
+}
+
+@media (forced-colors: active) {
+    .glass-card,
+    .section-text-backdrop,
+    dialog.mezcal-dialog {
+        border: 1px solid CanvasText;
+    }
+}
+
+/* ==========================================================================
+   17. Escenario Exclusivo 3D en Scrollytelling (proceso.html) y
+       Carrete Horizontal Cinemático de Galerías Conectadas (index.html)
+   ========================================================================== */
+.journey-sticky-stage {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 4.5rem;
+    align-self: flex-start;
+    z-index: 30;
+    will-change: transform;
+}
+
+@media (min-width: 768px) {
+    .journey-sticky-stage {
+        position: relative !important;
+        top: 0 !important;
+    }
+}
+
+#journey-particle-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    mix-blend-mode: screen;
+}
+
+/* Capítulo activo del Scrollytelling en proceso.html */
+[data-journey-step] {
+    opacity: 0.55;
+    transform: translateY(4px) scale(0.985);
+    transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.45s ease,
+                box-shadow 0.45s ease;
+}
+
+[data-journey-step].is-active-chapter {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    border-color: var(--mezcal-gold) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 28px rgba(212, 168, 83, 0.16);
+}
+
+/* Indicador activo de las 7 esculturas */
+[data-journey-pill].is-active-pill {
+    background-color: var(--mezcal-gold) !important;
+    color: var(--mezcal-dark) !important;
+    border-color: var(--mezcal-gold) !important;
+    box-shadow: 0 0 18px rgba(212, 168, 83, 0.35);
+}
+
+/* Carrete Horizontal Cinemático en index.html */
+.filmstrip-track {
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--mezcal-gold) rgba(255, 255, 255, 0.06);
+}
+
+.filmstrip-track::-webkit-scrollbar {
+    height: 6px;
+}
+
+.filmstrip-track::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 999px;
+}
+
+.filmstrip-track::-webkit-scrollbar-thumb {
+    background: var(--mezcal-gold);
+    border-radius: 999px;
+}
+
+/* Animaciones CSS Scroll-Driven nativas con detección completa de soporte */
+@media (prefers-reduced-motion: no-preference) {
+    @supports ((animation-timeline: view()) and (animation-range: entry)) {
+        @keyframes mezcal-filmstrip-slide-effect {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.72;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.95);
+                opacity: 0.72;
+            }
+        }
+
+        .filmstrip-track > [data-filmstrip-card] {
+            animation: mezcal-filmstrip-slide-effect linear both;
+            animation-timeline: view(inline);
+            animation-range: entry 0% exit 100%;
+        }
+    }
+}

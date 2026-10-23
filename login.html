@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión y Cuentas Demo | Mezcal Mil Sensaciones</title>
+    <meta name="description" content="Portal de acceso de Mezcal Mil Sensaciones con cuenta de Administrador General y 5 compras simuladas de distintos clientes.">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mezcal-dark': '#160f09',
+                        'mezcal-wood': '#281910',
+                        'mezcal-charcoal': '#23160e',
+                        'mezcal-agave': '#4b6043',
+                        'mezcal-agave-light': '#6c8663',
+                        'mezcal-gold': '#d4af37',
+                        'mezcal-earth': '#8b5a2b',
+                        'mezcal-light': '#f4f1ea'
+                    },
+                    fontFamily: {
+                        'serif': ['Cinzel', 'serif'],
+                        'sans': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/styles.css?v=12">
+</head>
+<body class="bg-mezcal-dark text-mezcal-light antialiased font-sans selection:bg-mezcal-gold selection:text-mezcal-dark relative min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <!-- Fondo líquido ambiental -->
+    <div class="liquid-blob w-96 h-96 bg-mezcal-agave top-0 left-0"></div>
+    <div class="liquid-blob w-80 h-80 bg-mezcal-gold bottom-0 right-0" style="animation-delay: -4s;"></div>
+
+    <!-- Navegación Simplificada -->
+    <header class="p-6 relative z-10 flex justify-between items-center max-w-7xl mx-auto w-full border-b border-white/10">
+        <a href="index.html" class="flex items-center gap-3 font-serif text-xl font-bold text-mezcal-light tracking-widest uppercase hover:text-mezcal-gold transition-colors">
+            <i class="fa-solid fa-wine-glass text-mezcal-gold"></i>
+            <span>Mil Sensaciones</span>
+        </a>
+        <div class="flex items-center gap-4">
+            <a href="dashboard.html?role=admin" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-mezcal-gold/15 border border-mezcal-gold/40 text-mezcal-gold hover:bg-mezcal-gold hover:text-mezcal-dark text-xs font-bold uppercase tracking-wider transition-all">
+                <i class="fa-solid fa-gauge-high"></i> Ir Directo al Dashboard Admin
+            </a>
+            <a href="index.html" class="text-xs uppercase tracking-wider text-mezcal-gold hover:text-mezcal-light flex items-center gap-2">
+                <i class="fa-solid fa-arrow-left"></i> Volver a la Tienda
+            </a>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Login + Cuentas Dummy Simuladas -->
+    <main class="flex-1 container mx-auto px-6 py-10 relative z-10 max-w-7xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+
+            <!-- COLUMNA IZQUIERDA (5 cols): FORMULARIO DE INICIO DE SESIÓN -->
+            <div class="lg:col-span-5 glass-panel-fluid p-8 md:p-10 rounded-3xl border border-mezcal-gold/30 shadow-2xl relative overflow-hidden">
+                <div class="text-center mb-6">
+                    <i class="fa-solid fa-shield-halved text-3xl text-mezcal-gold mb-2 animate-float inline-block"></i>
+                    <h1 class="font-serif text-2xl md:text-3xl font-bold text-mezcal-light">Iniciar Sesión</h1>
+                    <p class="text-xs text-mezcal-gold/80 uppercase tracking-widest mt-1">Portal Mezcalero Unificado</p>
+                </div>
+
+                <!-- Formulario principal (en la parte superior para evitar que el teclado móvil tape el botón) -->
+                <form id="login-form" class="space-y-4" onsubmit="handleLogin(event)">
+                    <div class="mezcal-field">
+                        <label for="email" class="block text-xs uppercase tracking-wider text-mezcal-light/80 mb-1.5">Correo Electrónico</label>
+                        <input id="email" name="email" type="email" required
+                               autocomplete="username" spellcheck="false" enterkeyhint="next"
+                               value="admin@milsensaciones.com"
+                               placeholder="admin@milsensaciones.com"
+                               class="mezcal-input w-full bg-mezcal-charcoal/90 border border-mezcal-light/20 rounded-xl px-4 py-3 text-sm text-mezcal-light focus:outline-none focus:border-mezcal-gold">
+                    </div>
+
+                    <div class="mezcal-field">
+                        <label for="current-password" class="block text-xs uppercase tracking-wider text-mezcal-light/80 mb-1.5">Contraseña</label>
+                        <input id="current-password" name="password" type="password" required
+                               autocomplete="current-password" enterkeyhint="done"
+                               value="AdminMezcal2026!"
+                               placeholder="••••••••"
+                               class="mezcal-input w-full bg-mezcal-charcoal/90 border border-mezcal-light/20 rounded-xl px-4 py-3 text-sm text-mezcal-light focus:outline-none focus:border-mezcal-gold">
+                    </div>
+
+                    <div class="mezcal-field">
+                        <label for="l-role" class="block text-xs uppercase tracking-wider text-mezcal-light/80 mb-1.5">Rol de Acceso</label>
+                        <select id="l-role" name="role" class="mezcal-input w-full bg-mezcal-charcoal/90 border border-mezcal-light/20 rounded-xl px-4 py-3 text-sm text-mezcal-light focus:outline-none focus:border-mezcal-gold">
+                            <option value="admin" selected>Administrador General (Redirige a Dashboard)</option>
+                            <option value="cliente">Cliente con Compra Simulada</option>
+                            <option value="pos">Vendedor de Punto de Venta (POS)</option>
+                        </select>
+                    </div>
+
+                    <input type="hidden" id="l-client-id" value="admin">
+
+                    <div class="flex items-center justify-between text-xs text-mezcal-light/70 pt-1">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" checked class="accent-mezcal-gold rounded">
+                            <span>Mantener sesión activa</span>
+                        </label>
+                        <span id="selected-account-pill" class="text-[11px] text-mezcal-gold font-semibold">Perfil: Administrador</span>
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 bg-mezcal-gold hover:bg-mezcal-light text-mezcal-dark font-bold text-xs uppercase tracking-wider rounded-xl transition-all duration-300 shadow-lg mt-2 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>Iniciar Sesión e Ir al Dashboard</span>
+                    </button>
+                </form>
+
+                <!-- Botón directo 1-Clic para Administrador -->
+                <div class="mt-6 pt-6 border-t border-white/10">
+                    <p class="text-[11px] uppercase tracking-wider text-mezcal-gold font-bold mb-2.5 flex items-center gap-1.5">
+                        <i class="fa-solid fa-bolt"></i> Acceso Rápido de Administración
+                    </p>
+                    <button type="button" onclick="loginDirectAsAdmin()"
+                            class="w-full py-3.5 px-4 bg-gradient-to-r from-mezcal-agave to-mezcal-agave-light hover:from-mezcal-gold hover:to-mezcal-gold hover:text-mezcal-dark text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all duration-300 shadow-lg flex items-center justify-between">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-user-shield text-sm"></i>
+                            <span>Entrar como Administrador (Directo)</span>
+                        </span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <p class="text-[11px] text-mezcal-light/60 mt-2 leading-relaxed">
+                        Envía directamente a <code class="text-mezcal-gold">dashboard.html</code> con el panel de control general y el listado de las 5 compras simuladas de clientes.
+                    </p>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA (7 cols): CUENTA DE ADMINISTRADOR Y 5 COMPRAS SIMULADAS DE DISTINTOS CLIENTES -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="section-text-backdrop p-6 md:p-8 rounded-3xl border border-mezcal-gold/25">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4 mb-5">
+                        <div>
+                            <span class="text-xs uppercase tracking-[0.25em] text-mezcal-gold font-bold block">Entorno Dummy de Demostración</span>
+                            <h2 class="font-serif text-2xl md:text-3xl font-bold text-mezcal-light mt-1">1 Cuenta Admin + 5 Compras Simuladas</h2>
+                        </div>
+                        <span class="self-start sm:self-center text-xs bg-mezcal-gold/15 text-mezcal-gold border border-mezcal-gold/40 px-3 py-1.5 rounded-full font-semibold">
+                            6 Perfiles Activos
+                        </span>
+                    </div>
+
+                    <!-- Tarjeta Destacada: Cuenta de Administrador -->
+                    <div class="p-5 rounded-2xl bg-gradient-to-r from-mezcal-charcoal via-mezcal-charcoal to-mezcal-agave/30 border-2 border-mezcal-gold/60 shadow-xl mb-6">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-mezcal-gold text-mezcal-dark">Cuenta Administrador</span>
+                                    <span class="text-xs font-mono text-mezcal-light/70">admin@milsensaciones.com</span>
+                                </div>
+                                <h3 class="font-serif text-lg font-bold text-white">Damián Olivera Díaz / Administración General</h3>
+                                <p class="text-xs text-mezcal-light/75 mt-1">Acceso total a KPIs, inventario de lotes NOM-070, terminal POS y gestión de los 5 pedidos de clientes.</p>
+                            </div>
+                            <button type="button" onclick="loginDirectAsAdmin()"
+                                    class="shrink-0 px-5 py-3 bg-mezcal-gold hover:bg-mezcal-light text-mezcal-dark font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg flex items-center gap-2">
+                                <span>Ir al Dashboard</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Encabezado de las 5 Compras Simuladas de Clientes -->
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-serif text-base md:text-lg font-bold text-mezcal-gold flex items-center gap-2">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            <span>5 Compras Simuladas de Distintos Clientes</span>
+                        </h3>
+                        <span class="text-[11px] text-mezcal-light/60">Haz clic en cualquier cliente para simular su sesión</span>
+                    </div>
+
+                    <!-- Lista de 5 Clientes con Compras Simuladas -->
+                    <div class="space-y-3" id="dummy-clients-list">
+                        <!-- Inyectado dinámicamente o renderizado estáticamente para máxima velocidad -->
+
+                        <!-- Cliente 1 -->
+                        <div class="p-4 rounded-2xl bg-mezcal-charcoal/90 hover:bg-mezcal-charcoal border border-white/10 hover:border-mezcal-gold/50 transition-all flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div class="space-y-1">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="font-mono text-xs font-bold text-mezcal-gold">#MS-2041</span>
+                                    <strong class="text-sm text-white">1. Alejandro Morales</strong>
+                                    <span class="text-[11px] text-mezcal-light/60">· CDMX (Sommelier)</span>
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-yellow-500/20 text-yellow-300">En Tránsito · DHL</span>
+                                </div>
+                                <p class="text-xs text-mezcal-light/80">
+                                    <strong>Compra:</strong> 2x Mezcal Espadín Joven 750ml + 1x Ensamble 750ml · <span class="text-mezcal-gold font-bold">$2,950 MXN</span>
+                                </p>
+                                <p class="text-[11px] font-mono text-mezcal-light/50">Correo: alejandro.morales@catadorescdmx.mx · Lote: ESP-2026-01</p>
+                            </div>
+                            <div class="flex sm:flex-col gap-2 w-full sm:w-auto shrink-0">
+                                <button type="button" onclick="loginDirectAsClient('c1')" class="flex-1 px-3.5 py-2 bg-mezcal-agave hover:bg-mezcal-gold hover:text-mezcal-dark text-white font-bold text-[11px] uppercase tracking-wider rounded-lg transition-colors text-center">
+                                    Entrar al Dashboard
+                                </button>
+                                <button type="button" onclick="fillClientForm('c1')" class="px-3 py-1.5 border border-white/15 hover:border-mezcal-gold text-mezcal-light/80 hover:text-mezcal-gold text-[11px] rounded-lg transition-colors text-center">
+                                    Cargar en Login
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cliente 2 -->
+                        <div class="p-4 rounded-2xl bg-mezcal-charcoal/90 hover:bg-mezcal-charcoal border border-white/10 hover:border-mezcal-gold/50 transition-all flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div class="space-y-1">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="font-mono text-xs font-bold text-mezcal-gold">#MS-2038</span>
+                                    <strong class="text-sm text-white">2. Sofía Hernández</strong>
+                                    <span class="text-[11px] text-mezcal-light/60">· Oaxaca de Juárez (Coleccionista)</span>
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-green-500/20 text-green-300">Entregado</span>
+                                </div>
+                                <p class="text-xs text-mezcal-light/80">
+                                    <strong>Compra:</strong> 2x Mezcal Silvestre 750ml (Micro-Lote de Montaña) · <span class="text-mezcal-gold font-bold">$2,900 MXN</span>
+                                </p>
+                                <p class="text-[11px] font-mono text-mezcal-light/50">Correo: sofia.hernandez@oaxacaculinary.mx · Lote: SIL-2026-01</p>
+                            </div>
+                            <div class="flex sm:flex-col gap-2 w-full sm:w-auto shrink-0">
+                                <button type="button" onclick="loginDirectAsClient('c2')" class="flex-1 px-3.5 py-2 bg-mezcal-agave hover:bg-mezcal-gold hover:text-mezcal-dark text-white font-bold text-[11px] uppercase tracking-wider rounded-lg transition-colors text-center">
+                                    Entrar al Dashboard
+                                </button>
+                                <button type="button" onclick="fillClientForm('c2')" class="px-3 py-1.5 border border-white/15 hover:border-mezcal-gold text-mezcal-light/80 hover:text-mezcal-gold text-[11px] rounded-lg transition-colors text-center">
+                                    Cargar en Login
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cliente 3 -->
+                        <div class="p-4 rounded-2xl bg-mezcal-charcoal/90 hover:bg-mezcal-charcoal border border-white/10 hover:border-mezcal-gold/50 transition-all flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div class="space-y-1">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="font-mono text-xs font-bold text-mezcal-gold">#MS-2035</span>
+                                    <strong class="text-sm text-white">3. Marcus Vance</strong>
+                                    <span class="text-[11px] text-mezcal-light/60">· Austin, Texas, EE. UU. (On-Trade Bar)</span>
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-500/20 text-blue-300">En Preparación NOM-070</span>
+                                </div>
+                                <p class="text-xs text-mezcal-light/80">
+                                    <strong>Compra:</strong> 4x Mezcal Espadín Joven 750ml + 2x Ensamble 750ml · <span class="text-mezcal-gold font-bold">$5,900 MXN</span>
+                                </p>
+                                <p class="text-[11px] font-mono text-mezcal-light/50">Correo: m.vance@austinagavebar.com · Lote: ESP-2026-01</p>
+                            </div>
+                            <div class="flex sm:flex-col gap-2 w-full sm:w-auto shrink-0">
+                                <button type="button" onclick="loginDirectAsClient('c3')" class="flex-1 px-3.5 py-2 bg-mezcal-agave hover:bg-mezcal-gold hover:text-mezcal-dark text-white font-bold text-[11px] uppercase tracking-wider rounded-lg transition-colors text-center">
+                                    Entrar al Dashboard
+                                </button>
+                                <button type="button" onclick="fillClientForm('c3')" class="px-3 py-1.5 border border-white/15 hover:border-mezcal-gold text-mezcal-light/80 hover:text-mezcal-gold text-[11px] rounded-lg transition-colors text-center">
+                                    Cargar en Login
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cliente 4 -->
+                        <div class="p-4 rounded-2xl bg-mezcal-charcoal/90 hover:bg-mezcal-charcoal border border-white/10 hover:border-mezcal-gold/50 transition-all flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div class="space-y-1">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="font-mono text-xs font-bold text-mezcal-gold">#MS-2029</span>
+                                    <strong class="text-sm text-white">4. Valeria Gómez</strong>
+                                    <span class="text-[11px] text-mezcal-light/60">· Guadalajara, Jal. (Evento Privado)</span>
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-green-500/20 text-green-300">Entregado</span>
+                                </div>
+                                <p class="text-xs text-mezcal-light/80">
+                                    <strong>Compra:</strong> 3x Curados de Mezcal Maracuyá 750ml (38% Alc. Vol.) · <span class="text-mezcal-gold font-bold">$2,250 MXN</span>
+                                </p>
+                                <p class="text-[11px] font-mono text-mezcal-light/50">Correo: valeria.gomez@eventosgdl.mx · Lote: CUR-2026-03</p>
+                            </div>
+                            <div class="flex sm:flex-col gap-2 w-full sm:w-auto shrink-0">
+                                <button type="button" onclick="loginDirectAsClient('c4')" class="flex-1 px-3.5 py-2 bg-mezcal-agave hover:bg-mezcal-gold hover:text-mezcal-dark text-white font-bold text-[11px] uppercase tracking-wider rounded-lg transition-colors text-center">
+                                    Entrar al Dashboard
+                                </button>
+                                <button type="button" onclick="fillClientForm('c4')" class="px-3 py-1.5 border border-white/15 hover:border-mezcal-gold text-mezcal-light/80 hover:text-mezcal-gold text-[11px] rounded-lg transition-colors text-center">
+                                    Cargar en Login
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cliente 5 -->
+                        <div class="p-4 rounded-2xl bg-mezcal-charcoal/90 hover:bg-mezcal-charcoal border border-white/10 hover:border-mezcal-gold/50 transition-all flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <div class="space-y-1">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="font-mono text-xs font-bold text-mezcal-gold">#MS-2024</span>
+                                    <strong class="text-sm text-white">5. Dr. Carlos Mendoza</strong>
+                                    <span class="text-[11px] text-mezcal-light/60">· Monterrey, N.L. (Club de Catadores)</span>
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-yellow-500/20 text-yellow-300">En Tránsito · FedEx</span>
+                                </div>
+                                <p class="text-xs text-mezcal-light/80">
+                                    <strong>Compra:</strong> 1x Silvestre + 1x Ensamble + 1x Espadín Joven (Pack Degustación) · <span class="text-mezcal-gold font-bold">$3,550 MXN</span>
+                                </p>
+                                <p class="text-[11px] font-mono text-mezcal-light/50">Correo: cmendoza@clubagavemty.mx · Lote: ENS-2026-02</p>
+                            </div>
+                            <div class="flex sm:flex-col gap-2 w-full sm:w-auto shrink-0">
+                                <button type="button" onclick="loginDirectAsClient('c5')" class="flex-1 px-3.5 py-2 bg-mezcal-agave hover:bg-mezcal-gold hover:text-mezcal-dark text-white font-bold text-[11px] uppercase tracking-wider rounded-lg transition-colors text-center">
+                                    Entrar al Dashboard
+                                </button>
+                                <button type="button" onclick="fillClientForm('c5')" class="px-3 py-1.5 border border-white/15 hover:border-mezcal-gold text-mezcal-light/80 hover:text-mezcal-gold text-[11px] rounded-lg transition-colors text-center">
+                                    Cargar en Login
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="p-6 text-center text-xs text-mezcal-light/50 border-t border-mezcal-light/10 relative z-10">
+        <p>&copy; 2026 Mezcal Mil Sensaciones · Equipo de Desarrollo: <strong class="text-mezcal-gold">Ing. en Computación Jose Ramon Aragon Toledo</strong></p>
+    </footer>
+
+        <!-- GSAP 3.13 + Plugins (ScrollTrigger, SplitText, Flip) + Lenis Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+    <script src="assets/js/particles-stage.js?v=12"></script>
+    <script src="assets/js/motion.js?v=12"></script>
+    <script src="assets/js/main.js?v=12"></script>
+    <script>
+        const DUMMY_CLIENTS = {
+            c1: {
+                id: 'c1',
+                name: 'Alejandro Morales',
+                email: 'alejandro.morales@catadorescdmx.mx',
+                city: 'Ciudad de México (CDMX)',
+                profile: 'Sommelier / Restaurante',
+                orderId: '#MS-2041',
+                date: '23 Oct 2026',
+                items: '2x Mezcal Espadín Joven 750ml + 1x Ensamble 750ml',
+                bottles: 3,
+                points: 590,
+                lote: 'ESP-2026-01',
+                total: 2950,
+                status: 'En Tránsito',
+                carrier: 'DHL Express · Guía 7849201145',
+                productLink: 'mezcal-espadin.html'
+            },
+            c2: {
+                id: 'c2',
+                name: 'Sofía Hernández',
+                email: 'sofia.hernandez@oaxacaculinary.mx',
+                city: 'Oaxaca de Juárez, Oax.',
+                profile: 'Coleccionista Privada',
+                orderId: '#MS-2038',
+                date: '21 Oct 2026',
+                items: '2x Mezcal Silvestre 750ml (Micro-Lote de Montaña)',
+                bottles: 2,
+                points: 580,
+                lote: 'SIL-2026-01',
+                total: 2900,
+                status: 'Entregado',
+                carrier: 'Entrega Directa Palenque Oaxaca',
+                productLink: 'mezcal-silvestre.html'
+            },
+            c3: {
+                id: 'c3',
+                name: 'Marcus Vance',
+                email: 'm.vance@austinagavebar.com',
+                city: 'Austin, Texas, EE. UU.',
+                profile: 'Importador / On-Trade Bar',
+                orderId: '#MS-2035',
+                date: '19 Oct 2026',
+                items: '4x Mezcal Espadín Joven 750ml + 2x Ensamble 750ml',
+                bottles: 6,
+                points: 1180,
+                lote: 'ESP-2026-01',
+                total: 5900,
+                status: 'En Preparación NOM-070',
+                carrier: 'DHL International Export · Marbete CRM',
+                productLink: 'mezcal-ensamble.html'
+            },
+            c4: {
+                id: 'c4',
+                name: 'Valeria Gómez',
+                email: 'valeria.gomez@eventosgdl.mx',
+                city: 'Guadalajara, Jalisco',
+                profile: 'Degustación y Eventos',
+                orderId: '#MS-2029',
+                date: '15 Oct 2026',
+                items: '3x Curados de Mezcal Maracuyá 750ml (38% Alc. Vol.)',
+                bottles: 3,
+                points: 450,
+                lote: 'CUR-2026-03',
+                total: 2250,
+                status: 'Entregado',
+                carrier: 'Estafeta Preferente · Guía 90124410',
+                productLink: 'curados-mezcal.html'
+            },
+            c5: {
+                id: 'c5',
+                name: 'Dr. Carlos Mendoza',
+                email: 'cmendoza@clubagavemty.mx',
+                city: 'Monterrey, Nuevo León',
+                profile: 'Miembro Club de Catadores',
+                orderId: '#MS-2024',
+                date: '12 Oct 2026',
+                items: '1x Silvestre 750ml + 1x Ensamble 750ml + 1x Espadín 750ml',
+                bottles: 3,
+                points: 710,
+                lote: 'ENS-2026-02',
+                total: 3550,
+                status: 'En Tránsito',
+                carrier: 'FedEx Priority · Guía 4490128831',
+                productLink: 'mezcal-silvestre.html'
+            }
+        };
+
+        function loginDirectAsAdmin() {
+            const adminUser = {
+                email: 'admin@milsensaciones.com',
+                role: 'admin',
+                name: 'Administrador General (Damián Olivera Díaz)',
+                clientId: 'admin',
+                loginTime: new Date().toISOString()
+            };
+            localStorage.setItem('mezcalUser', JSON.stringify(adminUser));
+            window.location.href = 'dashboard.html?role=admin';
+        }
+
+        function fillClientForm(clientId) {
+            const c = DUMMY_CLIENTS[clientId];
+            if (!c) return;
+            document.getElementById('email').value = c.email;
+            document.getElementById('current-password').value = 'ClienteMezcal2026!';
+            document.getElementById('l-role').value = 'cliente';
+            document.getElementById('l-client-id').value = clientId;
+            document.getElementById('selected-account-pill').textContent = `Cliente: ${c.name} (${c.orderId})`;
+        }
+
+        function loginDirectAsClient(clientId) {
+            const c = DUMMY_CLIENTS[clientId];
+            if (!c) return;
+            const clientUser = {
+                email: c.email,
+                role: 'cliente',
+                name: c.name,
+                clientId: clientId,
+                loginTime: new Date().toISOString()
+            };
+            localStorage.setItem('mezcalUser', JSON.stringify(clientUser));
+            window.location.href = `dashboard.html?role=cliente&client=${clientId}`;
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim().toLowerCase();
+            const roleSelect = document.getElementById('l-role').value;
+            let clientId = document.getElementById('l-client-id').value;
+
+            // Si el correo coincide con alguno de los 5 clientes simulados, usar su perfil
+            const matchedClient = Object.values(DUMMY_CLIENTS).find(c => c.email.toLowerCase() === email);
+
+            if (roleSelect === 'admin' || email === 'admin@milsensaciones.com') {
+                loginDirectAsAdmin();
+                return;
+            }
+
+            if (roleSelect === 'pos') {
+                const posUser = {
+                    email: email || 'vendedor.gramal@milsensaciones.com',
+                    role: 'pos',
+                    name: 'Vendedor Palenque El Gramal',
+                    loginTime: new Date().toISOString()
+                };
+                localStorage.setItem('mezcalUser', JSON.stringify(posUser));
+                window.location.href = 'dashboard.html?role=pos';
+                return;
+            }
+
+            const chosenId = matchedClient ? matchedClient.id : (DUMMY_CLIENTS[clientId] ? clientId : 'c1');
+            loginDirectAsClient(chosenId);
+        }
+    </script>
+</body>
+</html>

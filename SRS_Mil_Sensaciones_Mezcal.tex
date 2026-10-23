@@ -1,0 +1,708 @@
+\documentclass[11pt,letterpaper]{article}
+
+% ============================================================
+% PAQUETES
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+\usepackage{mathptmx} % Tipografía formal estilo Times
+\usepackage[left=2.2cm, right=2.2cm, top=2.5cm, bottom=2.5cm, headheight=28pt]{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{hyperref}
+
+\tcbuselibrary{skins,breakable}
+
+% ============================================================
+% PALETA DE COLORES (Inspirada en Mezcal Mil Sensaciones)
+% ============================================================
+\definecolor{mezcalDark}{HTML}{1E1B18}     % Carbón orgánico
+\definecolor{mezcalEarth}{HTML}{5C3A21}    % Tierra / Madera
+\definecolor{mezcalAgave}{HTML}{2E5A44}    % Verde Agave
+\definecolor{mezcalGold}{HTML}{B8860B}     % Ámbar / Dorado
+\definecolor{mezcalCream}{HTML}{FAF7F2}    % Fondo suave crema
+\definecolor{alertBg}{HTML}{FFF8E7}        % Fondo para pendientes
+\definecolor{watermarkColor}{HTML}{D0C8BE} % Gris/Tierra muy tenue para marca de agua
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=mezcalEarth,
+    urlcolor=mezcalAgave,
+    citecolor=mezcalEarth,
+    pdftitle={SRS y Cuestionario de Levantamiento - Mezcal Mil Sensaciones},
+    pdfauthor={Ing. en Computacion Jose Ramon Aragon Toledo (Clave DGP 521344)}
+}
+
+% ============================================================
+% MARCA DE AGUA CON DATOS DEL AUTOR EN CADA PÁGINA
+% ============================================================
+\AddToShipoutPictureBG{%
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[
+            rotate=38,
+            scale=1.45,
+            text=watermarkColor,
+            opacity=0.28,
+            align=center,
+            font=\bfseries\sffamily
+        ] at (current page.center) {
+            ING. EN COMPUTACIÓN JOSE RAMON ARAGON TOLEDO\\[0.25em]
+            {\large Ingeniero en Computación \quad|\quad Clave DGP: 521344}\\[0.25em]
+            {\normalsize aatr010423@gmail.com}\\[0.2em]
+            {\normalsize Desarrollo y Mantenimiento: Ing. en Computación Jose Ramon Aragon Toledo}
+        };
+    \end{tikzpicture}%
+}
+
+% ============================================================
+% ENCABEZADOS Y PIES DE PÁGINA
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{\textcolor{mezcalEarth}{SRS — Mezcal Artesanal ``Mil Sensaciones''}}}
+\fancyhead[R]{\small\textcolor{mezcalAgave}{IEEE 830 / ISO 29148 \quad|\quad v1.0}}
+\fancyfoot[L]{\footnotesize\textcolor{gray}{Autor: Ing. en Computación Jose Ramon Aragon Toledo (Clave DGP: 521344) — \texttt{aatr010423@gmail.com}}}
+\fancyfoot[R]{\footnotesize\textbf{Página \thepage}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+% ============================================================
+% COMANDOS AUXILIARES PARA CUESTIONARIO Y ESPACIOS RELLENABLES
+% ============================================================
+\newcommand{\cmark}{\textcolor{mezcalAgave}{\ding{52}}}
+\newcommand{\uchk}{$\square$}
+\newcommand{\chk}{\textcolor{mezcalAgave}{$\boxtimes$}}
+\newcommand{\uradio}{$\bigcirc$}
+\newcommand{\radio}{\textcolor{mezcalAgave}{\textbf{$\odot$}}}
+
+% Línea para rellenar a mano o digitalmente
+\newcommand{\fillline}[1][1.0\linewidth]{%
+    \par\vspace{0.35em}\noindent\textcolor{gray!70}{\rule{#1}{0.5pt}}\par\vspace{0.25em}%
+}
+
+% Caja de pregunta pendiente con espacio para respuesta
+\newtcolorbox{pendingbox}[1]{
+    enhanced,
+    breakable,
+    colback=alertBg,
+    colframe=mezcalGold,
+    coltitle=white,
+    fonttitle=\bfseries,
+    title={#1},
+    arc=3pt,
+    boxrule=0.8pt,
+    left=8pt, right=8pt, top=6pt, bottom=6pt
+}
+
+% Caja de respuesta registrada del cuestionario
+\newtcolorbox{answerbox}{
+    enhanced,
+    breakable,
+    colback=mezcalCream,
+    colframe=mezcalAgave!60,
+    arc=2pt,
+    boxrule=0.5pt,
+    left=8pt, right=8pt, top=5pt, bottom=5pt
+}
+
+\begin{document}
+
+% ============================================================
+% PORTADA
+% ============================================================
+\begin{titlepage}
+    \begin{flushright}
+        \small
+        \textbf{Ingeniería de Software y Desarrollo Web Profesional}\\
+        \textbf{Autor:} Ing. en Computación Jose Ramon Aragon Toledo\\
+        \textbf{Título:} Ingeniero en Computación (Clave DGP: \texttt{521344})\\
+        \textbf{Correo:} \href{mailto:aatr010423@gmail.com}{aatr010423@gmail.com}\\
+        \textbf{Equipo de Desarrollo:} Ing. en Computación Jose Ramon Aragon Toledo
+    \end{flushright}
+
+    \vspace{1.2cm}
+
+    \begin{center}
+        {\color{mezcalEarth}\rule{\linewidth}{2pt}}\\[0.4cm]
+        {\Huge\bfseries\textcolor{mezcalDark}{Especificación de Requerimientos de Software (SRS)}}\\[0.3cm]
+        {\LARGE\bfseries\textcolor{mezcalEarth}{y Levantamiento de Información del Cliente}}\\[0.3cm]
+        {\Large\textcolor{mezcalAgave}{Plataforma Web Oficial — Mezcal Artesanal ``Mil Sensaciones''}}\\[0.2cm]
+        {\color{mezcalEarth}\rule{\linewidth}{2pt}}
+    \end{center}
+
+    \vspace{0.8cm}
+
+    \begin{tcolorbox}[colback=mezcalCream, colframe=mezcalEarth, title=\textbf{Ficha de Control del Documento}, fonttitle=\bfseries\large]
+        \renewcommand{\arraystretch}{1.35}
+        \begin{tabularx}{\linewidth}{@{} l >{\raggedright\arraybackslash}X @{}}
+            \textbf{Estándar de Referencia:} & IEEE 830 / ISO/IEC/IEEE 29148 \\
+            \textbf{Versión del Documento:} & 1.0 (Integra SRS + Cuestionario de Levantamiento + Formato de Pendientes) \\
+            \textbf{Fecha de Emisión:} & 23 de octubre de 2026 \\
+            \textbf{Cliente / Marca:} & Mezcal Mil Sensaciones \\
+            \textbf{Origen / Palenque:} & El Gramal, Nejapa de Madero, Yautepec, Oaxaca, México \\
+            \textbf{Maestro Mezcalero:} & Damián Olivera Díaz (2.ª Generación; marca en 3.ª Generación familiar) \\
+            \textbf{Responsable / Autor:} & Ing. en Computación Jose Ramon Aragon Toledo (Clave DGP: \texttt{521344}) \\
+            \textbf{Equipo de Desarrollo:} & Ing. en Computación Jose Ramon Aragon Toledo (\texttt{aatr010423@gmail.com}) \\
+        \end{tabularx}
+    \end{tcolorbox}
+
+    \vfill
+
+    \begin{center}
+        \footnotesize\textcolor{gray}{Documento técnico confidencial con marca de agua de autoría registrada a nombre de José Ramón Aragón Toledo.\\ Incluye secciones interactivas/imprimibles para completar las preguntas y activos pendientes con el cliente.}
+    \end{center}
+\end{titlepage}
+
+% ============================================================
+% TABLA DE CONTENIDO
+% ============================================================
+\tableofcontents
+\newpage
+
+% ============================================================
+% SECCIÓN 1: INTRODUCCIÓN
+% ============================================================
+\section{Introducción}
+
+\subsection{Propósito del Documento}
+El presente documento de \textbf{Especificación de Requerimientos de Software (SRS)} define de manera formal, completa y verificable todos los requerimientos funcionales, no funcionales, de contenido, diseño, legales y operativos para el desarrollo y lanzamiento de la plataforma web oficial de \textbf{Mezcal Mil Sensaciones}. Adicionalmente, integra el registro íntegro del cuestionario de levantamiento aplicado al cliente y proporciona los \textbf{espacios y formularios estructurados} para responder las preguntas que quedaron sin contestar y recopilar los activos pendientes.
+
+\subsection{Alcance del Producto (Fase 1 vs. Fase 2)}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Fase 1 (Lanzamiento Inicial — MVP Comercial e Institucional):}
+    Sitio web interactivo, bilingüe (Español / Inglés), responsivo y de alto impacto visual que presenta la historia familiar de tres generaciones, el perfil del Maestro Mezcalero \textbf{Damián Olivera Díaz}, el proceso artesanal, las fichas técnicas detalladas de sus expresiones de mezcal (con descarga en PDF), galería visual del palenque, ubicación en Google Maps, canales de contacto directo (WhatsApp Business, formulario por correo, redes sociales) y verificación legal de mayoría de edad (+18).
+    \item \textbf{Fase 2 (Visión a Futuro / Evolutivos Planeados):}
+    \begin{itemize}
+        \item Tienda en línea (E-commerce B2C con pasarela de pagos).
+        \item Sistema de reservas para catas o tours al palenque en El Gramal.
+        \item Portal B2B para distribuidores e importadores con precios especiales.
+        \item Panel de administración (CMS) autogestionable.
+        \item Blog cultural del mezcal.
+        \item Integración con marketplaces (Amazon, MercadoLibre) y aplicación móvil.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Público Objetivo y Mercados}
+\begin{enumerate}[leftmargin=1.5em]
+    \item \textbf{Consumidor final (+18 años):} Busca mezcal artesanal auténtico con identidad, carácter e historia familiar.
+    \item \textbf{Bares, restaurantes y centros de coctelería (On-Trade):} Buscan fichas técnicas, graduación alcohólica, volumen por lote, perfil sensorial y contacto comercial directo.
+    \item \textbf{Importadores internacionales (EE. UU.):} Requieren información regulatoria clara (Código NOM-070 / CRM, registro IMPI, capacidad por lote) y navegación 100\% en inglés.
+    \item \textbf{Turistas y visitantes en Oaxaca / México:} Buscan conocer el origen, el palenque y dónde adquirir las botellas.
+\end{enumerate}
+\textbf{Mercados prioritarios:} Oaxaca (México) y Estados Unidos (exportación/importación).
+
+% ============================================================
+% SECCIÓN 2: DESCRIPCIÓN GENERAL DEL SISTEMA
+% ============================================================
+\section{Descripción General del Sistema}
+
+\subsection{Perspectiva del Producto y Referencias Visuales}
+El sistema es una aplicación web pública (\texttt{index.html}) inspirada en la interactividad y narrativa visual de \textbf{400 Conejos} (\texttt{400conejos.mx}) y \textbf{Casa Chagoya} (\texttt{casachagoya.com}).
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Personalidad de marca:} Artesanal y auténtica, tradicional y familiar, sostenible y cercana a la tierra.
+    \item \textbf{Paleta cromática propuesta:} Tonos naturales (tierra, verde agave, madera, carbón orgánico y acentos dorados/ámbar).
+    \item \textbf{Tono de comunicación propuesto:} Formal, sofisticado y con trasfondo de herencia familiar.
+    \item \textbf{Restricciones de diseño explícitas del cliente:}
+    \begin{itemize}
+        \item Prohibido el aspecto de ``presentación de PowerPoint'' o diseño plano/simple.
+        \item Prohibidas las animaciones rotas o bruscas (``que las animaciones no agarren'').
+        \item Prohibidas las imágenes sobrepuestas que no se vean integradas orgánicamente con el fondo del sitio.
+    \end{itemize}
+\end{itemize}
+
+% ============================================================
+% SECCIÓN 3: REQUERIMIENTOS FUNCIONALES (RF)
+% ============================================================
+\section{Requerimientos Funcionales (RF)}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.35}
+\small
+\begin{longtable}{@{} L{1.2cm} L{3.0cm} L{6.7cm} L{2.1cm} L{2.4cm} @{}}
+\toprule
+\textbf{ID} & \textbf{Módulo / Sección} & \textbf{Descripción del Requerimiento} & \textbf{Prioridad} & \textbf{Estado Actual} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Módulo / Sección} & \textbf{Descripción del Requerimiento} & \textbf{Prioridad} & \textbf{Estado Actual} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+
+\textbf{RF-01} & Verificación de Edad (+18) & Al ingresar al sitio, bloquear el scroll y difuminar el contenido mostrando un modal de mayoría de edad legal. Guardar confirmación en \texttt{sessionStorage}/\texttt{localStorage}. Mostrar restricción si selecciona ``No''. & Indispensable (Fase 1) & Implementado \\
+\midrule
+\textbf{RF-02} & Internacionalización (ES / EN) & Selector de idioma en barra de navegación (Desktop y Móvil) que traduzca el \textbf{100\% de los textos}, incluyendo fichas de productos, etapas del proceso, formularios, botones y avisos legales. & Indispensable (Fase 1) & Parcial (faltan productos, proceso, form y móvil) \\
+\midrule
+\textbf{RF-03} & Hero / Inicio Impactante & Encabezado a pantalla completa con video de fondo (del palenque/proceso) o fotografía profesional, animación tipográfica fluida de \textit{``MIL SENSACIONES''}, tagline e indicador de scroll. & Indispensable (Fase 1) & Parcial (usa foto genérica de Unsplash) \\
+\midrule
+\textbf{RF-04} & Historia y Valores de la Marca & Sección narrativa sobre las 3 generaciones (abuelo, padre e hijo), origen en \textit{El Gramal, Nejapa de Madero, Yautepec, Oaxaca}, misión y visión de la marca. & Indispensable (Fase 1) & Parcial (falta integrar Misión y Visión) \\
+\midrule
+\textbf{RF-05} & Perfil del Maestro Mezcalero & Sección dedicada a \textbf{Damián Olivera Díaz} (2.ª generación de maestros mezcaleros), su trayectoria desde la niñez y fotografía real integrada al estilo visual. & Indispensable (Fase 1) & Parcial (usa foto placeholder) \\
+\midrule
+\textbf{RF-06} & Fichas Detalladas de Productos & Mostrar expresiones: \textbf{Mezcal Espadín 750ml} (actual) y próximos lanzamientos (\textbf{Ensambles, Mezcal Silvestre, Curados de Mezcal}). Incluir obligatoriamente los \textbf{10 atributos requeridos} (Sección 3.1). & Indispensable (Fase 1) & Incompleto (faltan 5 atributos y fotos reales) \\
+\midrule
+\textbf{RF-07} & Descarga de Ficha Técnica PDF & Botón funcional en cada producto para visualizar/descargar su Ficha Técnica oficial en formato PDF (en español e inglés). & Indispensable (Fase 1) & Pendiente (botón sin acción) \\
+\midrule
+\textbf{RF-08} & Proceso de Elaboración & Explicación interactiva paso a paso del proceso artesanal (Selección/Corte, Cocción en horno cónico, Molienda, Fermentación, Destilación y Envasado) con fotos o video real. & Indispensable (Fase 1) & Básico (4 pasos estáticos sin EN ni fotos) \\
+\midrule
+\textbf{RF-09} & Galería Multimedia & Galería visual interactiva (con \textit{lightbox}) que muestre fotografías reales del palenque, campos de maguey en El Gramal, destilación y video del proceso. & Indispensable (Fase 1) & No implementado \\
+\midrule
+\textbf{RF-10} & Dónde Comprar / Google Maps & Mapa interactivo o enlace directo real a Google Maps hacia \textbf{El Gramal, Nejapa de Madero, Yautepec, Oaxaca}, más lista/mapa de puntos de venta autorizados. & Indispensable (Fase 1) & Pendiente (imagen sin enlace) \\
+\midrule
+\textbf{RF-11} & Formulario de Contacto & Formulario con validación (Nombre, Correo, Teléfono/Empresa, Tipo de consulta: Consumidor / Bar-Restaurante / Importador, Mensaje) con notificación al correo oficial. & Indispensable (Fase 1) & Simulado en frontend \\
+\midrule
+\textbf{RF-12} & Integración WhatsApp Business & Botón flotante y enlaces de acción directa (\texttt{wa.me}) configurados con el número real de WhatsApp Business y mensaje prellenado según producto/sección. & Indispensable (Fase 1) & Parcial (número ficticio) \\
+\midrule
+\textbf{RF-13} & Suscripción a Newsletter & Campo de captura de correo electrónico para lista de correo / novedades de lotes y lanzamientos. & Indispensable (Fase 1) & No implementado \\
+\midrule
+\textbf{RF-14} & Redes Sociales y Compartir & Enlaces verificados a Instagram (\texttt{@mezcalmilsensaciones}) y Facebook oficial, más botones para compartir fichas de producto o el sitio en redes sociales. & Indispensable (Fase 1) & Parcial (faltan botones compartir) \\
+\midrule
+\textbf{RF-15} & Aviso de Privacidad y Legal & Modal o página de Aviso de Privacidad conforme a la LFPDPPP (México), Términos de Uso y leyenda sanitaria obligatoria (\textit{``EVITA EL EXCESO''}). & Indispensable (Fase 1) & Parcial (enlace \texttt{\#} sin texto) \\
+\end{longtable}
+\normalsize
+
+\subsection{Detalle Obligatorio de la Ficha de Producto (10 Atributos)}
+Según la Sección 2.4 del cuestionario, cada producto presentado en el sitio debe mostrar obligatoriamente estos \textbf{10 campos}:
+\begin{enumerate}[leftmargin=1.8em]
+    \item \textbf{Nombre del producto} (ej. \textit{Mil Sensaciones — Espadín Joven}).
+    \item \textbf{Tipo de agave utilizado} (nombre común y científico, ej. \textit{Agave Angustifolia Haw}, tiempo de maduración).
+    \item \textbf{Maestro Mezcalero} (\textit{Damián Olivera Díaz}).
+    \item \textbf{Región y comunidad de origen} (\textit{El Gramal, Nejapa de Madero, Yautepec, Oaxaca}).
+    \item \textbf{Proceso de elaboración} (cocción, molienda, fermentación, tipo de alambique y número de destilaciones).
+    \item \textbf{Graduación alcohólica} (\texttt{\% Alc. Vol.} real por lote).
+    \item \textbf{Notas de cata} (vista, aromas en nariz y sabores en boca).
+    \item \textbf{Presentaciones disponibles} (\texttt{750 ml} u otras capacidades).
+    \item \textbf{Cantidad de botellas por lote} (ej. \textit{Edición limitada de $X$ botellas por lote}).
+    \item \textbf{Código NOM / Certificación CRM} (NOM-070-SCFI-2016).
+\end{enumerate}
+
+% ============================================================
+% SECCIÓN 4: REQUERIMIENTOS NO FUNCIONALES (RNF)
+% ============================================================
+\section{Requerimientos No Funcionales (RNF)}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{RNF-01 Rendimiento y Fluidez Visual:} Las animaciones deben ejecutarse a 60 FPS utilizando aceleración por hardware (\texttt{transform}, \texttt{opacity}) e \texttt{IntersectionObserver}, evitando bloqueos del hilo principal. Tiempo de carga inicial (LCP) menor a 2.5 segundos en conexiones 4G.
+    \item \textbf{RNF-02 Diseño Responsivo (Mobile-First):} Adaptación completa a teléfonos móviles (320px--767px), tablets (768px--1023px) y escritorio (1024px+), incluyendo selector de idioma y menú móvil accesible.
+    \item \textbf{RNF-03 Optimización Multimedia:} Imágenes en formato \texttt{WebP}/\texttt{AVIF} con recorte transparente (PNG/WebP sin fondo para botellas) para garantizar integración visual orgánica, y carga diferida (\texttt{loading="lazy"}).
+    \item \textbf{RNF-04 SEO y Metadatos (Open Graph):} Etiquetas \texttt{<meta>} bilingües, \texttt{og:title}, \texttt{og:description}, \texttt{og:image} y datos estructurados (\texttt{Schema.org/Product} y \texttt{Schema.org/Organization}).
+    \item \textbf{RNF-05 Mantenibilidad:} Código estructurado y documentado para que el equipo de desarrollo (\textit{Ing. en Computación Jose Ramon Aragon Toledo}) pueda actualizar lotes, productos y textos rápidamente sin requerir un CMS complejo en la Fase 1.
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% SECCIÓN 5: REGISTRO ÍNTEGRO DEL CUESTIONARIO DE LEVANTAMIENTO
+% ============================================================
+\section{Registro del Cuestionario de Levantamiento (Cuestionario Original)}
+
+A continuación se documentan las respuestas entregadas por el cliente en el cuestionario original, destacando también aquellas preguntas que quedaron \textbf{sin responder o incompletas} (las cuales tienen su espacio de respuesta en la Sección 6).
+
+\subsection{Sección 1 — La Marca}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{1.1 ¿Cuál es el nombre de la marca de mezcal?}\\
+    \textbf{Respuesta:} \texttt{MIL SENSACIONES}
+
+    \item \textbf{1.2 ¿Dónde producen el mezcal? (estado, municipio, comunidad)}\\
+    \textbf{Respuesta:} El Gramal, Nejapa de Madero, Yautepec, Oaxaca.
+
+    \item \textbf{1.3 ¿Cuánto tiempo llevan produciendo mezcal?}\\
+    \textbf{Respuesta:} Se empezó a producir nuevamente hace dos años.
+
+    \item \textbf{1.4 ¿Qué hace diferente a su mezcal del resto del mercado?}
+    \begin{answerbox}
+    ``Nuestro mezcal Mil Sensaciones no es solo una bebida\dots es historia viva. Somos la tercera generación de una tradición con el abuelo, continuó con el padre y hoy sigue en manos del hijo. Cada gota lleva años de experiencia, dedicación y respeto por el proceso artesanal.\\
+    Aquí no improvisamos. Conservamos las enseñanzas originales, los tiempos, los métodos y el cuidado que le dan a nuestro mezcal ese sabor único, auténtico e inconfundible.\\
+    Seleccionamos cuidadosamente los mejores magueyes, respetamos sus ciclos y trabajamos cada etapa con pasión: desde el corte hasta la destilación.\\
+    No buscamos producir masa, buscamos crear algo que realmente se sienta.\\
+    Mil Sensaciones tiene carácter, tiene identidad\dots y sobre todo, tiene alma.\\
+    Porque no vendemos solo mezcal, compartimos una herencia, una cultura y una experiencia que se disfruta en cada trago.''
+    \end{answerbox}
+
+    \item \textbf{1.5 ¿Tienen un maestro mezcalero identificado? ¿Quién es y cuál es su historia?}
+    \begin{answerbox}
+    ``Damián Olivera Díaz es el corazón de Mezcal Mil Sensaciones.\\
+    Segunda generación de maestros mezcaleros, su historia comienza desde la niñez, entre magueyes, aprendiendo a sembrar, cuidar y respetar la tierra. Lo que para muchos es un proceso, para él ha sido una forma de vida.\\
+    Con los años, perfeccionó su técnica sin perder la esencia: hacer mezcal como se hacía antes, con paciencia, conocimiento y pasión.\\
+    Hoy juntos, no solo elaboramos mezcal\dots creamos emociones en cada botella.\\
+    Porque detrás de cada gota, hay historia, familia y alma.''
+    \end{answerbox}
+
+    \item \textbf{1.6 ¿Cuál es la historia detrás de la marca? (origen, familia, motivación para crearla)}
+    \begin{answerbox}
+    ``Mezcal Mil Sensaciones nace del legado de una familia que ha vivido el mezcal desde sus raíces. No comenzó como un negocio, sino como una tradición: el conocimiento transmitido de generación en generación, entre magueyes, tierra y fuego.\\
+    Desde el abuelo hasta hoy, la motivación siempre ha sido la misma: preservar la esencia del mezcal auténtico y compartirlo con quienes saben valorar su origen.\\
+    La marca surge del deseo de llevar esa herencia más allá, de transformar años de trabajo, aprendizaje y pasión en una experiencia que conecte con los sentidos.\\
+    Mil Sensaciones no solo representa un mezcal\dots Representa historia, identidad y el orgullo de una familia que decidió compartir su esencia con el mundo.''
+    \end{answerbox}
+
+    \item \textbf{1.7 Elementos de la marca con los que ya cuentan (todos marcados por el cliente):}\\
+    \chk\ Nombre de la marca definido \quad
+    \chk\ Logo diseñado \quad
+    \chk\ Colores de marca seleccionados \quad
+    \chk\ Slogan o tagline \\
+    \chk\ Misión y visión redactadas \quad
+    \chk\ Etiqueta de botella diseñada \quad
+    \chk\ Registro de marca (IMPI) \\
+    \chk\ Certificación NOM-070 / CRM \quad
+    \chk\ Redes sociales activas \quad
+    \chk\ Correo electrónico de la empresa
+
+    \item \textbf{1.8 Redes sociales activas:}
+    \begin{itemize}
+        \item \textbf{Instagram:} \url{https://www.instagram.com/mezcalmilsensaciones/}
+        \item \textbf{Facebook:} \url{https://www.facebook.com/profile.php?id=61581942955039}
+    \end{itemize}
+\end{itemize}
+
+\subsection{Sección 2 — Los Productos}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{2.1 ¿Cuántos productos tienen actualmente o planean tener al lanzar el sitio?}\\
+    \textbf{Respuesta:} \textbf{750 ml — Mezcal Espadín} (Próximamente a lanzar: \textit{Ensambles}, \textit{Mezcal Silvestre}, \textit{Curados de mezcal}).
+
+    \item \textbf{2.2 Tipos de mezcal que producen o producirán:}\\
+    \chk\ Mezcal Joven \quad
+    \uchk\ Mezcal Reposado \quad
+    \uchk\ Mezcal Añejo \quad
+    \chk\ Edición Limitada \\
+    \chk\ Ensamble (mezcla de agaves) \quad
+    \uchk\ Crema de Mezcal \quad
+    \chk\ Otro: \textit{Curados de mezcal}.
+
+    \item \textbf{2.4 Información que desean mostrar en la ficha de cada producto:}\\
+    \chk\ Nombre del producto \quad
+    \chk\ Tipo de agave utilizado \quad
+    \chk\ Maestro mezcalero \quad
+    \chk\ Región y comunidad de origen \\
+    \chk\ Proceso de elaboración \quad
+    \chk\ Graduación alcohólica (\% Alc. Vol.) \quad
+    \chk\ Notas de cata (sabores y aromas) \\
+    \uchk\ Maridajes sugeridos \quad
+    \chk\ Presentaciones disponibles (ml) \quad
+    \uchk\ Premios o reconocimientos \\
+    \chk\ Cantidad de botellas por lote \quad
+    \chk\ Código NOM \quad
+    \uchk\ Precio de referencia
+
+    \item \textbf{2.5 Material visual actual para los productos:}\\
+    \chk\ Fotos básicas (teléfono), pero sirven de referencia.\\
+    \chk\ Tenemos video del proceso o la palenque.\\
+    \chk\ Fotos tomadas con cámara profesional por nosotros mismos.
+
+    \item \textbf{2.6 ¿Tienen ya redactada la descripción o historia de alguno de sus productos?}\\
+    \textcolor{red!80!black}{\textbf{[SIN RESPUESTA EN EL CUESTIONARIO — Ver espacio de llenado en Sección 6.1]}}
+\end{itemize}
+
+\subsection{Sección 3 — El Sitio Web}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{3.1 Secciones indispensables marcadas para la primera versión:}\\
+    \chk\ Inicio (página principal con video o foto impactante) \quad
+    \chk\ Historia de la marca / Nosotros \\
+    \uchk\ Catálogo de productos (sin precio ni carrito) \quad
+    \chk\ Ficha detallada de cada producto \\
+    \chk\ Proceso de elaboración \quad
+    \chk\ Maestro mezcalero (perfil y trayectoria) \\
+    \uchk\ Dónde encontrarnos / puntos de venta \textit{(Nota: marcado como Necesario en 3.4 y 7.1)} \\
+    \uchk\ Contacto y formulario de consulta \textit{(Nota: marcado como Necesario en 3.4 y 7.1)} \\
+    \uchk\ Prensa / Kit de medios \quad
+    \chk\ Galería de fotos \quad
+    \uchk\ Blog o noticias \quad
+    \uchk\ Aviso de privacidad
+
+    \item \textbf{3.2 ¿El sitio necesita estar en inglés también?}\\
+    \uradio\ No, solo en español por ahora\\
+    \radio\ \underline{\textbf{Sí, español e inglés desde el inicio}} \quad \textcolor{mezcalAgave}{\textbf{[RESUELTO E IMPLEMENTADO EN EL SITIO]}}\\
+    \uradio\ Español primero, inglés en una segunda fase
+
+    \item \textbf{3.3 ¿Necesitan un panel de administración para editar el contenido sin programador?}\\
+    \uradio\ Sí, alguien del equipo lo actualizará constantemente\\
+    \uradio\ No por ahora, el equipo de desarrollo hará los cambios\\
+    \radio\ \underline{\textbf{No sé, depende del costo}} \quad \textcolor{mezcalAgave}{\textbf{[RESUELTO: Incluido dentro del paquete integral de \$7,000 MXN a 6 semanas con Dashboard Administrativo + POS]}}\
+
+    \item \textbf{3.4 Otras funciones a incluir en el lanzamiento:}\\
+    \chk\ Verificación de edad (+18) al entrar al sitio \quad
+    \chk\ Formulario de contacto con notificación por correo \\
+    \chk\ Enlace a WhatsApp para consultas directas \quad
+    \uchk\ Integración con Instagram (posts recientes) \\
+    \chk\ Google Maps con ubicación de la palenque \quad
+    \chk\ Suscripción a lista de correo / newsletter \\
+    \chk\ Descarga de ficha técnica en PDF \quad
+    \chk\ Botones para compartir en redes sociales
+
+    \item \textbf{3.5 ¿Hay alguna función adicional no listada que sea importante?}\\
+    \textcolor{red!80!black}{\textbf{[SIN RESPUESTA EN EL CUESTIONARIO — Ver espacio de llenado en Sección 6.1]}}
+\end{itemize}
+
+\subsection{Sección 4 — Diseño y Estilo Visual}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{4.1 Personalidad de la marca (hasta 3):}\\
+    \chk\ Artesanal y auténtica \quad
+    \chk\ Tradicional y familiar \quad
+    \chk\ Sostenible y cercana a la tierra
+
+    \item \textbf{4.2 ¿Qué les gusta específicamente de \texttt{400conejos.mx} y \texttt{casachagoya.com}?}\\
+    \textbf{Respuesta:} ``Lo interactivo que están los sitios, la combinación de colores''.
+
+    \item \textbf{4.3 ¿Otro sitio web de referencia visual?}\\
+    \textbf{Respuesta:} No.
+
+    \item \textbf{4.4 ¿Qué NO quieren que se vea en el diseño del sitio?}\\
+    \textbf{Respuesta:} ``Que las animaciones no agarren, o que parezca presentación de PowerPoint, que esté simple, imágenes que no se vean integradas''.
+
+    \item \textbf{4.5 ¿Con qué paleta de colores se identifica más su marca?}\\
+    \uradio\ Tonos oscuros (negro, café, miel, ámbar) \qquad
+    \radio\ \underline{\textbf{Tonos naturales (tierra, verde, madera)}} \quad \textcolor{mezcalAgave}{\textbf{[IMPLEMENTADO]}}\\
+    \uradio\ Tonos claros y minimalistas (blanco, beige, crema) \qquad
+    \uradio\ Tonos vibrantes (terracota, rojo, naranja)\\
+    \uradio\ No lo tenemos definido aún
+
+    \item \textbf{4.6 ¿Cuál debe ser el tono de los textos del sitio?}\\
+    \textcolor{red!80!black}{\textbf{[SIN SELECCIÓN EN EL CUESTIONARIO — Ver espacio de llenado en Sección 6.1]}}
+\end{itemize}
+
+\subsection{Sección 5 — Mercado y Clientes}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{5.1 Público objetivo del sitio web:}\\
+    \chk\ Consumidor final \quad
+    \chk\ Bares, restaurantes y coctelería \quad
+    \chk\ Importadores internacionales \quad
+    \chk\ Turistas y visitantes de Oaxaca / México \\
+    \uchk\ Distribuidores nacionales \quad
+    \uchk\ Periodistas, bloggers y sommeliers \quad
+    \uchk\ Tiendas especializadas
+
+    \item \textbf{5.2 Mercado principal:} Oaxaca.
+    \item \textbf{5.3 Distribución fuera de México:} Sí, Estados Unidos.
+    \item \textbf{5.4 Descripción del cliente ideal:}\\
+    \textbf{Respuesta parcial:} ``Mayores de 18 años,'' \textcolor{red!80!black}{\textbf{[RESPUESTA INCOMPLETA — Ver Sección 6.1]}}
+\end{itemize}
+
+\subsection{Secciones 6, 7 y 8 — Técnico, Prioridades, Contenido y Tiempos}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{6.1 ¿Quién actualizará el contenido después de entregado?}\\
+    \chk\ El mismo equipo de desarrollo (\textbf{Ing. en Computación Jose Ramon Aragon Toledo}).
+    \item \textbf{6.2 Herramientas conectadas requeridas:} \chk\ WhatsApp Business.
+    \item \textbf{7.1 Matriz de Prioridades de Lanzamiento:}
+    \begin{itemize}
+        \item \textbf{Sí / Necesario desde el inicio:} Historia y valores de la marca, Ficha detallada de cada mezcal, Proceso de elaboración explicado, Perfil del maestro mezcalero, Formulario o botón de contacto, Mapa o lista de dónde comprar, Enlace a redes sociales, Versión en inglés, Verificación de edad (+18).
+        \item \textbf{Más adelante (Fase 2):} Catálogo visual de productos, Blog o sección de noticias, Panel de administración (CMS).
+    \end{itemize}
+    \item \textbf{7.2 Funciones deseadas a futuro (Fase 2):}\\
+    \chk\ Tienda en línea \quad
+    \chk\ Reservas para catas o tours a la palenque \quad
+    \chk\ Portal para distribuidores con precios especiales \quad
+    \chk\ App móvil \quad
+    \chk\ Versión en inglés del sitio \quad
+    \chk\ Blog sobre mezcal y cultura \quad
+    \chk\ Integración con marketplaces (Amazon, MercadoLibre).
+    \item \textbf{7.3 Indicadores de éxito esperados:} ``Visitas constantes al sitio, incremento de ventas, más seguidores e interacción en redes sociales''.
+    \item \textbf{8.1 Contenido disponible actualmente para entregar:}\\
+    \chk\ Nombre y logo de la marca \quad
+    \chk\ Textos sobre la historia \quad
+    \chk\ Misión y visión escritas \\
+    \chk\ Fotografías de la palenque o del proceso \quad
+    \chk\ Video del proceso de elaboración \quad
+    \chk\ Fichas técnicas de los productos \\
+    \uchk\ Fotografías profesionales de productos \quad
+    \uchk\ Etiquetas o arte gráfico de botellas.
+    \item \textbf{8.2 Redacción de textos:} ``Nosotros y el equipo de desarrollo''.
+    \item \textbf{8.3 Toma de fotografías:} ``Lo hará alguien del equipo''.
+    \item \textbf{8.4 Fecha límite o evento clave:} ``Por el momento no''.
+    \item \textbf{8.5 Frecuencia y canal de retroalimentación:} ``En WhatsApp cuando se pueda''.
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% SECCIÓN 6: ESPACIOS PARA PREGUNTAS Y DATOS PENDIENTES
+% ============================================================
+\section{Formulario de Cierre de Levantamiento (Preguntas y Datos Pendientes)}
+
+Esta sección está diseñada para ser completada directamente con el cliente (\textbf{Mezcal Mil Sensaciones}) con el fin de resolver las preguntas que quedaron en blanco en el cuestionario original y recopilar los datos exactos necesarios para finalizar la Fase 1.
+
+\subsection{Parte A: Preguntas del Cuestionario Original que Quedaron sin Responder}
+
+\begin{pendingbox}{Pregunta 2.6 — Descripción o historia individual de cada producto}
+\textbf{¿Tienen ya redactada la descripción o historia de alguno de sus productos? Si sí, favor de escribirla o adjuntarla; si no, confirmar si el equipo de desarrollo (\textit{Ing. en Computación Jose Ramon Aragon Toledo}) debe redactarla con base en las notas de cata:}
+\fillline
+\fillline
+\fillline
+\end{pendingbox}
+
+\begin{pendingbox}{Pregunta 3.2 — Confirmación del Idioma Inglés (RESUELTO)}
+\textbf{Respuesta subrayada por el cliente en el cuestionario original:}\\[0.4em]
+\uradio\ No, solo en español por ahora\\[0.25em]
+\radio\ \underline{\textbf{Sí, español e inglés desde el inicio}} \quad \textcolor{mezcalAgave}{\textbf{(Implementado al 100\% en las 9 páginas del sitio con selector interactivo ES | EN)}}\\[0.25em]
+\uradio\ Español primero, inglés en una segunda fase
+\end{pendingbox}
+
+\begin{pendingbox}{Pregunta 3.3 — Confirmación sobre Panel de Administración (RESUELTO)}
+\textbf{Respuesta subrayada por el cliente en el cuestionario original:}\\[0.4em]
+\uradio\ Sí, alguien del equipo lo actualizará constantemente\\[0.25em]
+\uradio\ No por ahora, el equipo de desarrollo hará los cambios\\[0.25em]
+\radio\ \underline{\textbf{No sé, depende del costo}}\\[0.35em]
+\textbf{Acuerdo Técnico-Económico:} El Panel de Administración (\texttt{dashboard.html}) con gestión de lotes/inventario, control de pedidos, punto de venta (POS) e historial de clientes \textbf{ya se incluye sin costo adicional} dentro del plan de desarrollo integral de \textbf{\$7,000.00 MXN a 6 semanas} elaborado por el \textbf{Ing. en Computación Jose Ramon Aragon Toledo}.
+\end{pendingbox}
+
+\begin{pendingbox}{Pregunta 3.5 — Funciones adicionales importantes no listadas}
+\textbf{¿Existe alguna función adicional que no apareció en las listas anteriores y que sea importante para el lanzamiento?}
+\fillline
+\fillline
+\end{pendingbox}
+
+\begin{pendingbox}{Pregunta 4.5 — Selección Oficial de Paleta de Colores (RESUELTO)}
+\textbf{Respuesta subrayada por el cliente en el cuestionario original:}\\[0.4em]
+\uradio\ Tonos oscuros (negro, café, miel, ámbar)\\[0.2em]
+\radio\ \underline{\textbf{Tonos naturales (tierra, verde, madera)}} \quad \textcolor{mezcalAgave}{\textbf{(Aplicado en el Sistema de Diseño Global)}}\\[0.2em]
+\uradio\ Tonos claros y minimalistas (blanco, beige, crema)\\[0.2em]
+\uradio\ Tonos vibrantes (terracota, rojo, naranja)\\[0.4em]
+\textbf{Tokens cromáticos aplicados en el sitio web (\texttt{assets/css/styles.css}):}
+\begin{itemize}[leftmargin=1.5em, topsep=2pt, itemsep=1pt]
+    \item \textbf{Madera horneada / Encino (\texttt{mezcal-dark} / \texttt{mezcal-wood}):} \texttt{\#18110B} y \texttt{\#261A11} (fondos principales de secciones, barra de navegación y cajas translúcidas sobre videos).
+    \item \textbf{Tierra de Oaxaca (\texttt{mezcal-charcoal} / \texttt{mezcal-earth}):} \texttt{\#2D1E14} y \texttt{\#8B5A2B} (tarjetas de productos, bordes cálidos, acentos de barro y franjas de sección).
+    \item \textbf{Verde Maguey (\texttt{mezcal-agave} / \texttt{mezcal-agave-light}):} \texttt{\#4B6043} y \texttt{\#6C8663} (botones principales, insignias de origen, divisores botánicos y degradados orgánicos).
+\end{itemize}
+\end{pendingbox}
+
+\begin{pendingbox}{Pregunta 4.6 — Tono de Comunicación de los Textos}
+\textbf{Esta pregunta quedó sin marcar en el documento Word. Seleccione el tono deseado para la redacción del sitio:}\\[0.4em]
+\uradio\ Formal y sofisticado \qquad
+\uradio\ Cercano y conversacional\\[0.25em]
+\uradio\ Poético y narrativo (que cuente historias) \qquad
+\uradio\ Técnico y educativo (énfasis en el proceso)
+\end{pendingbox}
+
+\begin{pendingbox}{Pregunta 5.4 — Perfil Completo del Cliente Ideal}
+\textbf{En el cuestionario únicamente se escribió \textit{``Mayores de 18 años,''}. Favor de completar: rango de edad principal, intereses, nivel socioeconómico y qué busca en un mezcal artesanal:}
+\fillline
+\fillline
+\fillline
+\end{pendingbox}
+
+\newpage
+
+\subsection{Parte B: Recolección de Textos Corporativos y Registros Oficiales}
+
+En los puntos 1.7 y 8.1 del cuestionario el cliente indicó que \textbf{ya cuenta} con estos elementos, pero falta su texto/dato exacto para integrarlos en el código del sitio web:
+
+\begin{pendingbox}{1. Identidad Verbal y Registros Regulatorios}
+\textbf{a) Slogan o Tagline oficial de ``Mil Sensaciones'':}
+\fillline
+\fillline
+
+\textbf{b) Misión de la empresa (texto íntegro):}
+\fillline
+\fillline
+\fillline
+
+\textbf{c) Visión de la empresa (texto íntegro):}
+\fillline
+\fillline
+\fillline
+
+\textbf{d) Código de Certificación NOM-070 / CRM exacto:} \rule{7.5cm}{0.5pt}\\[0.6em]
+\textbf{e) Número de Registro de Marca (IMPI):} \rule{8.8cm}{0.5pt}
+\end{pendingbox}
+
+\subsection{Parte C: Fichas Técnicas Completas por Producto (10 Atributos Obligatorios)}
+
+Complete los datos reales de cada expresión para generar sus tarjetas interactivas y sus respectivos archivos PDF descargables:
+
+\renewcommand{\arraystretch}{1.65}
+\begin{longtable}{@{} L{4.2cm} L{5.5cm} L{5.5cm} @{}}
+\toprule
+\textbf{Atributo Obligatorio} & \textbf{Producto 1: Mezcal Espadín (Actual)} & \textbf{Producto 2: Ensamble (Próximo)} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Atributo Obligatorio} & \textbf{Producto 1: Mezcal Espadín (Actual)} & \textbf{Producto 2: Ensamble (Próximo)} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+1. Nombre comercial exacto & & \\ \hline
+2. Tipo de agave (común, científico y años de maduración) & \textit{Agave Angustifolia Haw} (\rule{1.2cm}{0.4pt} años) & \\ \hline
+3. Maestro Mezcalero & Damián Olivera Díaz & Damián Olivera Díaz \\ \hline
+4. Región y comunidad & El Gramal, Nejapa de Madero, Yautepec, Oax. & El Gramal, Nejapa de Madero, Yautepec, Oax. \\ \hline
+5. Proceso (horno, molienda, tina de fermentación, alambique) & & \\ \hline
+6. Graduación alcohólica (\texttt{\% Alc. Vol.}) & \rule{2cm}{0.4pt} \% Alc. Vol. & \rule{2cm}{0.4pt} \% Alc. Vol. \\ \hline
+7. Notas de cata (Vista, Nariz, Boca) & & \\ \hline
+8. Presentaciones disponibles & 750 ml / Otra: \rule{2cm}{0.4pt} & 750 ml / Otra: \rule{2cm}{0.4pt} \\ \hline
+9. Cantidad de botellas por lote & \rule{2.5cm}{0.4pt} botellas & \rule{2.5cm}{0.4pt} botellas \\ \hline
+10. Código NOM / Lote & NOM: \rule{3cm}{0.4pt} & NOM: \rule{3cm}{0.4pt} \\
+\end{longtable}
+
+\begin{longtable}{@{} L{4.2cm} L{5.5cm} L{5.5cm} @{}}
+\toprule
+\textbf{Atributo Obligatorio} & \textbf{Producto 3: Mezcal Silvestre} & \textbf{Producto 4: Curados de Mezcal} \\
+\midrule
+1. Nombre comercial / Sabores & & Sabores: \\ \hline
+2. Tipo de agave silvestre / Frutas o ingredientes & & \\ \hline
+3. Maestro Mezcalero & Damián Olivera Díaz & Damián Olivera Díaz \\ \hline
+4. Proceso de elaboración & & \\ \hline
+5. Graduación alcohólica (\texttt{\% Alc. Vol.}) & \rule{2cm}{0.4pt} \% Alc. Vol. & \rule{2cm}{0.4pt} \% Alc. Vol. \\ \hline
+6. Notas de cata (Vista, Nariz, Boca) & & \\ \hline
+7. Presentaciones y botellas por lote & & \\ \hline
+8. ¿Mostrar ficha completa o como ``Próximamente''? & \uradio\ Ficha completa \quad \uradio\ Próximamente & \uradio\ Ficha completa \quad \uradio\ Próximamente \\
+\bottomrule
+\end{longtable}
+
+\subsection{Parte D: Datos de Contacto, Ubicación y Cumplimiento Legal}
+
+\begin{pendingbox}{2. Canales de Contacto, Ubicación y Datos Fiscales para Aviso de Privacidad}
+\textbf{a) Número oficial de WhatsApp Business (a 10 dígitos):} \texttt{+52} \rule{6cm}{0.5pt}\\[0.5em]
+\textbf{b) Correo electrónico oficial donde llegarán los mensajes del formulario:} \rule{6.2cm}{0.5pt}\\[0.5em]
+\textbf{c) Coordenadas o enlace exacto de Google Maps del Palenque en El Gramal:}
+\fillline
+\textbf{d) Lista de puntos de venta físicos actuales (dirección, nombre del local o ciudad):}
+\fillline
+\fillline
+\textbf{e) Nombre completo del titular o Razón Social (para el Aviso de Privacidad LFPDPPP):}
+\fillline
+\textbf{f) Domicilio fiscal o comercial para notificaciones de privacidad:}
+\fillline
+\end{pendingbox}
+
+\subsection{Parte E: Checklist de Entrega de Archivos Multimedia}
+\begin{itemize}[label=$\square$, leftmargin=2em, itemsep=0.4em]
+    \item \textbf{Logo oficial de Mil Sensaciones} en formato vectorial (\texttt{.SVG}, \texttt{.AI}, \texttt{.EPS}) o \texttt{.PNG} sin fondo.
+    \item \textbf{Fotografías en alta resolución de las botellas} (Mezcal Espadín y otras expresiones) bien iluminadas para recorte de fondo transparente.
+    \item \textbf{Fotografía real del Maestro Mezcalero Damián Olivera Díaz} en el palenque o campos de agave.
+    \item \textbf{Carpeta de fotografías del palenque y proceso artesanal} (corte, cocción, molienda, fermentación, destilación).
+    \item \textbf{Archivo de video del proceso de elaboración / palenque} (en formato \texttt{.MP4} / \texttt{.MOV}) para el encabezado principal (Hero).
+    \item \textbf{Arte gráfico de las etiquetas de botella} (para referencia de diseño y tipografías).
+\end{itemize}
+
+\vspace{1cm}
+
+% ============================================================
+% FIRMAS DE CONFORMIDAD
+% ============================================================
+\noindent
+\begin{tabularx}{\linewidth}{@{} X @{\hspace{1.5cm}} X @{}}
+    \hrulefill & \hrulefill \\
+    \centering\textbf{Por el Cliente: Mezcal Mil Sensaciones}\par
+    \small Damián Olivera Díaz / Representante de Marca\par
+    \footnotesize El Gramal, Nejapa de Madero, Yautepec, Oaxaca
+    &
+    \centering\textbf{Elaboró y Especificó (Equipo de Desarrollo)}\par
+    \small \textbf{Ing. en Computación Jose Ramon Aragon Toledo}\par
+    \footnotesize Ingeniero en Computación — Clave DGP: \texttt{521344}\par
+    \footnotesize \texttt{aatr010423@gmail.com}
+\end{tabularx}
+
+\end{document}

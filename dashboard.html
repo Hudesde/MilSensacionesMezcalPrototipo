@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control | Mezcal Mil Sensaciones</title>
+    <meta name="description" content="Dashboard dinámico de Mezcal Mil Sensaciones con vistas para Administrador General, 5 Clientes con Compras Simuladas y Punto de Venta (POS).">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mezcal-dark': '#160f09',
+                        'mezcal-wood': '#281910',
+                        'mezcal-charcoal': '#23160e',
+                        'mezcal-agave': '#4b6043',
+                        'mezcal-agave-light': '#6c8663',
+                        'mezcal-gold': '#d4af37',
+                        'mezcal-earth': '#8b5a2b',
+                        'mezcal-light': '#f4f1ea'
+                    },
+                    fontFamily: {
+                        'serif': ['Cinzel', 'serif'],
+                        'sans': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/styles.css?v=12">
+</head>
+<body class="bg-mezcal-dark text-mezcal-light antialiased font-sans selection:bg-mezcal-gold selection:text-mezcal-dark relative min-h-screen flex flex-col justify-between">
+
+    <!-- Blobs Líquidos de Fondo -->
+    <div class="liquid-blob w-96 h-96 bg-mezcal-agave top-12 left-10"></div>
+    <div class="liquid-blob w-80 h-80 bg-mezcal-gold top-60 right-10" style="animation-delay: -3.5s;"></div>
+
+    <!-- Barra Superior del Dashboard -->
+    <header class="glass-panel sticky top-0 z-40 border-b border-mezcal-gold/20 px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="font-serif text-lg font-bold text-mezcal-gold uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-wine-glass"></i> Mil Sensaciones
+                </a>
+                <span class="text-xs text-white/30">|</span>
+                <span id="header-role-badge" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-mezcal-gold text-mezcal-dark">
+                    Panel Administrador
+                </span>
+            </div>
+
+            <!-- Selector Rápido de Rol para Probar las 3 Vistas -->
+            <div class="flex items-center gap-3">
+                <div class="hidden md:flex items-center gap-1.5 bg-mezcal-charcoal/90 p-1 rounded-full border border-white/10 text-xs">
+                    <button type="button" onclick="switchRole('admin')" id="btn-tab-admin" class="px-3.5 py-1.5 rounded-full transition-colors font-medium">Administrador (5 Pedidos)</button>
+                    <button type="button" onclick="switchRole('cliente')" id="btn-tab-cliente" class="px-3.5 py-1.5 rounded-full transition-colors font-medium">Vista Cliente</button>
+                    <button type="button" onclick="switchRole('pos')" id="btn-tab-pos" class="px-3.5 py-1.5 rounded-full transition-colors font-medium">Punto de Venta (POS)</button>
+                </div>
+
+                <a href="login.html" class="px-3.5 py-2 border border-mezcal-gold/40 hover:bg-mezcal-gold hover:text-mezcal-dark text-mezcal-gold rounded-lg text-xs font-semibold transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-users-gear"></i> <span class="hidden sm:inline">Cambiar Cuenta Demo</span>
+                </a>
+
+                <button type="button" onclick="mezcalLogout()" class="px-3.5 py-2 border border-red-500/40 hover:bg-red-500/20 text-red-300 rounded-lg text-xs font-semibold transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-right-from-bracket"></i> <span class="hidden sm:inline">Salir</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 flex-1 relative z-10 max-w-7xl">
+
+        <!-- Selector Móvil de Rol -->
+        <div class="md:hidden mb-6 flex justify-around bg-mezcal-charcoal p-1.5 rounded-xl border border-white/10 text-xs">
+            <button type="button" onclick="switchRole('admin')" id="btn-tab-admin-m" class="px-3 py-2 rounded-lg transition-colors font-medium">Admin (5 Pedidos)</button>
+            <button type="button" onclick="switchRole('cliente')" id="btn-tab-cliente-m" class="px-3 py-2 rounded-lg transition-colors font-medium">Cliente</button>
+            <button type="button" onclick="switchRole('pos')" id="btn-tab-pos-m" class="px-3 py-2 rounded-lg transition-colors font-medium">POS</button>
+        </div>
+
+        <!-- ===================================================================
+             1. DASHBOARD DE ADMINISTRADOR (VISTA POR DEFECTO DESDE LOGIN ADMIN)
+             =================================================================== -->
+        <section id="view-admin" class="space-y-8">
+            <div class="glass-panel-fluid p-8 rounded-3xl border border-mezcal-gold/30">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-mezcal-gold">Panel Administrativo Central · Sesión Iniciada</span>
+                        <h1 class="font-serif text-2xl md:text-3xl font-bold text-mezcal-light mt-1">Control General de Producción y 5 Compras Simuladas</h1>
+                        <p class="text-xs text-mezcal-light/70 mt-1">Administrador: <strong class="text-mezcal-gold">Damián Olivera Díaz</strong> (admin@milsensaciones.com) · Palenque El Gramal, Oaxaca</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="login.html" class="px-4 py-2.5 bg-mezcal-charcoal border border-mezcal-gold/40 text-mezcal-gold font-semibold text-xs uppercase rounded-xl hover:bg-mezcal-gold hover:text-mezcal-dark transition-colors">
+                            <i class="fa-solid fa-user-check mr-1"></i> Ver Portal Login Dummy
+                        </a>
+                        <button type="button" onclick="alert('Generando reporte PDF consolidado de los 5 pedidos de clientes y lotes NOM-070...')" class="px-4 py-2.5 bg-mezcal-agave text-white font-semibold text-xs uppercase rounded-xl hover:bg-mezcal-agave-light transition-colors">
+                            <i class="fa-solid fa-file-pdf mr-1"></i> Exportar Pedidos y Lotes
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPIs de Negocio -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-card p-6 rounded-2xl border border-white/10">
+                    <span class="text-xs text-mezcal-light/60 uppercase">5 Compras Simuladas (Online)</span>
+                    <h3 id="admin-kpi-total" class="font-serif text-2xl font-bold text-mezcal-gold mt-2">$17,550 MXN</h3>
+                    <p class="text-xs text-green-400 mt-1"><i class="fa-solid fa-check-circle"></i> 17 botellas en 5 órdenes activas</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl border border-white/10">
+                    <span class="text-xs text-mezcal-light/60 uppercase">Ventas Globales del Mes</span>
+                    <h3 class="font-serif text-2xl font-bold text-mezcal-light mt-2">$184,500 MXN</h3>
+                    <p class="text-xs text-green-400 mt-1"><i class="fa-solid fa-arrow-up"></i> +18% vs mes anterior</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl border border-white/10">
+                    <span class="text-xs text-mezcal-light/60 uppercase">Inventario de Botellas</span>
+                    <h3 class="font-serif text-2xl font-bold text-mezcal-light mt-2">1,240 Unidades</h3>
+                    <p class="text-xs text-mezcal-gold mt-1">820 Espadín · 250 Ensamble · 170 Curados</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl border border-white/10">
+                    <span class="text-xs text-mezcal-light/60 uppercase">Cumplimiento NOM-070</span>
+                    <h3 class="font-serif text-2xl font-bold text-green-400 mt-2">100% Vigente</h3>
+                    <p class="text-xs text-mezcal-light/70 mt-1">Marbetes CRM e IMPI verificados</p>
+                </div>
+            </div>
+
+            <!-- TABLA PRINCIPAL: 5 COMPRAS SIMULADAS DE DISTINTOS CLIENTES -->
+            <div class="glass-card p-6 md:p-8 rounded-2xl border border-mezcal-gold/30 shadow-2xl">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-5">
+                    <div>
+                        <span class="text-[11px] uppercase tracking-widest text-mezcal-agave-light font-bold block">Módulo de Seguimiento de Pedidos E-Commerce</span>
+                        <h2 id="simulated-orders-caption" class="font-serif text-xl md:text-2xl font-bold text-mezcal-gold">5 Compras Simuladas de Distintos Clientes</h2>
+                    </div>
+                    <span class="text-xs text-mezcal-light/70 bg-mezcal-charcoal px-3 py-1.5 rounded-xl border border-white/10">
+                        Puedes cambiar el estado de envío o abrir la vista individual de cada cliente
+                    </span>
+                </div>
+
+                <div tabindex="0" role="region" aria-labelledby="simulated-orders-caption" class="table-wrapper rounded-xl border border-white/10">
+                    <table class="w-full text-left text-xs text-mezcal-light/85"
+                           style="--label-2: 'Cliente y Ciudad'; --label-3: 'Productos Comprados'; --label-4: 'Lote NOM'; --label-5: 'Total Pagado'; --label-6: 'Estado / Guía'; --label-7: 'Acción';">
+                        <thead class="bg-mezcal-charcoal text-mezcal-gold uppercase font-semibold border-b border-white/10">
+                            <tr>
+                                <th class="p-3.5">Orden / Fecha</th>
+                                <th class="p-3.5">Cliente y Ciudad</th>
+                                <th class="p-3.5">Productos Comprados</th>
+                                <th class="p-3.5">Lote NOM</th>
+                                <th class="p-3.5">Total Pagado</th>
+                                <th class="p-3.5">Estado de Envío / Guía</th>
+                                <th class="p-3.5 text-right">Vista Cliente</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-simulated-orders-tbody" class="divide-y divide-white/10">
+                            <!-- Renderizado dinámicamente por JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Gestión de Lotes y Precios -->
+            <div class="glass-card p-6 md:p-8 rounded-2xl border border-white/10">
+                <h2 id="batches-table-caption" class="font-serif text-xl font-bold text-mezcal-gold mb-4">Control de Lotes Activos en Palenque</h2>
+                <div tabindex="0" role="region" aria-labelledby="batches-table-caption" class="table-wrapper rounded-xl border border-white/10">
+                    <table class="w-full text-left text-xs text-mezcal-light/80"
+                           style="--label-2: 'Variante'; --label-3: 'Graduación'; --label-4: 'Producidas'; --label-5: 'Disponibles'; --label-6: 'Precio'; --label-7: 'Acción';">
+                        <thead class="bg-mezcal-charcoal text-mezcal-gold uppercase font-semibold border-b border-white/10">
+                            <tr>
+                                <th class="p-3">Código Lote</th>
+                                <th class="p-3">Variante</th>
+                                <th class="p-3">Graduación</th>
+                                <th class="p-3">Botellas Producidas</th>
+                                <th class="p-3">Disponibles</th>
+                                <th class="p-3">Precio Lista</th>
+                                <th class="p-3 text-right">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            <tr>
+                                <th class="p-3 font-mono font-bold text-mezcal-gold">ESP-2026-01</th>
+                                <td class="p-3">Espadín Joven 750ml</td>
+                                <td class="p-3">45% Alc. Vol.</td>
+                                <td class="p-3">600</td>
+                                <td class="p-3 font-bold text-white">185</td>
+                                <td class="p-3">$850 MXN</td>
+                                <td class="p-3 text-right"><a href="mezcal-espadin.html" class="text-mezcal-gold hover:underline">Ver Ficha</a></td>
+                            </tr>
+                            <tr>
+                                <th class="p-3 font-mono font-bold text-mezcal-gold">ENS-2026-02</th>
+                                <td class="p-3">Ensamble (Espadín/Madrecuixe)</td>
+                                <td class="p-3">47% Alc. Vol.</td>
+                                <td class="p-3">300</td>
+                                <td class="p-3 font-bold text-white">42</td>
+                                <td class="p-3">$1,250 MXN</td>
+                                <td class="p-3 text-right"><a href="mezcal-ensamble.html" class="text-mezcal-gold hover:underline">Ver Ficha</a></td>
+                            </tr>
+                            <tr>
+                                <th class="p-3 font-mono font-bold text-mezcal-gold">SIL-2026-01</th>
+                                <td class="p-3">Mezcal Silvestre de Montaña</td>
+                                <td class="p-3">48% Alc. Vol.</td>
+                                <td class="p-3">120</td>
+                                <td class="p-3 font-bold text-white">19</td>
+                                <td class="p-3">$1,450 MXN</td>
+                                <td class="p-3 text-right"><a href="mezcal-silvestre.html" class="text-mezcal-gold hover:underline">Ver Ficha</a></td>
+                            </tr>
+                            <tr>
+                                <th class="p-3 font-mono font-bold text-mezcal-gold">CUR-2026-03</th>
+                                <td class="p-3">Curados de Maracuyá</td>
+                                <td class="p-3">38% Alc. Vol.</td>
+                                <td class="p-3">250</td>
+                                <td class="p-3 font-bold text-white">88</td>
+                                <td class="p-3">$750 MXN</td>
+                                <td class="p-3 text-right"><a href="curados-mezcal.html" class="text-mezcal-gold hover:underline">Ver Ficha</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             2. DASHBOARD DE CLIENTE (CON SELECTOR DE LAS 5 COMPRAS SIMULADAS)
+             =================================================================== -->
+        <section id="view-cliente" class="space-y-8 hidden">
+
+            <!-- Selector rápido entre los 5 clientes simulados -->
+            <div class="glass-card p-5 rounded-2xl border border-mezcal-gold/30">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3">
+                    <span class="text-xs uppercase tracking-wider text-mezcal-gold font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-users"></i> Simulador de Cuentas de Clientes (5 Compras Distintas):
+                    </span>
+                    <button type="button" onclick="switchRole('admin')" class="self-start md:self-auto text-xs text-mezcal-gold hover:underline flex items-center gap-1">
+                        <i class="fa-solid fa-arrow-left"></i> Volver al Dashboard Administrador
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5" id="client-switcher-buttons">
+                    <!-- Botones generados dinámicamente -->
+                </div>
+            </div>
+
+            <div class="glass-panel-fluid p-8 rounded-3xl border border-mezcal-gold/30">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <span id="client-profile-badge" class="text-xs uppercase tracking-widest text-mezcal-gold">Club de Catadores Exclusivos</span>
+                        <h2 class="font-serif text-2xl md:text-3xl font-bold text-mezcal-light mt-1">¡Bienvenido, <span id="client-user-name">Alejandro Morales</span>!</h2>
+                        <p id="client-user-meta" class="text-xs text-mezcal-light/70 mt-1">Ciudad de México (CDMX) · alejandro.morales@catadorescdmx.mx</p>
+                    </div>
+                    <button type="button" class="open-cart-btn px-5 py-2.5 bg-mezcal-gold text-mezcal-dark font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-mezcal-light transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-basket-shopping"></i> Ver mi Cesta
+                    </button>
+                </div>
+            </div>
+
+            <!-- Métricas del Cliente Seleccionado -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl border border-white/10">
+                    <span class="text-xs text-mezcal-light/60 uppercase">Botellas en esta Compra</span>
+                    <h3 id="client-bottles-count" class="font-serif text-3xl font-bold text-mezcal-gold mt-2">3 Botellas</h3>
+                    <p id="client-items-summary" class="text-xs text-green-400 mt-1">2x Mezcal Espadín + 1x Ensamble</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl border border-white/10">
+                    <span class="text-xs text-mezcal-light/60 uppercase">Puntos Mezcaleros Acumulados</span>
+                    <h3 id="client-points" class="font-serif text-3xl font-bold text-mezcal-gold mt-2">590 Pts</h3>
+                    <p class="text-xs text-mezcal-light/70 mt-1">Canjeables por catas y lotes limitados</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl border border-white/10">
+                    <span class="text-xs text-mezcal-light/60 uppercase">Rastreo y Lote Asignado</span>
+                    <h3 id="client-lote-code" class="font-serif text-xl font-bold text-mezcal-light mt-2">Lote ESP-2026-01</h3>
+                    <p id="client-carrier-info" class="text-xs text-mezcal-gold mt-1">DHL Express · Guía 7849201145</p>
+                </div>
+            </div>
+
+            <!-- Detalle de la Compra Simulada del Cliente -->
+            <div class="glass-card p-6 md:p-8 rounded-2xl border border-white/10">
+                <h3 id="client-orders-caption" class="font-serif text-xl font-bold text-mezcal-gold mb-4">Detalle de Compra Simulada y Trazabilidad</h3>
+                <div tabindex="0" role="region" aria-labelledby="client-orders-caption" class="table-wrapper rounded-xl border border-white/10">
+                    <table class="w-full text-left text-xs text-mezcal-light/85"
+                           style="--label-2: 'Fecha'; --label-3: 'Expresiones Adquiridas'; --label-4: 'Lote NOM-070'; --label-5: 'Total'; --label-6: 'Estado'; --label-7: 'Ficha';">
+                        <thead class="bg-mezcal-charcoal text-mezcal-gold uppercase font-semibold border-b border-white/10">
+                            <tr>
+                                <th class="p-3.5">Pedido</th>
+                                <th class="p-3.5">Fecha</th>
+                                <th class="p-3.5">Expresiones Adquiridas</th>
+                                <th class="p-3.5">Lote NOM-070</th>
+                                <th class="p-3.5">Total</th>
+                                <th class="p-3.5">Estado</th>
+                                <th class="p-3.5 text-right">Ficha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="client-order-tbody" class="divide-y divide-white/5">
+                            <!-- Renderizado dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             3. DASHBOARD DE PUNTO DE VENTA (POS / VENDEDOR)
+             =================================================================== -->
+        <section id="view-pos" class="space-y-8 hidden">
+            <div class="glass-panel-fluid p-8 rounded-3xl border border-mezcal-gold/30">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-mezcal-gold">Terminal de Punto de Venta (POS)</span>
+                        <h2 class="font-serif text-3xl font-bold text-mezcal-light mt-1">Caja y Venta Mostrador en El Gramal</h2>
+                        <p class="text-xs text-mezcal-light/70 mt-1">Operador: Vendedor de Turno · Caja #1 Palenque</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="bg-green-500/20 text-green-300 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> Terminal En Línea
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Catálogo Rápido para Venta Mostrador -->
+                <div class="lg:col-span-7 glass-card p-6 rounded-2xl border border-white/10 space-y-4">
+                    <h3 class="font-serif text-xl font-bold text-mezcal-gold">Selección Rápida de Productos</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-4 bg-mezcal-charcoal/90 rounded-xl border border-white/10 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] bg-mezcal-agave px-2 py-0.5 rounded text-white font-bold uppercase">Espadín Joven</span>
+                                <h4 class="font-serif text-sm font-bold text-white mt-1">Espadín 750 ml (45%)</h4>
+                                <p class="text-xs text-mezcal-gold font-bold mt-1">$850 MXN</p>
+                            </div>
+                            <button type="button" onclick="addToPos('Mezcal Espadín 750ml', 850)" class="mt-3 w-full py-2 bg-mezcal-gold text-mezcal-dark font-bold text-xs uppercase rounded-lg hover:bg-mezcal-light transition-colors">
+                                + Agregar al Ticket
+                            </button>
+                        </div>
+
+                        <div class="p-4 bg-mezcal-charcoal/90 rounded-xl border border-white/10 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] bg-mezcal-earth px-2 py-0.5 rounded text-white font-bold uppercase">Ensamble</span>
+                                <h4 class="font-serif text-sm font-bold text-white mt-1">Ensamble Maestro 750 ml</h4>
+                                <p class="text-xs text-mezcal-gold font-bold mt-1">$1,250 MXN</p>
+                            </div>
+                            <button type="button" onclick="addToPos('Ensamble Maestro 750ml', 1250)" class="mt-3 w-full py-2 bg-mezcal-gold text-mezcal-dark font-bold text-xs uppercase rounded-lg hover:bg-mezcal-light transition-colors">
+                                + Agregar al Ticket
+                            </button>
+                        </div>
+
+                        <div class="p-4 bg-mezcal-charcoal/90 rounded-xl border border-white/10 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] bg-green-800 px-2 py-0.5 rounded text-white font-bold uppercase">Silvestre</span>
+                                <h4 class="font-serif text-sm font-bold text-white mt-1">Mezcal Silvestre 750 ml</h4>
+                                <p class="text-xs text-mezcal-gold font-bold mt-1">$1,450 MXN</p>
+                            </div>
+                            <button type="button" onclick="addToPos('Mezcal Silvestre 750ml', 1450)" class="mt-3 w-full py-2 bg-mezcal-gold text-mezcal-dark font-bold text-xs uppercase rounded-lg hover:bg-mezcal-light transition-colors">
+                                + Agregar al Ticket
+                            </button>
+                        </div>
+
+                        <div class="p-4 bg-mezcal-charcoal/90 rounded-xl border border-white/10 flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] bg-amber-700 px-2 py-0.5 rounded text-white font-bold uppercase">Curado</span>
+                                <h4 class="font-serif text-sm font-bold text-white mt-1">Curados de Mezcal 750 ml</h4>
+                                <p class="text-xs text-mezcal-gold font-bold mt-1">$750 MXN</p>
+                            </div>
+                            <button type="button" onclick="addToPos('Curados de Mezcal 750ml', 750)" class="mt-3 w-full py-2 bg-mezcal-gold text-mezcal-dark font-bold text-xs uppercase rounded-lg hover:bg-mezcal-light transition-colors">
+                                + Agregar al Ticket
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ticket de Cobro del Vendedor -->
+                <div class="lg:col-span-5 glass-panel p-6 rounded-2xl border border-mezcal-gold/30 space-y-4">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                        <h3 class="font-serif text-lg font-bold text-white">Ticket de Venta #TK-048</h3>
+                        <span class="text-xs text-mezcal-gold font-mono">Terminal #01</span>
+                    </div>
+
+                    <div id="pos-ticket-items" class="space-y-2 min-h-[140px] text-xs">
+                        <!-- Items del ticket -->
+                    </div>
+
+                    <div class="border-t border-white/10 pt-3 space-y-2">
+                        <div class="flex justify-between text-xs text-mezcal-light/70">
+                            <span>Subtotal</span>
+                            <span id="pos-subtotal" class="font-mono">$0 MXN</span>
+                        </div>
+                        <div class="flex justify-between text-base font-bold text-mezcal-gold">
+                            <span>Total a Cobrar</span>
+                            <span id="pos-total" class="font-mono text-xl">$0 MXN</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 pt-2">
+                        <button type="button" onclick="completePosSale('Efectivo')" class="py-3 bg-mezcal-agave hover:bg-mezcal-agave-light text-white font-bold rounded-xl text-xs uppercase transition-colors">
+                            <i class="fa-solid fa-money-bill-wave mr-1"></i> Efectivo
+                        </button>
+                        <button type="button" onclick="completePosSale('Tarjeta / Terminal')" class="py-3 bg-mezcal-gold hover:bg-mezcal-light text-mezcal-dark font-bold rounded-xl text-xs uppercase transition-colors">
+                            <i class="fa-solid fa-credit-card mr-1"></i> Tarjeta / CoDi
+                        </button>
+                    </div>
+
+                    <button type="button" onclick="clearPos()" class="w-full py-2 text-xs text-red-400 hover:text-red-300 text-center">
+                        Cancelar Ticket
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="p-6 text-center text-xs text-mezcal-light/50 border-t border-mezcal-light/10 relative z-10">
+        <p>&copy; 2026 Mezcal Mil Sensaciones · Equipo de Desarrollo: <strong class="text-mezcal-gold">Ing. en Computación Jose Ramon Aragon Toledo</strong></p>
+    </footer>
+
+    <!-- Cesta de compras slidebar -->
+    <div id="cart-container-mount"></div>
+
+        <!-- GSAP 3.13 + Plugins (ScrollTrigger, SplitText, Flip) + Lenis Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+    <script src="assets/js/particles-stage.js?v=12"></script>
+    <script src="assets/js/motion.js?v=12"></script>
+    <script src="assets/js/main.js?v=12"></script>
+    <script>
+        const SIMULATED_ORDERS = [
+            {
+                id: 'c1',
+                orderId: '#MS-2041',
+                date: '23 Oct 2026',
+                name: 'Alejandro Morales',
+                email: 'alejandro.morales@catadorescdmx.mx',
+                city: 'CDMX · Sommelier / Restaurante',
+                items: '2x Mezcal Espadín Joven 750ml + 1x Ensamble 750ml',
+                bottles: 3,
+                points: 590,
+                lote: 'ESP-2026-01',
+                total: 2950,
+                status: 'En Tránsito',
+                carrier: 'DHL Express · Guía 7849201145',
+                productLink: 'mezcal-espadin.html'
+            },
+            {
+                id: 'c2',
+                orderId: '#MS-2038',
+                date: '21 Oct 2026',
+                name: 'Sofía Hernández',
+                email: 'sofia.hernandez@oaxacaculinary.mx',
+                city: 'Oaxaca de Juárez · Coleccionista',
+                items: '2x Mezcal Silvestre 750ml (Micro-Lote de Montaña)',
+                bottles: 2,
+                points: 580,
+                lote: 'SIL-2026-01',
+                total: 2900,
+                status: 'Entregado',
+                carrier: 'Entrega Directa Palenque Oaxaca',
+                productLink: 'mezcal-silvestre.html'
+            },
+            {
+                id: 'c3',
+                orderId: '#MS-2035',
+                date: '19 Oct 2026',
+                name: 'Marcus Vance',
+                email: 'm.vance@austinagavebar.com',
+                city: 'Austin, TX (EE. UU.) · On-Trade Bar',
+                items: '4x Mezcal Espadín Joven 750ml + 2x Ensamble 750ml',
+                bottles: 6,
+                points: 1180,
+                lote: 'ESP-2026-01',
+                total: 5900,
+                status: 'En Preparación NOM-070',
+                carrier: 'DHL International Export · CRM',
+                productLink: 'mezcal-ensamble.html'
+            },
+            {
+                id: 'c4',
+                orderId: '#MS-2029',
+                date: '15 Oct 2026',
+                name: 'Valeria Gómez',
+                email: 'valeria.gomez@eventosgdl.mx',
+                city: 'Guadalajara, Jal. · Evento Privado',
+                items: '3x Curados de Mezcal Maracuyá 750ml (38% Alc. Vol.)',
+                bottles: 3,
+                points: 450,
+                lote: 'CUR-2026-03',
+                total: 2250,
+                status: 'Entregado',
+                carrier: 'Estafeta Preferente · Guía 90124410',
+                productLink: 'curados-mezcal.html'
+            },
+            {
+                id: 'c5',
+                orderId: '#MS-2024',
+                date: '12 Oct 2026',
+                name: 'Dr. Carlos Mendoza',
+                email: 'cmendoza@clubagavemty.mx',
+                city: 'Monterrey, N.L. · Club de Catadores',
+                items: '1x Silvestre 750ml + 1x Ensamble 750ml + 1x Espadín 750ml',
+                bottles: 3,
+                points: 710,
+                lote: 'ENS-2026-02',
+                total: 3550,
+                status: 'En Tránsito',
+                carrier: 'FedEx Priority · Guía 4490128831',
+                productLink: 'mezcal-silvestre.html'
+            }
+        ];
+
+        let currentRole = 'admin';
+        let activeClientId = 'c1';
+
+        function getStatusBadgeClass(status) {
+            if (status === 'Entregado') return 'bg-green-500/20 text-green-300 border-green-500/30';
+            if (status === 'En Tránsito') return 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30';
+            return 'bg-blue-500/20 text-blue-300 border-blue-500/30';
+        }
+
+        function renderAdminSimulatedOrders() {
+            const tbody = document.getElementById('admin-simulated-orders-tbody');
+            if (!tbody) return;
+
+            tbody.innerHTML = SIMULATED_ORDERS.map((order, idx) => `
+                <tr class="hover:bg-white/[0.02] transition-colors">
+                    <th class="p-3.5 font-mono text-mezcal-gold">
+                        <span class="block font-bold">${order.orderId}</span>
+                        <span class="text-[11px] text-mezcal-light/50 font-sans font-normal">${order.date}</span>
+                    </th>
+                    <td class="p-3.5">
+                        <strong class="text-white block">${idx + 1}. ${order.name}</strong>
+                        <span class="text-[11px] text-mezcal-light/60 block">${order.city}</span>
+                        <span class="text-[10px] font-mono text-mezcal-gold/80">${order.email}</span>
+                    </td>
+                    <td class="p-3.5">
+                        <span class="text-mezcal-light font-medium block">${order.items}</span>
+                        <span class="text-[11px] text-mezcal-light/50">${order.bottles} botellas · Empaque de madera</span>
+                    </td>
+                    <td class="p-3.5 font-mono text-mezcal-gold font-semibold">${order.lote}</td>
+                    <td class="p-3.5 font-serif font-bold text-mezcal-gold text-sm">$${order.total.toLocaleString('es-MX')} MXN</td>
+                    <td class="p-3.5">
+                        <select aria-label="Cambiar estado de orden ${order.orderId}"
+                                onchange="updateSimulatedOrderStatus('${order.id}', this.value)"
+                                class="px-2.5 py-1 rounded-lg text-[11px] font-semibold border ${getStatusBadgeClass(order.status)} bg-mezcal-charcoal focus:outline-none">
+                            <option value="En Preparación NOM-070" ${order.status === 'En Preparación NOM-070' ? 'selected' : ''}>En Preparación NOM-070</option>
+                            <option value="En Tránsito" ${order.status === 'En Tránsito' ? 'selected' : ''}>En Tránsito</option>
+                            <option value="Entregado" ${order.status === 'Entregado' ? 'selected' : ''}>Entregado</option>
+                        </select>
+                        <span class="block text-[10px] text-mezcal-light/55 mt-1">${order.carrier}</span>
+                    </td>
+                    <td class="p-3.5 text-right">
+                        <button type="button" onclick="inspectClientOrder('${order.id}')"
+                                class="px-3 py-1.5 bg-mezcal-agave/80 hover:bg-mezcal-gold hover:text-mezcal-dark text-white rounded-lg text-[11px] font-semibold transition-colors">
+                            Ver Cliente <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateSimulatedOrderStatus(clientId, newStatus) {
+            const ord = SIMULATED_ORDERS.find(o => o.id === clientId);
+            if (ord) {
+                ord.status = newStatus;
+                renderAdminSimulatedOrders();
+                renderClientView(activeClientId);
+            }
+        }
+
+        function inspectClientOrder(clientId) {
+            activeClientId = clientId;
+            renderClientView(clientId);
+            switchRole('cliente');
+        }
+
+        function renderClientView(clientId) {
+            activeClientId = clientId || activeClientId;
+            const c = SIMULATED_ORDERS.find(o => o.id === activeClientId) || SIMULATED_ORDERS[0];
+
+            // Botones selectores de los 5 clientes
+            const switcher = document.getElementById('client-switcher-buttons');
+            if (switcher) {
+                switcher.innerHTML = SIMULATED_ORDERS.map((item, i) => {
+                    const isActive = item.id === c.id;
+                    return `
+                        <button type="button" onclick="renderClientView('${item.id}')"
+                                class="p-2.5 rounded-xl border text-left transition-all ${isActive ? 'bg-mezcal-gold text-mezcal-dark border-mezcal-gold font-bold shadow-lg' : 'bg-mezcal-charcoal/80 text-mezcal-light border-white/10 hover:border-mezcal-gold/50'}">
+                            <span class="block text-[10px] font-mono ${isActive ? 'text-mezcal-dark/80' : 'text-mezcal-gold'}">${item.orderId} · $${item.total.toLocaleString('es-MX')}</span>
+                            <span class="block text-xs truncate">${i + 1}. ${item.name}</span>
+                        </button>
+                    `;
+                }).join('');
+            }
+
+            document.getElementById('client-profile-badge').textContent = `${c.city}`;
+            document.getElementById('client-user-name').textContent = c.name;
+            document.getElementById('client-user-meta').textContent = `Correo: ${c.email} · Orden Activa: ${c.orderId}`;
+            document.getElementById('client-bottles-count').textContent = `${c.bottles} Botellas`;
+            document.getElementById('client-items-summary').textContent = c.items;
+            document.getElementById('client-points').textContent = `${c.points} Pts`;
+            document.getElementById('client-lote-code').textContent = `Lote ${c.lote}`;
+            document.getElementById('client-carrier-info').textContent = c.carrier;
+
+            const clientTbody = document.getElementById('client-order-tbody');
+            if (clientTbody) {
+                clientTbody.innerHTML = `
+                    <tr>
+                        <th class="p-3.5 font-mono font-bold text-mezcal-gold">${c.orderId}</th>
+                        <td class="p-3.5">${c.date}</td>
+                        <td class="p-3.5 font-medium text-white">${c.items}</td>
+                        <td class="p-3.5 font-mono text-mezcal-gold">${c.lote}</td>
+                        <td class="p-3.5 font-serif font-bold text-mezcal-gold">$${c.total.toLocaleString('es-MX')} MXN</td>
+                        <td class="p-3.5">
+                            <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold border ${getStatusBadgeClass(c.status)}">${c.status}</span>
+                        </td>
+                        <td class="p-3.5 text-right">
+                            <a href="${c.productLink}" class="text-mezcal-gold hover:underline font-semibold">Ver Mezcal</a>
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        function checkUser() {
+            const params = new URLSearchParams(window.location.search);
+            const urlRole = params.get('role');
+            const urlClient = params.get('client');
+            const user = JSON.parse(localStorage.getItem('mezcalUser') || 'null');
+
+            if (urlClient && SIMULATED_ORDERS.some(o => o.id === urlClient)) {
+                activeClientId = urlClient;
+            } else if (user && user.clientId && SIMULATED_ORDERS.some(o => o.id === user.clientId)) {
+                activeClientId = user.clientId;
+            }
+
+            if (urlRole && ['admin', 'cliente', 'pos'].includes(urlRole)) {
+                currentRole = urlRole;
+            } else if (user && user.role && ['admin', 'cliente', 'pos'].includes(user.role)) {
+                currentRole = user.role;
+            } else {
+                currentRole = 'admin';
+            }
+
+            renderAdminSimulatedOrders();
+            renderClientView(activeClientId);
+            switchRole(currentRole);
+        }
+
+        function switchRole(role) {
+            currentRole = role;
+
+            ['cliente', 'admin', 'pos'].forEach(r => {
+                const view = document.getElementById(`view-${r}`);
+                const btnDesktop = document.getElementById(`btn-tab-${r}`);
+                const btnMobile = document.getElementById(`btn-tab-${r}-m`);
+
+                if (r === role) {
+                    view.classList.remove('hidden');
+                    if (btnDesktop) btnDesktop.className = 'px-3.5 py-1.5 rounded-full font-bold bg-mezcal-gold text-mezcal-dark shadow';
+                    if (btnMobile) btnMobile.className = 'px-3 py-2 rounded-lg font-bold bg-mezcal-gold text-mezcal-dark shadow';
+                } else {
+                    view.classList.add('hidden');
+                    if (btnDesktop) btnDesktop.className = 'px-3.5 py-1.5 rounded-full text-mezcal-light/70 hover:text-white transition-colors';
+                    if (btnMobile) btnMobile.className = 'px-3 py-2 rounded-lg text-mezcal-light/70 hover:text-white transition-colors';
+                }
+            });
+
+            const badge = document.getElementById('header-role-badge');
+            if (role === 'cliente') {
+                badge.textContent = 'Panel Cliente';
+                badge.className = 'px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-mezcal-agave text-white';
+            } else if (role === 'admin') {
+                badge.textContent = 'Panel Administrador';
+                badge.className = 'px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-mezcal-gold text-mezcal-dark';
+            } else if (role === 'pos') {
+                badge.textContent = 'Punto de Venta POS';
+                badge.className = 'px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-mezcal-earth text-white';
+            }
+        }
+
+        // Simulación POS
+        let posItems = [];
+        function addToPos(name, price) {
+            const item = posItems.find(i => i.name === name);
+            if (item) {
+                item.qty++;
+            } else {
+                posItems.push({ name, price, qty: 1 });
+            }
+            renderPos();
+        }
+
+        function renderPos() {
+            const container = document.getElementById('pos-ticket-items');
+            if (posItems.length === 0) {
+                container.innerHTML = '<p class="text-mezcal-light/40 italic py-8 text-center">Ticket vacío. Selecciona productos a la izquierda.</p>';
+            } else {
+                container.innerHTML = posItems.map((item) => `
+                    <div class="flex justify-between items-center py-1.5 border-b border-white/5">
+                        <div>
+                            <span class="font-semibold text-white">${item.name}</span>
+                            <span class="text-mezcal-gold ml-1">x${item.qty}</span>
+                        </div>
+                        <span class="font-mono text-mezcal-light">$${(item.price * item.qty).toLocaleString('es-MX')} MXN</span>
+                    </div>
+                `).join('');
+            }
+
+            const total = posItems.reduce((acc, i) => acc + (i.price * i.qty), 0);
+            document.getElementById('pos-subtotal').textContent = `$${total.toLocaleString('es-MX')} MXN`;
+            document.getElementById('pos-total').textContent = `$${total.toLocaleString('es-MX')} MXN`;
+        }
+
+        function completePosSale(method) {
+            if (posItems.length === 0) {
+                alert('Agrega al menos un mezcal al ticket antes de cobrar.');
+                return;
+            }
+            alert(`¡Venta procesada con éxito vía ${method}! Imprimiendo ticket con marbete NOM-070...`);
+            clearPos();
+        }
+
+        function clearPos() {
+            posItems = [];
+            renderPos();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkUser();
+            renderPos();
+        });
+    </script>
+</body>
+</html>
