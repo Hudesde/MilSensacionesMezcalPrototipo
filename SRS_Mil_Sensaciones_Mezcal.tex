@@ -74,7 +74,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small\textbf{\textcolor{mezcalEarth}{SRS — Mezcal Artesanal ``Mil Sensaciones''}}}
-\fancyhead[R]{\small\textcolor{mezcalAgave}{IEEE 830 / ISO 29148 \quad|\quad v1.0}}
+\fancyhead[R]{\small\textcolor{mezcalAgave}{IEEE 830 / ISO 29148 \quad|\quad v1.1}}
 \fancyfoot[L]{\footnotesize\textcolor{gray}{Autor: Ing. en Computación Jose Ramon Aragon Toledo (Clave DGP: 521344) — \texttt{aatr010423@gmail.com}}}
 \fancyfoot[R]{\footnotesize\textbf{Página \thepage}}
 \renewcommand{\headrulewidth}{0.5pt}
@@ -150,8 +150,9 @@
         \renewcommand{\arraystretch}{1.35}
         \begin{tabularx}{\linewidth}{@{} l >{\raggedright\arraybackslash}X @{}}
             \textbf{Estándar de Referencia:} & IEEE 830 / ISO/IEC/IEEE 29148 \\
-            \textbf{Versión del Documento:} & 1.0 (Integra SRS + Cuestionario de Levantamiento + Formato de Pendientes) \\
-            \textbf{Fecha de Emisión:} & 23 de octubre de 2026 \\
+            \textbf{Versión del Documento:} & 1.1 (Integra SRS + Cuestionario de Levantamiento + Formato de Pendientes) \\
+            \textbf{Fecha de Emisión:} & 23 de octubre de 2026 (revisión 1.1: 26 de octubre de 2026) \\
+            \textbf{Documento Relacionado:} & Plan de Desarrollo Técnico y Presupuesto: \$6,000.00 MXN a 6 semanas \\
             \textbf{Cliente / Marca:} & Mezcal Mil Sensaciones \\
             \textbf{Origen / Palenque:} & El Gramal, Nejapa de Madero, Yautepec, Oaxaca, México \\
             \textbf{Maestro Mezcalero:} & Damián Olivera Díaz (2.ª Generación; marca en 3.ª Generación familiar) \\
@@ -174,26 +175,60 @@
 \newpage
 
 % ============================================================
+% HISTORIAL DE CAMBIOS
+% ============================================================
+\section*{Historial de Cambios del Documento}
+\addcontentsline{toc}{section}{Historial de Cambios del Documento}
+
+\renewcommand{\arraystretch}{1.35}
+\begin{tabularx}{\linewidth}{@{} l l >{\raggedright\arraybackslash}X @{}}
+\toprule
+\textbf{Versión} & \textbf{Fecha} & \textbf{Descripción del cambio} \\
+\midrule
+1.0 & 23/10/2026 & Emisión inicial: SRS del sitio institucional y registro del cuestionario de levantamiento. \\
+\midrule
+1.1 & 26/10/2026 & Alineación con el \textit{Plan de Desarrollo Técnico y Presupuesto} (\$6,000.00 MXN a 6 semanas). Se agregan a la Fase 1 los módulos comerciales contratados (RF-16 a RF-25), la arquitectura técnica con backend en Go, la matriz de roles y permisos, los criterios de aceptación, el alcance excluido, los supuestos, nuevos requerimientos no funcionales y la actualización del estado real del prototipo. \\
+\bottomrule
+\end{tabularx}
+
+% ============================================================
 % SECCIÓN 1: INTRODUCCIÓN
 % ============================================================
 \section{Introducción}
 
 \subsection{Propósito del Documento}
-El presente documento de \textbf{Especificación de Requerimientos de Software (SRS)} define de manera formal, completa y verificable todos los requerimientos funcionales, no funcionales, de contenido, diseño, legales y operativos para el desarrollo y lanzamiento de la plataforma web oficial de \textbf{Mezcal Mil Sensaciones}. Adicionalmente, integra el registro íntegro del cuestionario de levantamiento aplicado al cliente y proporciona los \textbf{espacios y formularios estructurados} para responder las preguntas que quedaron sin contestar y recopilar los activos pendientes.
+El presente documento de \textbf{Especificación de Requerimientos de Software (SRS)} define de manera formal, completa y verificable los requerimientos funcionales, no funcionales, de contenido, diseño, legales y operativos para el desarrollo y lanzamiento de la plataforma web oficial de \textbf{Mezcal Mil Sensaciones}. Junto con el \textit{Plan de Desarrollo Técnico y Presupuesto}, es la referencia técnica para aceptar cada entrega. Adicionalmente, integra el registro íntegro del cuestionario de levantamiento aplicado al cliente y proporciona los \textbf{espacios y formularios estructurados} para responder las preguntas que quedaron sin contestar y recopilar los activos pendientes.
 
 \subsection{Alcance del Producto (Fase 1 vs. Fase 2)}
+
+\textbf{Fase 1 — Lanzamiento contratado (6 semanas, incluido en el presupuesto de \$6,000.00 MXN):}
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{Fase 1 (Lanzamiento Inicial — MVP Comercial e Institucional):}
-    Sitio web interactivo, bilingüe (Español / Inglés), responsivo y de alto impacto visual que presenta la historia familiar de tres generaciones, el perfil del Maestro Mezcalero \textbf{Damián Olivera Díaz}, el proceso artesanal, las fichas técnicas detalladas de sus expresiones de mezcal (con descarga en PDF), galería visual del palenque, ubicación en Google Maps, canales de contacto directo (WhatsApp Business, formulario por correo, redes sociales) y verificación legal de mayoría de edad (+18).
-    \item \textbf{Fase 2 (Visión a Futuro / Evolutivos Planeados):}
-    \begin{itemize}
-        \item Tienda en línea (E-commerce B2C con pasarela de pagos).
-        \item Sistema de reservas para catas o tours al palenque en El Gramal.
-        \item Portal B2B para distribuidores e importadores con precios especiales.
-        \item Panel de administración (CMS) autogestionable.
-        \item Blog cultural del mezcal.
-        \item Integración con marketplaces (Amazon, MercadoLibre) y aplicación móvil.
-    \end{itemize}
+    \item \textbf{Bloque A. Sitio institucional y de marca:} sitio interactivo, bilingüe (Español / Inglés) y responsivo con la historia familiar de tres generaciones, el perfil del Maestro Mezcalero \textbf{Damián Olivera Díaz}, el proceso artesanal, las fichas técnicas de cada expresión con descarga en PDF, galería multimedia, ubicación en Google Maps, canales de contacto (WhatsApp, formulario y redes sociales), verificación de mayoría de edad (+18) y apartados legales (RF-01 a RF-15).
+    \item \textbf{Bloque B. Plataforma comercial y de gestión:} carrito de compras, registro de pedidos con cierre por WhatsApp, cuentas de usuario con tres roles, dashboard administrativo, terminal de punto de venta (POS), seguimiento de pedidos, chatbot de WhatsApp, chat en vivo dentro del sitio y correos transaccionales (RF-16 a RF-25).
+\end{itemize}
+
+\textbf{Fase 2 — Evolutivos futuros (fuera del presupuesto actual, se cotizan por separado):}
+\begin{itemize}[leftmargin=1.5em]
+    \item Pasarela de pago en línea (tarjeta, OXXO o SPEI automatizado).
+    \item Facturación electrónica (CFDI 4.0).
+    \item Integración automática con paqueterías (cálculo de envío y generación de guías por API).
+    \item Sistema de reservas para catas o tours al palenque en El Gramal.
+    \item Portal B2B para distribuidores e importadores con precios especiales.
+    \item Gestor de contenido editorial (CMS) para que el cliente edite textos e imágenes del sitio sin programador.
+    \item Blog cultural del mezcal e integración con publicaciones recientes de Instagram.
+    \item Integración con marketplaces (Amazon, MercadoLibre) y aplicación móvil nativa.
+\end{itemize}
+
+\subsection{Exclusiones Explícitas de la Fase 1}
+Para evitar ambigüedades, los siguientes puntos \textbf{no} forman parte de la Fase 1:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Cobro en línea dentro del sitio.} El pedido se registra en el sistema y el pago se cierra por WhatsApp mediante transferencia, depósito o efectivo. El Administrador confirma cada pago de forma manual en el dashboard.
+    \item \textbf{Venta directa a consumidores en Estados Unidos.} El sitio informa y capta contactos de importadores. La venta en EE.~UU. requiere un importador autorizado en ese país.
+    \item \textbf{Modo sin conexión del POS.} La terminal POS requiere conexión a internet. No se incluyen impresoras de tickets, lectores de código ni terminales bancarias.
+    \item \textbf{Inteligencia artificial conversacional.} El chatbot de WhatsApp funciona con menús y palabras clave predefinidas.
+    \item \textbf{Producción fotográfica o de video profesional.} El cliente entrega el material. El equipo de desarrollo solo genera los videos \textit{loopable} de botellas con IA a partir de ese material.
+    \item \textbf{Validación jurídica de los textos legales.} El equipo redacta el Aviso de Privacidad y los Términos con base en la ley vigente. Se recomienda que el cliente los haga revisar por un abogado.
+    \item \textbf{Costos recurrentes posteriores al mes 7.} El servidor, la renovación del dominio y el consumo de mensajes de WhatsApp quedan a cargo del cliente, según el Plan de Desarrollo.
 \end{itemize}
 
 \subsection{Público Objetivo y Mercados}
@@ -205,17 +240,69 @@ El presente documento de \textbf{Especificación de Requerimientos de Software (
 \end{enumerate}
 \textbf{Mercados prioritarios:} Oaxaca (México) y Estados Unidos (exportación/importación).
 
+\subsection{Definiciones, Acrónimos y Abreviaturas}
+\renewcommand{\arraystretch}{1.25}
+\begin{longtable}{@{} >{\raggedright\arraybackslash}p{3.4cm} >{\raggedright\arraybackslash}p{12.4cm} @{}}
+\toprule
+\textbf{Término} & \textbf{Significado} \\
+\midrule
+\endhead
+SRS & Especificación de Requerimientos de Software (\textit{Software Requirements Specification}). \\
+RF / RNF & Requerimiento Funcional / Requerimiento No Funcional. \\
+MVP & Producto mínimo viable: primera versión publicable del sistema. \\
+NOM-070-SCFI-2016 & Norma Oficial Mexicana de bebidas alcohólicas, mezcal: especificaciones y etiquetado. \\
+CRM & Consejo Regulador del Mezcal: organismo que certifica el mezcal y emite los marbetes. \\
+Marbete & Etiqueta de control fiscal y de certificación adherida a cada botella. \\
+IMPI & Instituto Mexicano de la Propiedad Industrial (registro de marca). \\
+LFPDPPP & Ley Federal de Protección de Datos Personales en Posesión de los Particulares. \\
+LFPC & Ley Federal de Protección al Consumidor (aplica a las ventas a distancia). \\
+Derechos ARCO & Derechos de Acceso, Rectificación, Cancelación y Oposición sobre datos personales. \\
+POS & Punto de Venta (\textit{Point of Sale}): caja para ventas presenciales. \\
+Lote & Producción de una misma destilación, identificada con número, fecha y cantidad de botellas. \\
+Folio & Identificador único de un pedido, por ejemplo \texttt{MS-2026-0001}. \\
+Go & Lenguaje de programación del backend; se compila como un solo binario ejecutable. \\
+API & Interfaz de programación por la cual el sitio se comunica con el servidor. \\
+JWT & Token firmado que identifica la sesión del usuario. \\
+Argon2id & Algoritmo de cifrado unidireccional para almacenar contraseñas. \\
+WebSocket & Canal de comunicación en tiempo real usado por el chat en vivo. \\
+VPS & Servidor privado virtual en la nube. \\
+CDN & Red de distribución de contenido que acelera la entrega de archivos. \\
+SPF / DKIM / DMARC & Registros DNS que autentican el correo del dominio y evitan que llegue a spam. \\
+LCP / INP / CLS & Métricas de rendimiento web de Google: carga del elemento principal, respuesta a la interacción y estabilidad visual. \\
+Video \textit{loopable} & Video cuyo primer y último fotograma coinciden para repetirse sin cortes. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Documentos de Referencia}
+\begin{itemize}[leftmargin=1.5em]
+    \item Cuestionario de levantamiento aplicado al cliente (\texttt{Cuestionario\_Mezcal\_Fercho 2.docx}).
+    \item Plan de Desarrollo Técnico y Esquema Comercial de Implementación en Producción, actualizado el 26 de octubre de 2026.
+    \item IEEE 830-1998 e ISO/IEC/IEEE 29148:2018, ingeniería de requerimientos.
+    \item NOM-070-SCFI-2016 (mezcal) y NOM-142-SSA1/SCFI-2014 (etiquetado sanitario de bebidas alcohólicas).
+    \item LFPDPPP y LFPC vigentes.
+\end{itemize}
+
+\subsection{Supuestos y Dependencias}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Entrega de contenidos:} el cliente entrega la información de la Sección~6 a más tardar al final de la semana 2. Si se retrasa, los módulos se publican con contenido provisional marcado como tal y el retraso no se imputa al equipo de desarrollo.
+    \item \textbf{Número de WhatsApp:} el cliente proporciona un número telefónico dedicado para la WhatsApp Business Platform. Ese número no puede estar activo al mismo tiempo en la aplicación de WhatsApp del teléfono.
+    \item \textbf{Verificación en Meta:} el titular del negocio completa la verificación de su empresa en Meta Business para habilitar el chatbot.
+    \item \textbf{Titularidad:} el dominio, las cuentas de los servicios y los datos quedan a nombre del cliente. El equipo de desarrollo conserva acceso técnico durante el proyecto.
+    \item \textbf{Equipo para el POS:} el cliente aporta una tableta o teléfono con navegador actualizado y conexión a internet.
+    \item \textbf{Retroalimentación:} el cliente revisa cada entrega quincenal por WhatsApp en un plazo máximo de 3 días hábiles. Sin observaciones en ese plazo, la entrega se considera aceptada.
+\end{itemize}
+
 % ============================================================
 % SECCIÓN 2: DESCRIPCIÓN GENERAL DEL SISTEMA
 % ============================================================
 \section{Descripción General del Sistema}
 
 \subsection{Perspectiva del Producto y Referencias Visuales}
-El sistema es una aplicación web pública (\texttt{index.html}) inspirada en la interactividad y narrativa visual de \textbf{400 Conejos} (\texttt{400conejos.mx}) y \textbf{Casa Chagoya} (\texttt{casachagoya.com}).
+El sistema es una aplicación web con \textbf{9 páginas públicas} (\texttt{index}, \texttt{historia}, \texttt{proceso}, \texttt{mezcales}, \texttt{contacto} y una página por cada una de las 4 expresiones) y \textbf{2 páginas privadas} (\texttt{login} y \texttt{dashboard}), conectadas a un backend propio. Su diseño se inspira en la interactividad y narrativa visual de \textbf{400 Conejos} (\texttt{400conejos.mx}) y \textbf{Casa Chagoya} (\texttt{casachagoya.com}).
 \begin{itemize}[leftmargin=1.5em]
     \item \textbf{Personalidad de marca:} Artesanal y auténtica, tradicional y familiar, sostenible y cercana a la tierra.
-    \item \textbf{Paleta cromática propuesta:} Tonos naturales (tierra, verde agave, madera, carbón orgánico y acentos dorados/ámbar).
-    \item \textbf{Tono de comunicación propuesto:} Formal, sofisticado y con trasfondo de herencia familiar.
+    \item \textbf{Paleta cromática:} Tonos naturales (tierra, verde agave, madera, carbón orgánico y acentos dorados/ámbar), elegida por el cliente en la pregunta 4.5.
+    \item \textbf{Tono de comunicación propuesto:} Formal, sofisticado y con trasfondo de herencia familiar. Pendiente de confirmar en la pregunta 4.6.
     \item \textbf{Restricciones de diseño explícitas del cliente:}
     \begin{itemize}
         \item Prohibido el aspecto de ``presentación de PowerPoint'' o diseño plano/simple.
@@ -224,55 +311,176 @@ El sistema es una aplicación web pública (\texttt{index.html}) inspirada en la
     \end{itemize}
 \end{itemize}
 
+\subsection{Usuarios, Roles y Permisos}
+El sistema distingue cuatro tipos de usuario. Los permisos se validan en el servidor, no solo en la interfaz.
+
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{} >{\raggedright\arraybackslash}p{6.0cm} >{\centering\arraybackslash}p{1.7cm} >{\centering\arraybackslash}p{1.6cm} >{\centering\arraybackslash}p{1.9cm} >{\centering\arraybackslash}p{2.6cm} @{}}
+\toprule
+\textbf{Función} & \textbf{Visitante} & \textbf{Cliente} & \textbf{Vendedor POS} & \textbf{Administrador} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Navegar el sitio, fichas, galería y descargar PDF & \cmark & \cmark & \cmark & \cmark \\
+Usar el carrito y enviar un pedido & \cmark & \cmark & --- & --- \\
+Consultar seguimiento con el enlace del correo de confirmación & \cmark & \cmark & --- & \cmark \\
+Ver historial de pedidos propios en su cuenta & --- & \cmark & --- & --- \\
+Usar el chat en vivo como visitante & \cmark & \cmark & --- & --- \\
+Responder chats desde la bandeja del dashboard & --- & --- & \cmark & \cmark \\
+Registrar ventas presenciales en el POS & --- & --- & \cmark & \cmark \\
+Confirmar pagos y cambiar el estado de los pedidos & --- & --- & --- & \cmark \\
+Gestionar productos, precios, lotes e inventario & --- & --- & --- & \cmark \\
+Ver métricas de ventas y exportar reportes & --- & --- & --- & \cmark \\
+Crear usuarios Vendedor POS y Administrador & --- & --- & --- & \cmark \\
+\end{longtable}
+
+\subsection{Arquitectura y Stack Tecnológico}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{} >{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}p{12.2cm} @{}}
+\toprule
+\textbf{Capa} & \textbf{Tecnología y función} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Frontend & HTML5, Tailwind CSS compilado para producción y JavaScript nativo, a partir del prototipo actual. \\
+Backend & API REST en \textbf{Go} (última versión estable), compilada como un solo binario. Incluye el webhook de WhatsApp y el servidor WebSocket del chat. \\
+Base de datos & PostgreSQL en el mismo servidor, con migraciones versionadas. \\
+Servidor web y HTTPS & Caddy como proxy inverso con certificados Let's Encrypt renovados automáticamente. \\
+Hospedaje & VPS Vultr en la Ciudad de México: 1 vCPU, 1~GB de RAM y 25~GB SSD. Los datos permanecen en México. \\
+DNS, CDN y protección & Cloudflare, plan gratuito. \\
+Almacenamiento de archivos & Cloudflare R2 para videos, fichas PDF y respaldos diarios de la base de datos. \\
+Correo electrónico & Resend para el envío de correos y Cloudflare Email Routing para recibir \textit{contacto@} y \textit{ventas@}. \\
+WhatsApp & WhatsApp Business Platform (Cloud API oficial de Meta). \\
+\end{longtable}
+
+\subsection{Restricciones Operativas y de Capacidad}
+Estas restricciones se derivan del presupuesto de infraestructura de \$1,500.00 MXN y de los planes gratuitos elegidos:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Correos:} el plan gratuito de Resend permite 3,000 correos al mes y 100 al día, sumando transaccionales y newsletter. Un boletín para más de 100 suscriptores se envía en varios días o requiere el plan Pro de US\$20.00 al mes.
+    \item \textbf{Archivos:} el almacenamiento gratuito de R2 es de 10~GB. Los videos se publican optimizados a 720p para respetar ese límite.
+    \item \textbf{Servidor:} el plan de 1~GB está dimensionado para el volumen inicial. Si el uso de CPU o RAM supera el 80\% de forma sostenida, se recomienda escalar al plan de 2~GB.
+    \item \textbf{WhatsApp:} los primeros 1,000 mensajes de servicio de cada mes son gratuitos. Los mensajes adicionales y las plantillas de marketing tienen costo por mensaje, a cargo del cliente.
+\end{itemize}
+
 % ============================================================
 % SECCIÓN 3: REQUERIMIENTOS FUNCIONALES (RF)
 % ============================================================
 \section{Requerimientos Funcionales (RF)}
 
+Todos los requerimientos de esta sección son \textbf{Indispensables para la Fase 1}. La columna \textit{Estado en Prototipo} refleja la revisión del código del prototipo realizada el 26 de octubre de 2026. ``Simulado'' significa que la interfaz existe pero no guarda ni envía datos reales.
+
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \renewcommand{\arraystretch}{1.35}
 \small
-\begin{longtable}{@{} L{1.2cm} L{3.0cm} L{6.7cm} L{2.1cm} L{2.4cm} @{}}
+\begin{longtable}{@{} L{1.2cm} L{3.0cm} L{7.4cm} L{3.9cm} @{}}
 \toprule
-\textbf{ID} & \textbf{Módulo / Sección} & \textbf{Descripción del Requerimiento} & \textbf{Prioridad} & \textbf{Estado Actual} \\
+\textbf{ID} & \textbf{Módulo / Sección} & \textbf{Descripción del Requerimiento} & \textbf{Estado en Prototipo} \\
 \midrule
 \endfirsthead
 \toprule
-\textbf{ID} & \textbf{Módulo / Sección} & \textbf{Descripción del Requerimiento} & \textbf{Prioridad} & \textbf{Estado Actual} \\
+\textbf{ID} & \textbf{Módulo / Sección} & \textbf{Descripción del Requerimiento} & \textbf{Estado en Prototipo} \\
 \midrule
 \endhead
 \bottomrule
 \endfoot
 
-\textbf{RF-01} & Verificación de Edad (+18) & Al ingresar al sitio, bloquear el scroll y difuminar el contenido mostrando un modal de mayoría de edad legal. Guardar confirmación en \texttt{sessionStorage}/\texttt{localStorage}. Mostrar restricción si selecciona ``No''. & Indispensable (Fase 1) & Implementado \\
+\multicolumn{4}{@{}l}{\textbf{\textcolor{mezcalEarth}{Bloque A. Sitio institucional y de marca}}} \\
 \midrule
-\textbf{RF-02} & Internacionalización (ES / EN) & Selector de idioma en barra de navegación (Desktop y Móvil) que traduzca el \textbf{100\% de los textos}, incluyendo fichas de productos, etapas del proceso, formularios, botones y avisos legales. & Indispensable (Fase 1) & Parcial (faltan productos, proceso, form y móvil) \\
+\textbf{RF-01} & Verificación de Edad (+18) & Al ingresar al sitio, bloquear el scroll y difuminar el contenido mostrando un modal de mayoría de edad. Guardar la confirmación en el navegador. Mostrar un mensaje de restricción si el usuario selecciona ``No''. & Implementado \\
 \midrule
-\textbf{RF-03} & Hero / Inicio Impactante & Encabezado a pantalla completa con video de fondo (del palenque/proceso) o fotografía profesional, animación tipográfica fluida de \textit{``MIL SENSACIONES''}, tagline e indicador de scroll. & Indispensable (Fase 1) & Parcial (usa foto genérica de Unsplash) \\
+\textbf{RF-02} & Internacionalización (ES / EN) & Selector de idioma en la barra de navegación (escritorio y móvil) que traduzca el \textbf{100\% de los textos públicos}: fichas, proceso, formularios, botones, correos al cliente y avisos legales. El dashboard y el POS son de uso interno y solo en español. & Parcial: 5 páginas traducidas; faltan las 4 páginas individuales de producto \\
 \midrule
-\textbf{RF-04} & Historia y Valores de la Marca & Sección narrativa sobre las 3 generaciones (abuelo, padre e hijo), origen en \textit{El Gramal, Nejapa de Madero, Yautepec, Oaxaca}, misión y visión de la marca. & Indispensable (Fase 1) & Parcial (falta integrar Misión y Visión) \\
+\textbf{RF-03} & Hero / Inicio Impactante & Encabezado a pantalla completa con video de fondo o video \textit{loopable} de la botella generado con IA, animación tipográfica de \textit{``MIL SENSACIONES''}, tagline e indicador de scroll. & Parcial: video del cliente integrado; faltan los loops de botella y el tagline oficial \\
 \midrule
-\textbf{RF-05} & Perfil del Maestro Mezcalero & Sección dedicada a \textbf{Damián Olivera Díaz} (2.ª generación de maestros mezcaleros), su trayectoria desde la niñez y fotografía real integrada al estilo visual. & Indispensable (Fase 1) & Parcial (usa foto placeholder) \\
+\textbf{RF-04} & Historia y Valores de la Marca & Sección narrativa sobre las 3 generaciones (abuelo, padre e hijo), origen en \textit{El Gramal, Nejapa de Madero, Yautepec, Oaxaca}, misión y visión de la marca. & Parcial: falta Misión y Visión del cliente \\
 \midrule
-\textbf{RF-06} & Fichas Detalladas de Productos & Mostrar expresiones: \textbf{Mezcal Espadín 750ml} (actual) y próximos lanzamientos (\textbf{Ensambles, Mezcal Silvestre, Curados de Mezcal}). Incluir obligatoriamente los \textbf{10 atributos requeridos} (Sección 3.1). & Indispensable (Fase 1) & Incompleto (faltan 5 atributos y fotos reales) \\
+\textbf{RF-05} & Perfil del Maestro Mezcalero & Sección dedicada a \textbf{Damián Olivera Díaz} (2.ª generación de maestros mezcaleros), su trayectoria y fotografía real integrada al estilo visual. & Parcial: usa una foto de Instagram; falta foto en alta resolución \\
 \midrule
-\textbf{RF-07} & Descarga de Ficha Técnica PDF & Botón funcional en cada producto para visualizar/descargar su Ficha Técnica oficial en formato PDF (en español e inglés). & Indispensable (Fase 1) & Pendiente (botón sin acción) \\
+\textbf{RF-06} & Fichas Detalladas de Productos & Página propia para cada expresión: \textbf{Espadín 750~ml} (actual), \textbf{Ensamble}, \textbf{Silvestre} y \textbf{Curados}. Cada ficha muestra los \textbf{10 atributos} de la Sección~3.2 y, si el cliente lo decide, la etiqueta ``Próximamente''. & Parcial: 4 páginas creadas con datos provisionales por confirmar \\
 \midrule
-\textbf{RF-08} & Proceso de Elaboración & Explicación interactiva paso a paso del proceso artesanal (Selección/Corte, Cocción en horno cónico, Molienda, Fermentación, Destilación y Envasado) con fotos o video real. & Indispensable (Fase 1) & Básico (4 pasos estáticos sin EN ni fotos) \\
+\textbf{RF-07} & Ficha Técnica en PDF & Botón en cada producto para ver y descargar su ficha técnica oficial en PDF, en español e inglés. & Parcial: ficha imprimible desde el navegador; falta el PDF descargable \\
 \midrule
-\textbf{RF-09} & Galería Multimedia & Galería visual interactiva (con \textit{lightbox}) que muestre fotografías reales del palenque, campos de maguey en El Gramal, destilación y video del proceso. & Indispensable (Fase 1) & No implementado \\
+\textbf{RF-08} & Proceso de Elaboración & Explicación interactiva del proceso artesanal (selección y corte, cocción en horno cónico, molienda, fermentación, destilación y envasado) con fotos o video real. & Implementado; falta validar los textos con el cliente \\
 \midrule
-\textbf{RF-10} & Dónde Comprar / Google Maps & Mapa interactivo o enlace directo real a Google Maps hacia \textbf{El Gramal, Nejapa de Madero, Yautepec, Oaxaca}, más lista/mapa de puntos de venta autorizados. & Indispensable (Fase 1) & Pendiente (imagen sin enlace) \\
+\textbf{RF-09} & Galería Multimedia & Galería interactiva con \textit{lightbox} de fotografías y video del palenque, campos de maguey y destilación. & Implementado \\
 \midrule
-\textbf{RF-11} & Formulario de Contacto & Formulario con validación (Nombre, Correo, Teléfono/Empresa, Tipo de consulta: Consumidor / Bar-Restaurante / Importador, Mensaje) con notificación al correo oficial. & Indispensable (Fase 1) & Simulado en frontend \\
+\textbf{RF-10} & Dónde Comprar / Google Maps & Mapa embebido de Google Maps con el pin exacto del palenque, más la lista de puntos de venta autorizados. & Parcial: mapa embebido; faltan pin exacto y puntos de venta \\
 \midrule
-\textbf{RF-12} & Integración WhatsApp Business & Botón flotante y enlaces de acción directa (\texttt{wa.me}) configurados con el número real de WhatsApp Business y mensaje prellenado según producto/sección. & Indispensable (Fase 1) & Parcial (número ficticio) \\
+\textbf{RF-11} & Formulario de Contacto & Formulario con validación (Nombre, Correo, Teléfono/Empresa, Tipo de consulta: Consumidor / Bar-Restaurante / Importador, Mensaje). Guarda la consulta y la envía por correo a \textit{contacto@}. & Simulado \\
 \midrule
-\textbf{RF-13} & Suscripción a Newsletter & Campo de captura de correo electrónico para lista de correo / novedades de lotes y lanzamientos. & Indispensable (Fase 1) & No implementado \\
+\textbf{RF-12} & Enlaces a WhatsApp & Botón flotante y enlaces \texttt{wa.me} con el número real de la marca y mensaje prellenado según el producto o la sección. & Parcial: número ficticio \texttt{5219510000000} \\
 \midrule
-\textbf{RF-14} & Redes Sociales y Compartir & Enlaces verificados a Instagram (\texttt{@mezcalmilsensaciones}) y Facebook oficial, más botones para compartir fichas de producto o el sitio en redes sociales. & Indispensable (Fase 1) & Parcial (faltan botones compartir) \\
+\textbf{RF-13} & Suscripción a Newsletter & Captura de correo con doble confirmación para el boletín de lotes y lanzamientos. Cada correo incluye un enlace para darse de baja. & Simulado \\
 \midrule
-\textbf{RF-15} & Aviso de Privacidad y Legal & Modal o página de Aviso de Privacidad conforme a la LFPDPPP (México), Términos de Uso y leyenda sanitaria obligatoria (\textit{``EVITA EL EXCESO''}). & Indispensable (Fase 1) & Parcial (enlace \texttt{\#} sin texto) \\
+\textbf{RF-14} & Redes Sociales y Compartir & Enlaces a Instagram (\texttt{@mezcalmilsensaciones}) y Facebook oficial, más botones para compartir fichas o el sitio. & Implementado; faltan botones en las páginas individuales \\
+\midrule
+\textbf{RF-15} & Aviso de Privacidad y Legal & Aviso de Privacidad conforme a la LFPDPPP, Términos y Condiciones de Venta conforme a la LFPC (envíos, devoluciones por daño, venta solo a mayores de 18), aviso de cookies y leyenda sanitaria obligatoria en todas las páginas públicas. & Parcial: aviso de privacidad solo en inicio; faltan Términos y leyenda en 4 páginas \\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{\textcolor{mezcalEarth}{Bloque B. Plataforma comercial y de gestión}}} \\
+\midrule
+\textbf{RF-16} & Carrito de Compras Slidebar & Panel lateral para agregar productos, cambiar cantidades, eliminar y ver subtotal y total en MXN. Conserva el carrito al recargar y lo asocia a la cuenta al iniciar sesión. & Parcial: funciona en el navegador; las páginas de producto cargan el carrito desde una ruta local que fallará en producción \\
+\midrule
+\textbf{RF-17} & Pedido y Cierre por WhatsApp & El cliente captura nombre, teléfono, correo y dirección de envío. El sistema guarda el pedido con folio único y estado \textit{Orden Recibida}, envía la confirmación por correo y abre WhatsApp con el resumen y el folio. & No implementado \\
+\midrule
+\textbf{RF-18} & Cuentas de Usuario & Registro con correo y contraseña, verificación del correo, confirmación de mayoría de edad, inicio y cierre de sesión, y recuperación de contraseña con enlace temporal. & Simulado: credenciales de prueba fijas en \texttt{login.html} \\
+\midrule
+\textbf{RF-19} & Control de Acceso por Rol & Aplicar la matriz de la Sección~2.2. El rol lo asigna el Administrador, nunca el usuario al iniciar sesión. & Simulado: el rol se elige en un selector \\
+\midrule
+\textbf{RF-20} & Dashboard Administrativo & Alta y edición de productos y precios. Registro de lotes (número, agave, fecha de destilación, kilos de maguey en horno, \% Alc. Vol., botellas producidas, estado de marbetes CRM). Inventario por lote, gestión de pedidos y clientes, métricas de ingresos por mes y por producto, y exportación a CSV. & Simulado: datos de ejemplo \\
+\midrule
+\textbf{RF-21} & Terminal Punto de Venta (POS) & Pantalla táctil para ventas presenciales: búsqueda de producto, cantidad, método de pago (efectivo, transferencia o terminal externa), registro de la venta, descuento de inventario del lote y ticket digital por correo o WhatsApp. & Simulado \\
+\midrule
+\textbf{RF-22} & Seguimiento de Pedidos & Estados: \textit{Orden Recibida, Pago Confirmado, En Empaque Artesanal, En Tránsito, Entregado} o \textit{Cancelado}. El Administrador captura paquetería y número de guía. El cliente consulta el estado en su cuenta o con el enlace del correo y recibe un correo en cada cambio. Cada pedido queda vinculado al lote de origen. & No implementado \\
+\midrule
+\textbf{RF-23} & Chatbot de WhatsApp & Menú automático 24/7 con opciones: catálogo y precios, mayoreo para bares y restaurantes, atención a importadores, estado de pedido por folio y hablar con una persona. Fuera del horario de atención, responde con un mensaje automático. & No implementado \\
+\midrule
+\textbf{RF-24} & Chat en Vivo en el Sitio & Ventana flotante en las páginas públicas. El visitante deja nombre y correo y conversa en tiempo real. Vendedores y Administradores responden desde una bandeja en el dashboard con historial. Si nadie está conectado, el mensaje se guarda y se notifica por correo. & No implementado \\
+\midrule
+\textbf{RF-25} & Correos Transaccionales & Envío automático de bienvenida, verificación de cuenta, recuperación de contraseña, confirmación de pedido, cambio de estado, ticket del POS y boletín. El dominio queda autenticado con SPF, DKIM y DMARC. & No implementado \\
+\end{longtable}
+\normalsize
+
+\subsection{Criterios de Aceptación}
+Cada requerimiento se da por cumplido cuando su criterio se verifica en el entorno de producción.
+
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{longtable}{@{} L{1.9cm} L{13.9cm} @{}}
+\toprule
+\textbf{ID} & \textbf{Criterio de aceptación verificable} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Criterio de aceptación verificable} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+RF-01 & Al abrir cualquier página pública por primera vez aparece el modal. Con ``No'' el contenido sigue bloqueado. Con ``Sí'' no vuelve a aparecer en ese navegador. \\
+RF-02 & Al cambiar a inglés, ningún texto visible de las 9 páginas públicas queda en español, y el idioma elegido se conserva al navegar. \\
+RF-03 & El hero carga en móvil y escritorio sin saltos visibles, y el video reproduce en bucle continuo sin audio. \\
+RF-04 / RF-05 & Las secciones muestran los textos y fotografías oficiales entregados por el cliente, sin imágenes de relleno. \\
+RF-06 & Las 4 fichas muestran los 10 atributos con datos confirmados por escrito por el cliente. \\
+RF-07 & Cada ficha descarga un PDF en el idioma activo con los 10 atributos y el logo. \\
+RF-08 / RF-09 & Las 6 etapas del proceso y la galería abren fotos y videos en \textit{lightbox} y se cierran con la tecla Esc o un toque fuera. \\
+RF-10 & El mapa abre el pin exacto del palenque y la lista de puntos de venta coincide con la entregada por el cliente. \\
+RF-11 & Un envío de prueba llega a \textit{contacto@} en menos de 2 minutos y queda guardado en la base de datos. Los campos inválidos muestran un mensaje de error. \\
+RF-12 & Todos los enlaces abren WhatsApp con el número oficial y un mensaje prellenado acorde a la página. \\
+RF-13 & Un correo de prueba recibe la confirmación. Tras confirmar queda suscrito, y el enlace de baja lo elimina de la lista. \\
+RF-14 & Los íconos abren los perfiles oficiales y el botón compartir funciona en Android, iOS y escritorio. \\
+RF-15 & Las 9 páginas públicas enlazan el Aviso de Privacidad y los Términos, y muestran la leyenda sanitaria. \\
+RF-16 & El carrito conserva productos y cantidades al recargar, y el total coincide con la suma de precio por cantidad. \\
+RF-17 & Un pedido de prueba genera folio, aparece en el dashboard, envía el correo de confirmación y abre WhatsApp con el resumen. \\
+RF-18 & Un usuario nuevo se registra, verifica su correo, inicia sesión y recupera su contraseña. Un enlace de recuperación usado o vencido es rechazado. \\
+RF-19 & Un Cliente o Vendedor POS que intenta abrir una función de Administrador recibe un error de acceso, aun escribiendo la dirección directamente. \\
+RF-20 & Un producto o lote creado en el dashboard aparece en el sitio sin modificar código, y el inventario coincide con las ventas registradas. \\
+RF-21 & Una venta en el POS descuenta el inventario del lote, emite el ticket digital y aparece en las métricas del día. \\
+RF-22 & Cada cambio de estado envía un correo al cliente y se refleja en su cuenta y en el enlace de seguimiento. \\
+RF-23 & Cada opción del menú responde correctamente desde un teléfono externo, y la consulta por folio devuelve el estado real del pedido. \\
+RF-24 & Un mensaje enviado desde el sitio aparece en la bandeja del dashboard en menos de 3 segundos, y la respuesta llega al visitante. \\
+RF-25 & Los correos de prueba llegan a la bandeja principal de Gmail y Outlook, no a spam, y pasan la validación SPF, DKIM y DMARC. \\
 \end{longtable}
 \normalsize
 
@@ -291,16 +499,24 @@ Según la Sección 2.4 del cuestionario, cada producto presentado en el sitio de
     \item \textbf{Código NOM / Certificación CRM} (NOM-070-SCFI-2016).
 \end{enumerate}
 
+\textbf{Importante:} los valores que hoy muestra el prototipo (45\%, 47\%, 48\% y 38\% Alc. Vol., micro-lote de 300 botellas, notas de cata y maridajes) son \textbf{provisionales}. Se reemplazan por los datos que el cliente entregue en la Sección~6, Parte~C.
+
 % ============================================================
 % SECCIÓN 4: REQUERIMIENTOS NO FUNCIONALES (RNF)
 % ============================================================
 \section{Requerimientos No Funcionales (RNF)}
 \begin{itemize}[leftmargin=1.5em]
-    \item \textbf{RNF-01 Rendimiento y Fluidez Visual:} Las animaciones deben ejecutarse a 60 FPS utilizando aceleración por hardware (\texttt{transform}, \texttt{opacity}) e \texttt{IntersectionObserver}, evitando bloqueos del hilo principal. Tiempo de carga inicial (LCP) menor a 2.5 segundos en conexiones 4G.
-    \item \textbf{RNF-02 Diseño Responsivo (Mobile-First):} Adaptación completa a teléfonos móviles (320px--767px), tablets (768px--1023px) y escritorio (1024px+), incluyendo selector de idioma y menú móvil accesible.
-    \item \textbf{RNF-03 Optimización Multimedia:} Imágenes en formato \texttt{WebP}/\texttt{AVIF} con recorte transparente (PNG/WebP sin fondo para botellas) para garantizar integración visual orgánica, y carga diferida (\texttt{loading="lazy"}).
-    \item \textbf{RNF-04 SEO y Metadatos (Open Graph):} Etiquetas \texttt{<meta>} bilingües, \texttt{og:title}, \texttt{og:description}, \texttt{og:image} y datos estructurados (\texttt{Schema.org/Product} y \texttt{Schema.org/Organization}).
-    \item \textbf{RNF-05 Mantenibilidad:} Código estructurado y documentado para que el equipo de desarrollo (\textit{Ing. en Computación Jose Ramon Aragon Toledo}) pueda actualizar lotes, productos y textos rápidamente sin requerir un CMS complejo en la Fase 1.
+    \item \textbf{RNF-01 Rendimiento y Fluidez Visual:} en móvil con red 4G, LCP menor a 2.5~s, INP menor a 200~ms y CLS menor a 0.1, medidos con PageSpeed Insights. Las animaciones corren a 60~FPS usando \texttt{transform} y \texttt{opacity}. Las respuestas de la API para catálogo y pedidos tardan menos de 300~ms en el 95\% de los casos.
+    \item \textbf{RNF-02 Diseño Responsivo (Mobile-First):} adaptación completa a teléfonos (320--767~px), tabletas (768--1023~px) y escritorio (1024~px o más), incluyendo selector de idioma, carrito, chat y POS.
+    \item \textbf{RNF-03 Optimización Multimedia:} imágenes en \texttt{WebP} o \texttt{AVIF} con carga diferida. Las botellas se integran como imagen sin fondo o como video \textit{loopable} 720p sin audio sobre un fondo del mismo color del sitio. Cada video de loop pesa como máximo 5~MB.
+    \item \textbf{RNF-04 SEO y Metadatos:} etiquetas \texttt{<meta>} y Open Graph bilingües, datos estructurados de Schema.org para producto y organización, \texttt{sitemap.xml}, \texttt{robots.txt} y etiquetas \texttt{hreflang} para español e inglés.
+    \item \textbf{RNF-05 Mantenibilidad:} productos, precios y lotes se actualizan desde el dashboard sin tocar código. Los textos institucionales los actualiza el equipo de desarrollo, sin CMS en la Fase 1. El código incluye migraciones de base de datos versionadas, pruebas automáticas de los flujos de registro, pedido e inventario, y un manual de despliegue.
+    \item \textbf{RNF-06 Seguridad:} HTTPS obligatorio con HSTS. Contraseñas almacenadas con Argon2id. Sesión con JWT en cookie \texttt{HttpOnly}, \texttt{Secure} y \texttt{SameSite}. Bloqueo temporal tras 5 intentos fallidos de inicio de sesión en 15 minutos. Validación de datos en el servidor, consultas parametrizadas y protección contra las vulnerabilidades del OWASP Top 10. Las credenciales de prueba del prototipo se eliminan antes del lanzamiento.
+    \item \textbf{RNF-07 Disponibilidad y Respaldos:} disponibilidad objetivo de 99.5\% mensual, sin contar mantenimientos avisados con anticipación. Respaldo automático diario de la base de datos en Cloudflare R2, con retención de 30 días. Pérdida máxima aceptable de 24 horas de datos y restauración en menos de 4 horas. Se realiza una prueba de restauración antes del lanzamiento.
+    \item \textbf{RNF-08 Privacidad de Datos:} se recaban solo los datos necesarios para vender y entregar. Los datos se alojan en México. El Aviso de Privacidad indica el correo para ejercer los derechos ARCO. Sin consentimiento solo se usan cookies técnicas.
+    \item \textbf{RNF-09 Compatibilidad:} últimas dos versiones de Chrome, Safari en iOS, Firefox, Edge y Samsung Internet.
+    \item \textbf{RNF-10 Accesibilidad:} contraste de texto nivel AA de WCAG 2.2, navegación con teclado en menús y modales, texto alternativo en imágenes y animaciones reducidas cuando el usuario activa la preferencia del sistema \texttt{prefers-reduced-motion}.
+    \item \textbf{RNF-11 Cumplimiento para Bebidas Alcohólicas:} verificación de mayoría de edad al entrar, al crear cuenta y al enviar pedido. Leyenda sanitaria visible en todas las páginas públicas. Código NOM y certificación CRM visibles en cada ficha. La publicidad y el boletín se dirigen solo a mayores de 18 años.
 \end{itemize}
 
 \newpage
@@ -425,13 +641,13 @@ A continuación se documentan las respuestas entregadas por el cliente en el cue
 
     \item \textbf{3.2 ¿El sitio necesita estar en inglés también?}\\
     \uradio\ No, solo en español por ahora\\
-    \radio\ \underline{\textbf{Sí, español e inglés desde el inicio}} \quad \textcolor{mezcalAgave}{\textbf{[RESUELTO E IMPLEMENTADO EN EL SITIO]}}\\
+    \radio\ \underline{\textbf{Sí, español e inglés desde el inicio}} \quad \textcolor{mezcalAgave}{\textbf{[RESUELTO: incluido en la Fase 1, ver RF-02]}}\\
     \uradio\ Español primero, inglés en una segunda fase
 
     \item \textbf{3.3 ¿Necesitan un panel de administración para editar el contenido sin programador?}\\
     \uradio\ Sí, alguien del equipo lo actualizará constantemente\\
     \uradio\ No por ahora, el equipo de desarrollo hará los cambios\\
-    \radio\ \underline{\textbf{No sé, depende del costo}} \quad \textcolor{mezcalAgave}{\textbf{[RESUELTO: Incluido dentro del paquete integral de \$7,000 MXN a 6 semanas con Dashboard Administrativo + POS]}}\
+    \radio\ \underline{\textbf{No sé, depende del costo}} \quad \textcolor{mezcalAgave}{\textbf{[RESUELTO: Incluido en el paquete integral de \$6,000.00 MXN a 6 semanas con Dashboard Administrativo + POS, ver RF-20 y RF-21]}}\
 
     \item \textbf{3.4 Otras funciones a incluir en el lanzamiento:}\\
     \chk\ Verificación de edad (+18) al entrar al sitio \quad
@@ -546,7 +762,7 @@ Esta sección está diseñada para ser completada directamente con el cliente (\
 \begin{pendingbox}{Pregunta 3.2 — Confirmación del Idioma Inglés (RESUELTO)}
 \textbf{Respuesta subrayada por el cliente en el cuestionario original:}\\[0.4em]
 \uradio\ No, solo en español por ahora\\[0.25em]
-\radio\ \underline{\textbf{Sí, español e inglés desde el inicio}} \quad \textcolor{mezcalAgave}{\textbf{(Implementado al 100\% en las 9 páginas del sitio con selector interactivo ES | EN)}}\\[0.25em]
+\radio\ \underline{\textbf{Sí, español e inglés desde el inicio}} \quad \textcolor{mezcalAgave}{\textbf{(Incluido en la Fase 1. En el prototipo ya funciona en 5 páginas; faltan las 4 páginas individuales de producto)}}\\[0.25em]
 \uradio\ Español primero, inglés en una segunda fase
 \end{pendingbox}
 
@@ -555,7 +771,7 @@ Esta sección está diseñada para ser completada directamente con el cliente (\
 \uradio\ Sí, alguien del equipo lo actualizará constantemente\\[0.25em]
 \uradio\ No por ahora, el equipo de desarrollo hará los cambios\\[0.25em]
 \radio\ \underline{\textbf{No sé, depende del costo}}\\[0.35em]
-\textbf{Acuerdo Técnico-Económico:} El Panel de Administración (\texttt{dashboard.html}) con gestión de lotes/inventario, control de pedidos, punto de venta (POS) e historial de clientes \textbf{ya se incluye sin costo adicional} dentro del plan de desarrollo integral de \textbf{\$7,000.00 MXN a 6 semanas} elaborado por el \textbf{Ing. en Computación Jose Ramon Aragon Toledo}.
+\textbf{Acuerdo Técnico-Económico:} El Panel de Administración (\texttt{dashboard.html}) con gestión de lotes/inventario, control de pedidos, punto de venta (POS) e historial de clientes \textbf{ya se incluye sin costo adicional} dentro del plan de desarrollo integral de \textbf{\$6,000.00 MXN a 6 semanas} (\$1,500.00 de infraestructura y \$4,500.00 de honorarios) elaborado por el \textbf{Ing. en Computación Jose Ramon Aragon Toledo}.
 \end{pendingbox}
 
 \begin{pendingbox}{Pregunta 3.5 — Funciones adicionales importantes no listadas}
@@ -665,7 +881,8 @@ Complete los datos reales de cada expresión para generar sus tarjetas interacti
 
 \begin{pendingbox}{2. Canales de Contacto, Ubicación y Datos Fiscales para Aviso de Privacidad}
 \textbf{a) Número oficial de WhatsApp Business (a 10 dígitos):} \texttt{+52} \rule{6cm}{0.5pt}\\[0.5em]
-\textbf{b) Correo electrónico oficial donde llegarán los mensajes del formulario:} \rule{6.2cm}{0.5pt}\\[0.5em]
+\textbf{b) Correo electrónico oficial donde llegarán los mensajes del formulario:}
+\fillline
 \textbf{c) Coordenadas o enlace exacto de Google Maps del Palenque en El Gramal:}
 \fillline
 \textbf{d) Lista de puntos de venta físicos actuales (dirección, nombre del local o ciudad):}
@@ -686,6 +903,36 @@ Complete los datos reales de cada expresión para generar sus tarjetas interacti
     \item \textbf{Archivo de video del proceso de elaboración / palenque} (en formato \texttt{.MP4} / \texttt{.MOV}) para el encabezado principal (Hero).
     \item \textbf{Arte gráfico de las etiquetas de botella} (para referencia de diseño y tipografías).
 \end{itemize}
+
+\subsection{Parte F: Decisiones Comerciales Pendientes para la Plataforma de Ventas}
+
+Estas decisiones son necesarias para configurar los módulos RF-16 a RF-25. Sin ellas, el sistema se entrega con valores de ejemplo.
+
+\begin{pendingbox}{3. Precios, Pagos, Envíos y Operación}
+\textbf{a) Precio al público por botella de cada expresión (MXN, IVA incluido):}
+\fillline
+\textbf{b) Precio de mayoreo para bares y restaurantes, y cantidad mínima:}
+\fillline
+\textbf{c) Formas de pago aceptadas en la Fase 1 y datos bancarios a mostrar:}\\[0.3em]
+\uchk\ Transferencia SPEI \quad \uchk\ Depósito bancario \quad \uchk\ Efectivo en el palenque \quad \uchk\ Terminal bancaria propia\\[0.3em]
+\uradio\ Confirmo que en la Fase 1 no habrá cobro en línea y el pago se confirma manualmente\\[0.2em]
+\uradio\ Requiero pasarela de pago (se cotiza en Fase 2)
+\fillline
+\textbf{d) Zonas de envío, paquetería preferida y costo de envío (tarifa fija o cotización por WhatsApp):}
+\fillline
+\textbf{e) Política de devoluciones o reposición por daño en el transporte:}
+\fillline
+\textbf{f) Nombres y correos de los Administradores y de los Vendedores POS:}
+\fillline
+\fillline
+\textbf{g) Horario de atención humana para el chat del sitio y WhatsApp:}
+\fillline
+\textbf{h) Número telefónico dedicado a la API de WhatsApp (no activo en la app):}\\[0.4em]
+\texttt{+52} \rule{6cm}{0.5pt}\\[0.6em]
+\textbf{i) ¿Necesitan emitir factura (CFDI) a sus clientes?} \quad \uradio\ Sí, en Fase 2 \quad \uradio\ No por ahora\\[0.6em]
+\textbf{j) Periodo de garantía y esquema de mantenimiento después de la entrega:}
+\fillline
+\end{pendingbox}
 
 \vspace{1cm}
 

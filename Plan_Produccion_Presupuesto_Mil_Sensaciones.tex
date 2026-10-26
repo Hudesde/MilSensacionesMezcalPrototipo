@@ -118,7 +118,7 @@
         \textbf{Título / Clave DGP:} & Ingeniero en Computación — Clave DGP: 521344 \\
         \textbf{Correo de Contacto:} & \texttt{aatr010423@gmail.com} \\
         \textbf{Duración Estimada:} & 6 Semanas (3 Quincenas) \\
-        \textbf{Inversión Total:} & \$7,000.00 MXN (\$2,000.00 Infraestructura + \$5,000.00 Desarrollo) \\
+        \textbf{Inversión Total:} & \$6,000.00 MXN (\$1,500.00 Infraestructura + \$4,500.00 Desarrollo) \\
         \textbf{Estado del Proyecto:} & Prototipo interactivo aprobado para transición a producción
     \end{tabular}
     \\[0.3cm]
@@ -138,43 +138,89 @@ La solución contempla el despliegue de una plataforma web integral con landing 
 % ==============================================================================
 \section{Esquema de Cobro y Presupuesto de Implementación (6 Semanas)}
 
-El costo total pactado para el desarrollo completo, configuración de infraestructura y puesta en marcha en producción durante las \textbf{6 semanas} es de \textbf{\$7,000.00 MXN (Siete mil pesos 00/100 M.N.)}, estructurado de forma transparente en dos conceptos:
+El costo total pactado para el desarrollo completo, configuración de infraestructura y puesta en marcha en producción durante las \textbf{6 semanas} es de \textbf{\$6,000.00 MXN (Seis mil pesos 00/100 M.N.)}, estructurado de forma transparente en dos conceptos:
 
 \subsection{Desglose de Costos}
 
 \begin{table}[H]
 \centering
 \small
-\begin{tabularx}{\textwidth}{p{3.6cm}Xp{3.0cm}r}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.0cm}r}
 \toprule
 \rowcolor{MezcalAgave!15}
 \textbf{Concepto} & \textbf{Descripción Técnica \& Destino} & \textbf{Modalidad de Pago} & \textbf{Monto (MXN)} \\
 \midrule
 \textbf{1. Infraestructura, Dominio, Hosting \& Activos Animados IA} & 
-Adquisición del dominio web oficial \texttt{.com} / \texttt{.mx} por 1 año, certificado de seguridad SSL/TLS wildcard, aprovisionamiento de servidor en la nube (Cloud VPS / Hosting SSD optimizado), configuración de DNS (SPF/DKIM/DMARC), almacenamiento CDN y procesamiento de activos de video \textit{loopable} a 720p (generación de secuencias animadas de botellas y fondos con IA). & 
-Pago único inicial al arrancar el proyecto (destinado a hosting, dominio y recursos multimedia) & 
-\textbf{\$2,000.00} \\
+Dominio oficial \texttt{.com} por 1 año, servidor VPS en la Ciudad de México por 7 meses para el backend en Go, suscripción de 1 mes a la herramienta de IA para generar los videos \textit{loopable} a 720p, saldo inicial de mensajes de WhatsApp y un fondo de contingencia cambiaria. El SSL/TLS, DNS, CDN, almacenamiento de videos y correo transaccional usan planes gratuitos. Desglose exacto en la sección~\ref{sec:infra}. &
+Pago único inicial al arrancar el proyecto (destinado a hosting, dominio y recursos multimedia) &
+\textbf{\$1,500.00} \\
 \midrule
 \textbf{2. Sueldo / Honorarios de Desarrollo} & 
 Ingeniería de software de los 10 módulos funcionales y del pipeline de animaciones cinemáticas en loop a lo largo de 6 semanas: landing page animada con botella protagonista en rotación/loop y videos verticales al 40\%, catálogo y páginas individuales de mezcal, carrito slidebar Fluid UI, sistema de cuentas, dashboard administrativo y POS, seguimiento de pedidos, apartados legales, chatbot de WhatsApp, chat directo en plataforma y sistema de correos electrónicos. & 
-Cubierto quincenalmente durante las 6 semanas (3 quincenas) & 
-\textbf{\$5,000.00} \\
+Cubierto quincenalmente durante las 6 semanas (3 quincenas de \$1,500.00) &
+\textbf{\$4,500.00} \\
 \midrule
 \rowcolor{MezcalGold!20}
-\multicolumn{3}{l}{\textbf{TOTAL DEL PROYECTO LLAVE EN MANO (6 SEMANAS):}} & \textbf{\$7,000.00 MXN} \\
+\multicolumn{3}{l}{\textbf{TOTAL DEL PROYECTO LLAVE EN MANO (6 SEMANAS):}} & \textbf{\$6,000.00 MXN} \\
 \bottomrule
 \end{tabularx}
 \end{table}
+
+\subsection{Desglose Exacto de Infraestructura para Producción con Go}
+\label{sec:infra}
+
+El backend se compila en \textbf{Go} como un solo binario ligero. Esto permite operar la API, la base de datos PostgreSQL y el proxy HTTPS (Caddy con certificados Let's Encrypt automáticos) en un servidor pequeño de 1~GB de RAM, con un consumo estimado menor a 400~MB. Los videos y respaldos se sirven desde almacenamiento de objetos con transferencia gratuita, para no saturar el servidor.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.6cm}r}
+\toprule
+\rowcolor{MezcalAgave!15}
+\textbf{Concepto} & \textbf{Proveedor y Especificación} & \textbf{Precio Lista} & \textbf{Monto (MXN)} \\
+\midrule
+Dominio \texttt{milsensaciones.com} (1 año) & Cloudflare Registrar, precio al costo con privacidad WHOIS incluida. Comprar antes del 1 de noviembre de 2026, cuando sube la tarifa del registro \texttt{.com}. & US\$10.46 + IVA = US\$12.13 & \$223.62 \\
+\midrule
+Servidor VPS (7 meses) & Vultr Cloud Compute, región Ciudad de México: 1 vCPU, 1~GB RAM, 25~GB SSD, 1~TB de transferencia e IPv4 incluida. Cubre las 6 semanas de desarrollo y los primeros 5 meses en producción. & US\$5.00/mes + IVA = US\$5.80/mes (\$106.89) & \$748.23 \\
+\midrule
+Generación de videos con IA (1 mes) & Google AI Pro con acceso a Flow / Veo 3.1 para producir los loops de las 4 botellas y fondos. Se cancela al terminar la semana 2. & \$395.00/mes & \$395.00 \\
+\midrule
+Saldo inicial WhatsApp Business Platform & API oficial de Meta. Incluye 1,000 mensajes de servicio gratis al mes por número. El saldo cubre cerca de 550 mensajes adicionales de utilidad o servicio. & US\$0.0085 + IVA por mensaje & \$100.00 \\
+\midrule
+DNS, CDN, SSL y protección DDoS básica & Cloudflare plan Free. Certificado del servidor con Let's Encrypt vía Caddy. & Gratis & \$0.00 \\
+\midrule
+Almacenamiento de videos y respaldos & Cloudflare R2 plan gratuito: 10~GB de almacenamiento y salida de datos sin costo. Respaldo diario automático de PostgreSQL. & Gratis & \$0.00 \\
+\midrule
+Correo transaccional y corporativo & Resend plan Free (3,000 correos/mes, 100 por día) con SPF, DKIM y DMARC. Cloudflare Email Routing para recibir \textit{contacto@} y \textit{ventas@} en la bandeja del cliente. & Gratis & \$0.00 \\
+\midrule
+Fondo de contingencia cambiaria & Absorbe variaciones del tipo de cambio y comisiones del banco por cargos en dólares. & --- & \$33.15 \\
+\midrule
+\rowcolor{MezcalGold!20}
+\multicolumn{3}{l}{\textbf{TOTAL INFRAESTRUCTURA:}} & \textbf{\$1,500.00 MXN} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent\textbf{Bases del cálculo:} tipo de cambio de \$18.43 MXN por dólar (cierre interbancario de Banxico del 19 de octubre de 2026) e IVA del 16\% sobre servicios digitales de proveedores extranjeros. Precios consultados el 26 de octubre de 2026. Si algún proveedor no cobra IVA, la diferencia se suma al fondo de contingencia.
+
+\subsubsection{Costos Recurrentes Después del Mes 7 (a cargo del cliente)}
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Servidor VPS:} \$106.89 MXN al mes (US\$5.80 con IVA).
+    \item \textbf{Renovación del dominio (octubre de 2027):} cerca de \$238.80 MXN al año, con la tarifa \texttt{.com} vigente a partir de noviembre de 2026.
+    \item \textbf{WhatsApp:} los primeros 1,000 mensajes de servicio de cada mes son gratis. Después, cerca de \$0.18 MXN por mensaje de utilidad o servicio y US\$0.0397 + IVA por mensaje de marketing.
+    \item \textbf{Escalamiento opcional:} si el tráfico crece, el servidor sube al plan de 2~GB de RAM por US\$10.00 + IVA al mes, sin reinstalar nada.
+\end{itemize}
 
 \subsection{Calendario de Pagos Quincenales}
 
 Para facilitar la planeación financiera de Mezcal Mil Sensaciones durante las \textbf{6 semanas (3 quincenas)} de ejecución, el presupuesto se cubre de la siguiente manera:
 
 \begin{enumerate}[label=\textbf{\arabic*.}]
-    \item \textbf{Pago Inicial de Infraestructura — Día 1 (\$2,000.00 MXN):} Destinado exclusivamente a la compra inmediata del dominio oficial, certificados de seguridad y activación del servidor de hosting.
-    \item \textbf{Primera Quincena — Final de Semana 2 (\$1,666.67 MXN / o \$1,700.00 MXN cerrados):} Contra entrega del entorno de producción activo, Landing Page optimizada, Catálogo y Páginas Independientes de las 4 expresiones de mezcal y Carrito de Compras Slidebar.
-    \item \textbf{Segunda Quincena — Final de Semana 4 (\$1,666.67 MXN / o \$1,700.00 MXN cerrados):} Contra entrega del Sistema de Cuentas (Login multi-rol), Dashboard del Administrador, Terminal de Punto de Venta (POS) y Sistema de Seguimiento de Pedidos.
-    \item \textbf{Tercera Quincena — Final de Semana 6 (\$1,666.66 MXN / o \$1,600.00 MXN cerrados):} Contra entrega del Chatbot de Automatización por WhatsApp, Chat Directo en Plataforma con Vendedores/Administradores, Sistema de Correos Electrónicos y Apartados Legales completos (sumando exactamente los \textbf{\$5,000.00 MXN} de honorarios).
+    \item \textbf{Pago Inicial de Infraestructura — Día 1 (\$1,500.00 MXN):} Destinado exclusivamente a la compra inmediata del dominio oficial, el servidor VPS, la herramienta de IA para videos y el saldo de WhatsApp, según la sección~\ref{sec:infra}.
+    \item \textbf{Primera Quincena — Final de Semana 2 (\$1,500.00 MXN):} Contra entrega del entorno de producción activo, Landing Page optimizada, Catálogo y Páginas Independientes de las 4 expresiones de mezcal y Carrito de Compras Slidebar.
+    \item \textbf{Segunda Quincena — Final de Semana 4 (\$1,500.00 MXN):} Contra entrega del Sistema de Cuentas (Login multi-rol), Dashboard del Administrador, Terminal de Punto de Venta (POS) y Sistema de Seguimiento de Pedidos.
+    \item \textbf{Tercera Quincena — Final de Semana 6 (\$1,500.00 MXN):} Contra entrega del Chatbot de Automatización por WhatsApp, Chat Directo en Plataforma con Vendedores/Administradores, Sistema de Correos Electrónicos y Apartados Legales completos (sumando exactamente los \textbf{\$4,500.00 MXN} de honorarios).
 \end{enumerate}
 
 % ==============================================================================
@@ -272,17 +318,17 @@ Para transformar el prototipo actual en un sistema comercial de grado productivo
 \rowcolor{MezcalAgave!15}
 \textbf{Semana} & \textbf{Fase / Módulos} & \textbf{Entregables Técnicos en Producción} & \textbf{Esquema de Pago} \\
 \midrule
-\textbf{Semana 1} & Infraestructura, Hosting, Dominio y Landing Animada IA & Compra de dominio oficial, configuración de servidor Cloud VPS, generación de video \textit{loopable} 720p de la botella principal con IA (Flow/Veo) y despliegue de Landing Page inmersiva con capa de video al 40\%. & \textbf{Inicio:} \$2,000.00 MXN (Hosting, Dominio y Recursos) \\
+\textbf{Semana 1} & Infraestructura, Hosting, Dominio y Landing Animada IA & Compra de dominio oficial, configuración del servidor VPS en CDMX con el backend en Go, generación de video \textit{loopable} 720p de la botella principal con IA (Flow/Veo) y despliegue de Landing Page inmersiva con capa de video al 40\%. & \textbf{Inicio:} \$1,500.00 MXN (Hosting, Dominio y Recursos) \\
 \midrule
-\textbf{Semana 2} & Catálogo, Loops de las 4 Expresiones y Carrito Slidebar & Puesta en línea de las 4 páginas independientes de mezcal con sus animaciones/loops de botella, fichas PDF de 10 atributos y cesta de compras interactiva con Fluid UI. & \textbf{1.ª Quincena:} \$1,666.67 MXN \\
+\textbf{Semana 2} & Catálogo, Loops de las 4 Expresiones y Carrito Slidebar & Puesta en línea de las 4 páginas independientes de mezcal con sus animaciones/loops de botella, fichas PDF de 10 atributos y cesta de compras interactiva con Fluid UI. & \textbf{1.ª Quincena:} \$1,500.00 MXN \\
 \midrule
-\textbf{Semana 3} & Sistema de Cuentas y Base de Datos en Producción & Base de datos relacional, portal de Login con cifrado de contraseñas y control de sesiones para Cliente, Administrador y Vendedor POS. & --- \\
+\textbf{Semana 3} & Sistema de Cuentas y Base de Datos en Producción & Base de datos PostgreSQL con API en Go, portal de Login con cifrado de contraseñas y control de sesiones para Cliente, Administrador y Vendedor POS. & --- \\
 \midrule
-\textbf{Semana 4} & Dashboard de Administrador, POS y Seguimiento de Pedidos & Panel administrativo de inventarios/lotes, terminal táctil POS para el palenque y módulo de rastreo de pedidos con guías de envío. & \textbf{2.ª Quincena:} \$1,666.67 MXN \\
+\textbf{Semana 4} & Dashboard de Administrador, POS y Seguimiento de Pedidos & Panel administrativo de inventarios/lotes, terminal táctil POS para el palenque y módulo de rastreo de pedidos con guías de envío. & \textbf{2.ª Quincena:} \$1,500.00 MXN \\
 \midrule
 \textbf{Semana 5} & Chatbot de WhatsApp y Chat Directo en Plataforma & Configuración del bot automatizado de WhatsApp Business y desarrollo del chat en tiempo real dentro de la plataforma con bandeja para vendedores. & --- \\
 \midrule
-\textbf{Semana 6} & Sistema de Correos, Marco Legal y Lanzamiento Final & Configuración de correos transaccionales SMTP, páginas de Privacidad, Términos de Servicio y Condiciones, pruebas finales y liberación. & \textbf{3.ª Quincena:} \$1,666.66 MXN \\
+\textbf{Semana 6} & Sistema de Correos, Marco Legal y Lanzamiento Final & Configuración de correos transaccionales SMTP, páginas de Privacidad, Términos de Servicio y Condiciones, pruebas finales y liberación. & \textbf{3.ª Quincena:} \$1,500.00 MXN \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -292,7 +338,7 @@ Para transformar el prototipo actual en un sistema comercial de grado productivo
 % ==============================================================================
 \vspace{0.2cm}
 \begin{goldbox}{Conformidad y Aprobación del Plan de Trabajo (6 Semanas)}
-Al suscribir el presente documento, ambas partes acuerdan el alcance técnico de los 10 módulos descritos para el paso a producción en un plazo de \textbf{6 semanas} y el esquema económico total de \textbf{\$7,000.00 MXN} (\textbf{\$2,000.00 MXN} iniciales exclusivos para hosting y dominio, y \textbf{\$5,000.00 MXN} de sueldo de desarrollo cubiertos quincenalmente en 3 exhibiciones).
+Al suscribir el presente documento, ambas partes acuerdan el alcance técnico de los 10 módulos descritos para el paso a producción en un plazo de \textbf{6 semanas} y el esquema económico total de \textbf{\$6,000.00 MXN} (\textbf{\$1,500.00 MXN} iniciales exclusivos para infraestructura, y \textbf{\$4,500.00 MXN} de sueldo de desarrollo cubiertos quincenalmente en 3 exhibiciones).
 \end{goldbox}
 
 \vspace{0.5cm}
