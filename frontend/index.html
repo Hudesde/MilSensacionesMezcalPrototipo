@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mil Sensaciones | Mezcal Artesanal de Oaxaca</title>
+    <meta name="description" content="Mezcal Artesanal Mil Sensaciones. Tres generaciones de tradición mezcalera en El Gramal, Nejapa de Madero, Yautepec, Oaxaca. Maestro Mezcalero Damián Olivera Díaz.">
+    <meta property="og:title" content="Mil Sensaciones | Mezcal Artesanal de Oaxaca">
+    <meta property="og:description" content="Historia viva, herencia familiar y alma en cada gota. Producido en El Gramal, Nejapa de Madero, Oaxaca.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mezcal-dark': '#160f09',
+                        'mezcal-wood': '#281910',
+                        'mezcal-charcoal': '#23160e',
+                        'mezcal-agave': '#4b6043',
+                        'mezcal-agave-light': '#6c8663',
+                        'mezcal-gold': '#d4af37',
+                        'mezcal-earth': '#8b5a2b',
+                        'mezcal-light': '#f4f1ea'
+                    },
+                    fontFamily: {
+                        'serif': ['Cormorant Garamond', 'Cinzel', 'serif'],
+                        'script': ['Great Vibes', 'cursive'],
+                        'sans': ['Inter', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "linear-gradient(to bottom, rgba(22,15,9,0.52), rgba(22,15,9,0.92)), url('assets/img/SaveClip.App_670425167_18098109029514771_8310009834137245489_n.jpg')",
+                        'texture': "url('https://www.transparenttextures.com/patterns/stucco.png')"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Estilos Globales -->
+    <link rel="stylesheet" href="assets/css/styles.css?v=12">
+</head>
+<body class="locked antialiased font-sans selection:bg-mezcal-gold selection:text-mezcal-dark relative">
+
+    <!-- ===================================================================
+         MODAL DE VERIFICACIÓN DE EDAD (+18) (RF-01)
+         =================================================================== -->
+    <div id="age-gate" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-mezcal-dark/95 bg-texture text-center p-6 transition-opacity duration-700" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
+        <div class="max-w-md w-full glass-card p-10 rounded-2xl shadow-2xl border border-mezcal-earth/60 relative overflow-hidden">
+            <div class="absolute inset-0 bg-mezcal-agave opacity-15"></div>
+            <div class="relative z-10">
+                <h2 id="age-gate-title" class="brand-lockup mb-3 mx-auto">
+                    <span class="brand-script-mezcal text-5xl text-mezcal-light">Mezcal</span>
+                    <span class="brand-serif-mil text-2xl mt-0.5">Mil</span>
+                    <span class="brand-serif-sensaciones text-3xl sm:text-4xl">SENSACIONES</span>
+                    <svg class="brand-botanical-divider mx-auto max-w-[260px]" viewBox="0 0 420 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M56 17 C42 17, 25 14, 15 17 C25 20, 42 17, 56 17 Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                        <path d="M56 17 C49 9, 41 3, 35 4 C35 10, 44 15, 56 17 Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                        <path d="M56 17 C49 25, 41 31, 35 30 C35 24, 44 19, 56 17 Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                        <line x1="56" y1="17" x2="194" y2="17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                        <circle cx="210" cy="17" r="4" fill="currentColor"/>
+                        <line x1="226" y1="17" x2="364" y2="17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                        <path d="M364 17 C378 17, 395 14, 405 17 C395 20, 378 17, 364 17 Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                        <path d="M364 17 C371 9, 379 3, 385 4 C385 10, 376 15, 364 17 Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                        <path d="M364 17 C371 25, 379 31, 385 30 C385 24, 376 19, 364 17 Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                    </svg>
+                </h2>
+                <p class="text-mezcal-gold/90 mb-7 text-xs uppercase tracking-[0.25em]">El Gramal, Nejapa de Madero, Oaxaca</p>
+                <p class="text-base md:text-lg mb-8 text-mezcal-light/90" data-lang-es="¿Tienes la mayoría de edad legal (+18) para consumir bebidas alcohólicas en tu país de residencia?" data-lang-en="Are you of legal drinking age (+18) in your country of residence?">
+                    ¿Tienes la mayoría de edad legal (+18) para consumir bebidas alcohólicas en tu país de residencia?
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button id="btn-yes" class="px-8 py-3 bg-mezcal-agave hover:bg-mezcal-agave-light text-white font-semibold rounded-full transition-all duration-300 border border-transparent hover:border-mezcal-light transform hover:-translate-y-0.5">
+                        <span data-lang-es="SÍ, SOY MAYOR DE EDAD" data-lang-en="YES, I AM OF LEGAL AGE">SÍ, SOY MAYOR DE EDAD</span>
+                    </button>
+                    <button id="btn-no" class="px-8 py-3 bg-transparent border border-mezcal-light/30 hover:border-mezcal-gold text-mezcal-light hover:text-mezcal-gold font-semibold rounded-full transition-all duration-300">
+                        <span data-lang-es="NO" data-lang-en="NO">NO</span>
+                    </button>
+                </div>
+                <div id="age-error" class="hidden mt-6 text-red-400 text-sm opacity-0 transition-opacity duration-300">
+                    <span data-lang-es="Lo sentimos, debes ser mayor de edad (+18) para ingresar a este sitio." data-lang-en="Sorry, you must be of legal drinking age (+18) to enter this site.">Lo sentimos, debes ser mayor de edad (+18) para ingresar a este sitio.</span>
+                </div>
+                <p class="mt-8 text-[11px] text-mezcal-light/40 tracking-wider uppercase" data-lang-es="EVITA EL EXCESO · Prohibida su venta a menores de 18 años" data-lang-en="ENJOY RESPONSIBLY · Must be of legal drinking age">
+                    EVITA EL EXCESO · Prohibida su venta a menores de 18 años
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================
+         CONTENIDO PRINCIPAL DEL SITIO
+         =================================================================== -->
+    <div id="main-content" class="blurred">
+
+        <!-- BARRA DE NAVEGACIÓN MULTI-PÁGINA -->
+        <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 bg-transparent py-5">
+            <div class="container mx-auto px-6 lg:px-12 flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-3 font-serif text-xl md:text-2xl font-bold text-mezcal-light tracking-widest uppercase hover:text-mezcal-gold transition-colors">
+                    <span>Mil Sensaciones</span>
+                </a>
+
+                <!-- Menú Escritorio -->
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="index.html" class="text-xs font-semibold tracking-widest text-mezcal-gold border-b border-mezcal-gold pb-1" data-lang-es="INICIO" data-lang-en="HOME">INICIO</a>
+                    <a href="historia.html" class="text-xs font-semibold tracking-widest text-mezcal-light hover:text-mezcal-gold transition-colors" data-lang-es="HISTORIA Y MAESTRO" data-lang-en="STORY & MASTER">HISTORIA Y MAESTRO</a>
+                    <a href="mezcales.html" class="text-xs font-semibold tracking-widest text-mezcal-light hover:text-mezcal-gold transition-colors" data-lang-es="NUESTROS MEZCALES" data-lang-en="OUR MEZCALS">NUESTROS MEZCALES</a>
+                    <a href="proceso.html" class="text-xs font-semibold tracking-widest text-mezcal-light hover:text-mezcal-gold transition-colors" data-lang-es="PROCESO Y GALERÍA" data-lang-en="PROCESS & GALLERY">PROCESO Y GALERÍA</a>
+                    <a href="contacto.html" class="text-xs font-semibold tracking-widest text-mezcal-light hover:text-mezcal-gold transition-colors" data-lang-es="CONTACTO" data-lang-en="CONTACT">CONTACTO</a>
+
+                    <button class="lang-toggle-btn flex items-center space-x-1.5 border border-mezcal-light/30 px-3 py-1 rounded-full hover:border-mezcal-gold transition-colors" aria-label="Cambiar idioma / Switch language">
+                        <span class="lang-es-indicator text-xs font-bold text-mezcal-gold">ES</span>
+                        <span class="text-xs text-mezcal-light/40">|</span>
+                        <span class="lang-en-indicator text-xs font-bold text-mezcal-light/50">EN</span>
+                    </button>
+
+                    <!-- Botón Cesta Escritorio -->
+                    <button type="button" class="open-cart-btn relative p-2 text-mezcal-light hover:text-mezcal-gold transition-colors touch-target" aria-label="Abrir cesta">
+                        <i class="fa-solid fa-basket-shopping text-base"></i>
+                        <span class="cart-count-badge absolute -top-1 -right-1 bg-mezcal-agave text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                    </button>
+
+                    <!-- Botones Login / Dashboard / Logout -->
+                    <div class="flex items-center gap-2">
+                        <a href="login.html" class="auth-link px-4 py-1.5 rounded-full bg-mezcal-gold text-mezcal-dark hover:bg-mezcal-light text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow">
+                            <i class="fa-solid fa-user"></i>
+                            <span data-lang-es="Iniciar Sesión" data-lang-en="Sign In">Iniciar Sesión</span>
+                        </a>
+                        <button type="button" onclick="mezcalLogout()" class="logout-nav-btn hidden px-3 py-1.5 rounded-full border border-red-500/40 bg-red-500/10 hover:bg-red-500/25 text-red-300 text-xs font-semibold transition-all flex items-center gap-1.5" title="Cerrar Sesión">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span data-lang-es="Salir" data-lang-en="Logout">Salir</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Botones Móvil -->
+                <div class="flex items-center gap-2.5 lg:hidden">
+                    <a href="login.html" class="auth-link px-3 py-1 rounded-full bg-mezcal-gold text-mezcal-dark text-[11px] font-bold uppercase tracking-wider flex items-center gap-1">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Login</span>
+                    </a>
+                    <button type="button" onclick="mezcalLogout()" class="logout-nav-btn hidden px-2.5 py-1 rounded-full border border-red-500/40 bg-red-500/10 text-red-300 text-[11px] font-semibold flex items-center gap-1" aria-label="Cerrar Sesión">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                    <button class="lang-toggle-btn flex items-center space-x-1 border border-mezcal-light/30 px-2.5 py-1 rounded-full">
+                        <span class="lang-es-indicator text-xs font-bold text-mezcal-gold">ES</span>
+                        <span class="text-xs text-mezcal-light/40">|</span>
+                        <span class="lang-en-indicator text-xs font-bold text-mezcal-light/50">EN</span>
+                    </button>
+                    <button type="button" class="open-cart-btn relative p-2 text-mezcal-light hover:text-mezcal-gold transition-colors touch-target" aria-label="Cesta">
+                        <i class="fa-solid fa-basket-shopping text-base"></i>
+                        <span class="cart-count-badge absolute -top-1 -right-1 bg-mezcal-agave text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-mezcal-light text-2xl focus:outline-none" aria-label="Abrir menú">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Menú Desplegable Móvil -->
+            <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-mezcal-charcoal/98 backdrop-blur-lg shadow-2xl border-t border-mezcal-light/10 flex flex-col items-center py-6 space-y-5">
+                <a href="index.html" class="text-sm font-semibold tracking-widest text-mezcal-gold" data-lang-es="INICIO" data-lang-en="HOME">INICIO</a>
+                <a href="historia.html" class="text-sm font-semibold tracking-widest text-mezcal-light hover:text-mezcal-gold" data-lang-es="HISTORIA Y MAESTRO" data-lang-en="STORY & MASTER">HISTORIA Y MAESTRO</a>
+                <a href="mezcales.html" class="text-sm font-semibold tracking-widest text-mezcal-light hover:text-mezcal-gold" data-lang-es="NUESTROS MEZCALES" data-lang-en="OUR MEZCALS">NUESTROS MEZCALES</a>
+                <a href="proceso.html" class="text-sm font-semibold tracking-widest text-mezcal-light hover:text-mezcal-gold" data-lang-es="PROCESO Y GALERÍA" data-lang-en="PROCESS & GALLERY">PROCESO Y GALERÍA</a>
+                <a href="contacto.html" class="text-sm font-semibold tracking-widest text-mezcal-light hover:text-mezcal-gold" data-lang-es="DÓNDE COMPRAR / CONTACTO" data-lang-en="WHERE TO BUY / CONTACT">DÓNDE COMPRAR / CONTACTO</a>
+                <div class="pt-3 border-t border-white/10 flex items-center gap-3">
+                    <a href="login.html" class="auth-link px-5 py-2 rounded-full bg-mezcal-gold text-mezcal-dark text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-user"></i> <span>Iniciar Sesión</span>
+                    </a>
+                    <button type="button" onclick="mezcalLogout()" class="logout-nav-btn hidden px-4 py-2 rounded-full border border-red-500/40 bg-red-500/15 text-red-300 text-xs font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-right-from-bracket"></i> <span>Cerrar Sesión</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ===================================================================
+             HERO PRINCIPAL CON VIDEO EN VIVO Y BOTELLA LCP (RF-03)
+             =================================================================== -->
+        <header class="relative min-h-screen flex items-center justify-center bg-hero-pattern bg-cover bg-center bg-no-repeat overflow-hidden pt-24 pb-16">
+            <!-- Video real del horno de tierra en El Gramal -->
+            <video autoplay muted loop playsinline poster="assets/img/SaveClip.App_670425167_18098109029514771_8310009834137245489_n.jpg" class="absolute inset-0 w-full h-full object-cover opacity-35 pointer-events-none">
+                <source src="assets/video/%F0%9F%94%A5%20Entre%20fuego%2C%20tierra%20y%20tradici%C3%B3n%20nace%20algo%20m%C3%A1s%20que%20mezcal%E2%80%A6%20nace%20una%20experiencia.En%20cada%20horno%20.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-b from-mezcal-dark/70 via-mezcal-dark/65 to-mezcal-dark"></div>
+            <div class="absolute inset-0 bg-texture opacity-30 mix-blend-overlay"></div>
+
+            <div class="relative z-10 container mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mt-8">
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-mezcal-wood/80 border border-mezcal-earth/50 mb-4 reveal">
+                        <span class="hero-palette-dot w-2.5 h-2.5 rounded-full bg-[#8b5a2b] transition-colors" title="Tierra"></span>
+                        <span class="hero-palette-dot w-2.5 h-2.5 rounded-full bg-[#4b6043] transition-colors" title="Verde Maguey"></span>
+                        <span class="hero-palette-dot w-2.5 h-2.5 rounded-full bg-[#281910] transition-colors" title="Madera"></span>
+                        <p class="text-mezcal-gold tracking-[0.28em] text-[11px] md:text-xs uppercase font-semibold" data-lang-es="Mezcal Artesanal · Tercera Generación · Oaxaca" data-lang-en="Artisanal Mezcal · Third Generation · Oaxaca">
+                            Mezcal Artesanal · Tercera Generación · Oaxaca
+                        </p>
+                    </div>
+                    <h1 id="hero-title" data-animated-title="true" class="brand-lockup mb-4 mx-auto lg:mx-0 select-none">
+                        <span class="brand-script-mezcal text-6xl sm:text-7xl md:text-8xl lg:text-[6.2rem]">Mezcal</span>
+                        <span class="brand-serif-mil text-3xl sm:text-4xl md:text-5xl mt-1">Mil</span>
+                        <span class="brand-serif-sensaciones text-4xl sm:text-6xl md:text-7xl lg:text-[5.15rem] mt-0.5">SENSACIONES</span>
+                        <svg class="brand-botanical-divider mx-auto" viewBox="0 0 420 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M56 17 C42 17, 25 14, 15 17 C25 20, 42 17, 56 17 Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                            <path d="M56 17 C49 9, 41 3, 35 4 C35 10, 44 15, 56 17 Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                            <path d="M56 17 C49 25, 41 31, 35 30 C35 24, 44 19, 56 17 Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                            <line x1="56" y1="17" x2="194" y2="17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                            <circle cx="210" cy="17" r="4" fill="currentColor"/>
+                            <line x1="226" y1="17" x2="364" y2="17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                            <path d="M364 17 C378 17, 395 14, 405 17 C395 20, 378 17, 364 17 Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                            <path d="M364 17 C371 9, 379 3, 385 4 C385 10, 376 15, 364 17 Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                            <path d="M364 17 C371 25, 379 31, 385 30 C385 24, 376 19, 364 17 Z" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                        </svg>
+                    </h1>
+                    <p class="text-base md:text-lg font-medium text-mezcal-light/85 mb-3 reveal delay-100" data-lang-es="¡Descubre la esencia del horneado tradicional de las piñas de maguey!" data-lang-en="Discover the essence of traditional earth-pit roasting of agave hearts!">
+                        ¡Descubre la esencia del horneado tradicional de las piñas de maguey!
+                    </p>
+                    <p class="text-lg md:text-xl font-light text-mezcal-light/90 italic mb-9 reveal delay-200" data-lang-es='"No es solo una bebida… es historia viva, herencia y alma."' data-lang-en='"It is not just a drink… it is living history, heritage and soul."'>
+                        "No es solo una bebida… es historia viva, herencia y alma."
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start reveal delay-300">
+                        <a href="mezcales.html" class="px-8 py-3.5 bg-mezcal-agave hover:bg-mezcal-agave-light border border-mezcal-gold/40 text-mezcal-light font-bold text-sm uppercase tracking-wider rounded-full transition-all duration-300 shadow-lg">
+                            <span data-lang-es="Explorar Nuestros Mezcales" data-lang-en="Explore Our Mezcals">Explorar Nuestros Mezcales</span>
+                        </a>
+                        <a href="proceso.html#galeria-multimedia" class="px-8 py-3.5 bg-mezcal-wood/80 border border-mezcal-earth/70 hover:border-mezcal-gold text-mezcal-light hover:text-mezcal-gold font-semibold text-sm uppercase tracking-wider rounded-full transition-all duration-300 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-play text-xs text-mezcal-gold"></i>
+                            <span data-lang-es="Ver Videos y Galería" data-lang-en="Watch Videos & Gallery">Ver Videos y Galería</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Imagen Principal LCP (Optimizada con fetchpriority="high") -->
+                <div class="lg:col-span-5 reveal delay-200">
+                    <a href="mezcal-espadin.html"
+                       class="block relative mx-auto max-w-sm rounded-2xl overflow-hidden border border-mezcal-gold/35 shadow-[0_20px_60px_rgba(0,0,0,0.9)] group cursor-pointer">
+                        <img src="assets/img/botellasPrimerPlano/espadin/EspadinPP02.jpeg"
+                             fetchpriority="high"
+                             alt="Botella Mezcal Mil Sensaciones Espadín Joven 750ml en el campo de agave"
+                             class="w-full h-[420px] object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-mezcal-dark/90 via-transparent to-transparent flex items-end p-5">
+                            <div>
+                                <span class="text-[10px] uppercase tracking-widest bg-mezcal-gold text-mezcal-dark font-bold px-2.5 py-0.5 rounded-full">Espadín Joven · 45% Alc. Vol.</span>
+                                <p class="text-xs text-mezcal-light/90 mt-1.5 font-light flex items-center gap-1.5">El Gramal, Nejapa de Madero, Oaxaca <i class="fa-solid fa-arrow-right text-mezcal-gold"></i></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- ===================================================================
+             RESUMEN DE HISTORIA Y VALORES (Enlace a historia.html)
+             =================================================================== -->
+        <section class="py-24 bg-mezcal-dark ambient-video-section relative overflow-hidden" style="position:relative;overflow:hidden;">
+            <!-- Capa intermedia de video vertical full-bleed al 40% detrás del contenido -->
+            <div class="ambient-video-layer absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden opacity-40" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:0.40;pointer-events:none;overflow:hidden;">
+                <video autoplay muted loop playsinline preload="metadata" tabindex="-1" class="absolute inset-0 w-full h-full object-cover pointer-events-none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;">
+                    <source src="assets/video/Desde%20el%20coraz%C3%B3n%20del%20campo%20nace%20la%20esencia%20de%20Mil%20Sensaciones.%20%F0%9F%8C%B5Cortamos%20con%20respeto%2C%20elegimos%20.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="ambient-video-vignette absolute inset-0 z-[1] pointer-events-none" aria-hidden="true" style="position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg, rgba(13,12,11,0.92) 0%, rgba(13,12,11,0.28) 20%, rgba(13,12,11,0.28) 80%, rgba(13,12,11,0.92) 100%);"></div>
+
+            <div class="container mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-16 relative z-10" style="position:relative;z-index:10;">
+                <div class="w-full lg:w-1/2 reveal">
+                    <a href="historia.html" class="block relative rounded-t-full rounded-b-xl overflow-hidden border border-mezcal-gold/20 shadow-[0_0_50px_rgba(75,96,67,0.25)] group">
+                        <img src="assets/img/SaveClip.App_430070117_17907195989925247_5407206661363555243_n.jpg"
+                             alt="Cosecha y jima de maguey en El Gramal, Oaxaca"
+                             loading="lazy"
+                             class="w-full h-[540px] object-cover transition-transform duration-1000 group-hover:scale-105 organic-image-blend">
+                        <div class="inline-caption-overlay">
+                            <p class="text-[11px] text-mezcal-light/95"><i class="fa-solid fa-seedling text-mezcal-gold mr-1.5"></i>Piña de maguey recién jimada y acarreo tradicional en El Gramal · Ver Historia</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="w-full lg:w-1/2 section-text-backdrop bg-mezcal-dark/75 backdrop-blur-md p-8 md:p-10 rounded-3xl border border-mezcal-gold/20 shadow-2xl reveal delay-100">
+                    <span class="text-xs uppercase tracking-[0.25em] text-mezcal-agave-light font-semibold block mb-2" data-lang-es="El Gramal, Nejapa de Madero, Yautepec, Oaxaca" data-lang-en="El Gramal, Nejapa de Madero, Yautepec, Oaxaca">
+                        El Gramal, Nejapa de Madero, Yautepec, Oaxaca
+                    </span>
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold mb-6 text-mezcal-gold" data-lang-es="Tres Generaciones de Tradición" data-lang-en="Three Generations of Tradition">
+                        Tres Generaciones de Tradición
+                    </h2>
+                    <p class="text-xl font-light text-mezcal-light mb-6 italic" data-lang-es='"Comenzó con el abuelo, continuó con el padre y hoy sigue en manos del hijo."' data-lang-en='"It began with the grandfather, continued with the father, and today lives on in the hands of the son."'>
+                        "Comenzó con el abuelo, continuó con el padre y hoy sigue en manos del hijo."
+                    </p>
+                    <div class="space-y-4 text-mezcal-light/85 font-light leading-relaxed mb-8">
+                        <p data-lang-es="Aquí no improvisamos. Conservamos las enseñanzas originales, los tiempos, los métodos y el cuidado que le dan a nuestro mezcal ese sabor único, auténtico e inconfundible. No buscamos producir en masa, buscamos crear algo que realmente se sienta." data-lang-en="Here we do not improvise. We preserve the original teachings, times, methods, and care that give our mezcal its unique, authentic, and unmistakable flavor. We do not seek mass production; we seek to create something truly felt.">
+                            Aquí no improvisamos. Conservamos las enseñanzas originales, los tiempos, los métodos y el cuidado que le dan a nuestro mezcal ese sabor único, auténtico e inconfundible. No buscamos producir en masa, buscamos crear algo que realmente se sienta.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 mb-8 border-y border-mezcal-light/15 py-5 text-center">
+                        <div>
+                            <span class="block font-serif text-2xl md:text-3xl font-bold text-mezcal-gold">3.ª</span>
+                            <span class="text-xs text-mezcal-light/70 uppercase tracking-wider" data-lang-es="Generación Familiar" data-lang-en="Family Generation">Generación Familiar</span>
+                        </div>
+                        <div>
+                            <span class="block font-serif text-2xl md:text-3xl font-bold text-mezcal-gold">100%</span>
+                            <span class="text-xs text-mezcal-light/70 uppercase tracking-wider" data-lang-es="Artesanal Oaxaqueño" data-lang-en="Artisanal Oaxacan">Artesanal Oaxaqueño</span>
+                        </div>
+                        <div>
+                            <span class="block font-serif text-2xl md:text-3xl font-bold text-mezcal-gold">NOM-070</span>
+                            <span class="text-xs text-mezcal-light/70 uppercase tracking-wider" data-lang-es="Registro IMPI / CRM" data-lang-en="IMPI / CRM Certified">Registro IMPI / CRM</span>
+                        </div>
+                    </div>
+
+                    <a href="historia.html" class="inline-flex items-center gap-3 text-mezcal-gold hover:text-mezcal-light font-semibold tracking-wider text-sm uppercase transition-colors">
+                        <span data-lang-es="Leer la historia completa y conocer al Maestro Damián Olivera Díaz" data-lang-en="Read the full story & meet Master Damián Olivera Díaz">Leer la historia completa y conocer al Maestro Damián Olivera Díaz</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             VISTA RÁPIDA DE EXPRESIONES DE MEZCAL CON FOTOS REALES (RF-06, RF-07)
+             =================================================================== -->
+        <section class="py-24 bg-mezcal-charcoal bg-texture relative">
+            <div class="container mx-auto px-6 lg:px-12">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 section-text-backdrop bg-mezcal-dark/70 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-mezcal-gold/20 shadow-xl reveal">
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.25em] text-mezcal-agave-light font-semibold block mb-2" data-lang-es="Pequeños Lotes con Identidad y Alma" data-lang-en="Small Batches with Identity and Soul">Pequeños Lotes con Identidad y Alma</span>
+                        <h2 class="font-serif text-4xl md:text-5xl font-bold text-mezcal-gold" data-lang-es="Nuestras Expresiones" data-lang-en="Our Expressions">Nuestras Expresiones</h2>
+                    </div>
+                    <a href="mezcales.html" class="inline-flex items-center gap-2 px-6 py-3 border border-mezcal-gold text-mezcal-gold hover:bg-mezcal-gold hover:text-mezcal-dark rounded-full text-xs font-bold uppercase tracking-wider transition-colors">
+                        <span data-lang-es="Ver Catálogo y 10 Atributos por Botella" data-lang-en="View Catalog & 10 Attributes per Bottle">Ver Catálogo y 10 Atributos por Botella</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Producto 1: Espadín -->
+                    <article class="glass-card glass-card-hover rounded-2xl overflow-hidden flex flex-col justify-between reveal group">
+                        <a href="mezcal-espadin.html" class="block">
+                            <div class="h-64 relative overflow-hidden cursor-pointer">
+                                <img src="assets/img/botellasPrimerPlano/espadin/EspadinPP02.jpeg"
+                                     alt="Botella Mezcal Espadín 750ml"
+                                     loading="lazy"
+                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-mezcal-charcoal via-transparent to-transparent"></div>
+                                <span class="absolute top-4 right-4 text-[11px] bg-mezcal-agave px-3 py-1 rounded-full text-white font-semibold">Disponible · 750 ml</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-serif text-2xl font-bold text-mezcal-light group-hover:text-mezcal-gold transition-colors mb-1">Mezcal Espadín</h3>
+                                <p class="text-xs text-mezcal-gold mb-3 italic">Agave Angustifolia Haw · Joven 45% Alc. Vol.</p>
+                                <p class="text-sm text-mezcal-light/70 mb-4">Notas cítricas, tierra húmeda y ahumado sutil. Clic para ver historia, ficha y compra.</p>
+                            </div>
+                        </a>
+                        <div class="px-6 pb-6 flex gap-2">
+                            <a href="mezcal-espadin.html" class="flex-1 py-2.5 bg-mezcal-gold text-mezcal-dark font-bold hover:bg-mezcal-light text-center rounded-lg transition-colors text-xs flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-arrow-right"></i> Ver Mezcal Espadín
+                            </a>
+                            <button type="button" onclick="addToCart({ id: 'espadin', name: 'Mezcal Espadín Joven 750ml', price: 850, img: 'assets/img/botellasPrimerPlano/espadin/EspadinPP02.jpeg', qty: 1 })" class="px-3 py-2.5 border border-mezcal-gold/40 hover:bg-mezcal-gold hover:text-mezcal-dark text-mezcal-gold rounded-lg transition-colors text-xs" aria-label="Agregar a la cesta">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Producto 2: Ensamble -->
+                    <article class="glass-card glass-card-hover rounded-2xl overflow-hidden flex flex-col justify-between reveal delay-100 group">
+                        <a href="mezcal-ensamble.html" class="block">
+                            <div class="h-64 relative overflow-hidden cursor-pointer">
+                                <img src="assets/img/botellasPrimerPlano/Ensamble.jpeg"
+                                     alt="Botella Mezcal Ensamble 750ml"
+                                     loading="lazy"
+                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-mezcal-charcoal via-transparent to-transparent"></div>
+                                <span class="absolute top-4 right-4 text-[11px] bg-mezcal-earth px-3 py-1 rounded-full text-white font-semibold">Edición Limitada · 750 ml</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-serif text-2xl font-bold text-mezcal-light group-hover:text-mezcal-gold transition-colors mb-1">Ensamble</h3>
+                                <p class="text-xs text-mezcal-gold mb-3 italic">Mezcla de Agaves · 47% Alc. Vol.</p>
+                                <p class="text-sm text-mezcal-light/70 mb-4">Fusión de magueyes en su madurez óptima. Clic para ver detalles y comprar.</p>
+                            </div>
+                        </a>
+                        <div class="px-6 pb-6 flex gap-2">
+                            <a href="mezcal-ensamble.html" class="flex-1 py-2.5 bg-mezcal-gold text-mezcal-dark font-bold hover:bg-mezcal-light text-center rounded-lg transition-colors text-xs flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-arrow-right"></i> Ver Ensamble
+                            </a>
+                            <button type="button" onclick="addToCart({ id: 'ensamble', name: 'Ensamble de Agaves 750ml', price: 1250, img: 'assets/img/botellasPrimerPlano/Ensamble.jpeg', qty: 1 })" class="px-3 py-2.5 border border-mezcal-gold/40 hover:bg-mezcal-gold hover:text-mezcal-dark text-mezcal-gold rounded-lg transition-colors text-xs" aria-label="Agregar a la cesta">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Producto 3: Silvestre -->
+                    <article class="glass-card glass-card-hover rounded-2xl overflow-hidden flex flex-col justify-between reveal delay-200 group">
+                        <a href="mezcal-silvestre.html" class="block">
+                            <div class="h-64 relative overflow-hidden cursor-pointer">
+                                <img src="assets/img/botellasPrimerPlano/Silvestre01.jpeg"
+                                     alt="Botella Mezcal Silvestre 750ml"
+                                     loading="lazy"
+                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-mezcal-charcoal via-transparent to-transparent"></div>
+                                <span class="absolute top-4 right-4 text-[11px] bg-green-800 px-3 py-1 rounded-full text-white font-semibold">Micro-Lote · 750 ml</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-serif text-2xl font-bold text-mezcal-light group-hover:text-mezcal-gold transition-colors mb-1">Mezcal Silvestre</h3>
+                                <p class="text-xs text-mezcal-gold mb-3 italic">Magueyes de Montaña · 48% Alc. Vol.</p>
+                                <p class="text-sm text-mezcal-light/70 mb-4">Notas herbales profundas, copal y carácter indomable. Clic para explorar.</p>
+                            </div>
+                        </a>
+                        <div class="px-6 pb-6 flex gap-2">
+                            <a href="mezcal-silvestre.html" class="flex-1 py-2.5 bg-mezcal-gold text-mezcal-dark font-bold hover:bg-mezcal-light text-center rounded-lg transition-colors text-xs flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-arrow-right"></i> Ver Silvestre
+                            </a>
+                            <button type="button" onclick="addToCart({ id: 'silvestre', name: 'Mezcal Silvestre 750ml', price: 1450, img: 'assets/img/botellasPrimerPlano/Silvestre01.jpeg', qty: 1 })" class="px-3 py-2.5 border border-mezcal-gold/40 hover:bg-mezcal-gold hover:text-mezcal-dark text-mezcal-gold rounded-lg transition-colors text-xs" aria-label="Agregar a la cesta">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Producto 4: Curados -->
+                    <article class="glass-card glass-card-hover rounded-2xl overflow-hidden flex flex-col justify-between reveal delay-300 group">
+                        <a href="curados-mezcal.html" class="block">
+                            <div class="h-64 relative overflow-hidden cursor-pointer">
+                                <img src="assets/img/botellasPrimerPlano/Curado01.jpeg"
+                                     alt="Curados de Mezcal Mil Sensaciones"
+                                     loading="lazy"
+                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-mezcal-charcoal via-transparent to-transparent"></div>
+                                <span class="absolute top-4 right-4 text-[11px] bg-amber-700 px-3 py-1 rounded-full text-white font-semibold">Receta Familiar · 750 ml</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-serif text-2xl font-bold text-mezcal-light group-hover:text-mezcal-gold transition-colors mb-1">Curados de Mezcal</h3>
+                                <p class="text-xs text-mezcal-gold mb-3 italic">Maceración Natural de Frutas · 38% Alc. Vol.</p>
+                                <p class="text-sm text-mezcal-light/70 mb-4">Mezcal Espadín infusionado con maracuyá y frutas de Oaxaca. Clic para comprar.</p>
+                            </div>
+                        </a>
+                        <div class="px-6 pb-6 flex gap-2">
+                            <a href="curados-mezcal.html" class="flex-1 py-2.5 bg-mezcal-gold text-mezcal-dark font-bold hover:bg-mezcal-light text-center rounded-lg transition-colors text-xs flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-arrow-right"></i> Ver Curados
+                            </a>
+                            <button type="button" onclick="addToCart({ id: 'curados', name: 'Curados de Mezcal 750ml', price: 750, img: 'assets/img/botellasPrimerPlano/Curado01.jpeg', qty: 1 })" class="px-3 py-2.5 border border-mezcal-gold/40 hover:bg-mezcal-gold hover:text-mezcal-dark text-mezcal-gold rounded-lg transition-colors text-xs" aria-label="Agregar a la cesta">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             CARRETE HORIZONTAL CINEMÁTICO: PUENTE ENTRE TODAS LAS GALERÍAS DEL SITIO
+             =================================================================== -->
+        <section id="filmstrip-gallery-section" class="py-24 bg-mezcal-dark ambient-video-section border-t border-mezcal-light/10 relative overflow-hidden" style="position:relative;overflow:hidden;">
+            <!-- Capa intermedia de video vertical full-bleed al 40% detrás del contenido -->
+            <div class="ambient-video-layer absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden opacity-40" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:0.40;pointer-events:none;overflow:hidden;">
+                <video autoplay muted loop playsinline preload="metadata" tabindex="-1" class="absolute inset-0 w-full h-full object-cover pointer-events-none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;">
+                    <source src="assets/video/SaveClip.App_AQMmwVXH_c1ViDR3Qzx8ydIzkvwCIn6bMi6tT2vSekzFHmuJHLwyHFxUsO3jjR7jEehCSg4gQhD9VVHrJsnqiEXS.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="ambient-video-vignette absolute inset-0 z-[1] pointer-events-none" aria-hidden="true" style="position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg, rgba(13,12,11,0.92) 0%, rgba(13,12,11,0.28) 20%, rgba(13,12,11,0.28) 80%, rgba(13,12,11,0.92) 100%);"></div>
+
+            <div class="container mx-auto px-6 lg:px-12 relative z-10" style="position:relative;z-index:10;">
+                <!-- Encabezado con controles del carrete y enlace al Archivo Completo -->
+                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-10 gap-6 section-text-backdrop bg-mezcal-dark/80 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-mezcal-gold/20 shadow-2xl">
+                    <div class="max-w-2xl">
+                        <span class="text-xs uppercase tracking-[0.25em] text-mezcal-agave-light font-semibold block mb-2" data-lang-es="Narrativa Visual Conectada · 6 Capítulos" data-lang-en="Connected Visual Narrative · 6 Chapters">Narrativa Visual Conectada · 6 Capítulos</span>
+                        <h2 class="font-serif text-3xl md:text-5xl font-bold text-mezcal-gold mb-2" data-lang-es="Del Campo y el Horno a tu Copa" data-lang-en="From Field and Oven to Your Glass">Del Campo y el Horno a tu Copa</h2>
+                        <p class="text-xs sm:text-sm text-mezcal-light/75 font-light" data-lang-es="Recorre el carrete horizontal: cada escena conecta nuestros videos documentales en El Gramal, el escenario 3D del proceso y el estudio fotográfico de cada botella." data-lang-en="Explore the horizontal filmstrip: each scene connects our documentary videos in El Gramal, the 3D process stage, and each bottle's close-up studio.">
+                            Recorre el carrete horizontal: cada escena conecta nuestros videos documentales en El Gramal, el escenario 3D del proceso y el estudio fotográfico de cada botella.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <div class="flex items-center gap-2">
+                            <button type="button" id="filmstrip-prev" aria-label="Capítulo anterior" class="w-10 h-10 rounded-full bg-mezcal-charcoal hover:bg-mezcal-gold text-mezcal-gold hover:text-mezcal-dark border border-mezcal-gold/40 flex items-center justify-center transition-all">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button type="button" id="filmstrip-next" aria-label="Siguiente capítulo" class="w-10 h-10 rounded-full bg-mezcal-charcoal hover:bg-mezcal-gold text-mezcal-gold hover:text-mezcal-dark border border-mezcal-gold/40 flex items-center justify-center transition-all">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+                        <a href="proceso.html#galeria-multimedia" class="inline-flex items-center gap-2 px-5 py-2.5 bg-mezcal-agave hover:bg-mezcal-agave-light text-white rounded-full text-xs font-bold uppercase tracking-wider transition-colors">
+                            <i class="fa-solid fa-photo-film"></i>
+                            <span data-lang-es="Archivo Completo (23 Medios + 3D)" data-lang-en="Full Archive (23 Media + 3D)">Archivo Completo (23 Medios + 3D)</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Carrete Horizontal Cinemático con Scroll-Snap y Parallax Suave -->
+                <div id="filmstrip-track" class="filmstrip-track flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory">
+
+                    <!-- Escena 01: Campo y Jima (Reel en vivo + enlace a filtro Campo) -->
+                    <article data-filmstrip-card class="snap-center shrink-0 w-[85vw] sm:w-[370px] glass-card glass-card-hover rounded-3xl overflow-hidden border border-mezcal-gold/25 flex flex-col">
+                        <div class="relative h-72 overflow-hidden cursor-pointer group"
+                             data-lightbox-video="assets/video/Desde%20el%20coraz%C3%B3n%20del%20campo%20nace%20la%20esencia%20de%20Mil%20Sensaciones.%20%F0%9F%8C%B5Cortamos%20con%20respeto%2C%20elegimos%20.mp4"
+                             data-lightbox-caption="Capítulo 01: Desde el corazón del campo nace la esencia de Mil Sensaciones — Corte y jima con respeto.">
+                            <video muted loop playsinline preload="metadata" onmouseover="this.play()" onmouseout="this.pause()" class="w-full h-full object-cover">
+                                <source src="assets/video/Desde%20el%20coraz%C3%B3n%20del%20campo%20nace%20la%20esencia%20de%20Mil%20Sensaciones.%20%F0%9F%8C%B5Cortamos%20con%20respeto%2C%20elegimos%20.mp4#t=0.5" type="video/mp4">
+                            </video>
+                            <div class="absolute inset-0 bg-gradient-to-t from-mezcal-dark via-mezcal-dark/20 to-transparent flex flex-col justify-between p-5">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] uppercase tracking-widest bg-mezcal-gold text-mezcal-dark font-bold px-3 py-1 rounded-full flex items-center gap-1.5">
+                                        <i class="fa-solid fa-play"></i> 01 · Video Reel
+                                    </span>
+                                    <span class="text-[10px] font-mono text-mezcal-light/80 bg-mezcal-dark/80 px-2.5 py-1 rounded-full">El Gramal</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-serif text-xl font-bold text-mezcal-light">El Arte de la Jima</h3>
+                                    <p class="text-xs text-mezcal-light/75">Magueyes maduros de 8 a 15 años cortados a mano</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-mezcal-dark/90 border-t border-mezcal-light/10 flex items-center justify-between">
+                            <a href="proceso.html?filter=campo#galeria-multimedia" class="text-xs font-bold text-mezcal-gold hover:underline flex items-center gap-1.5">
+                                <i class="fa-solid fa-seedling"></i>
+                                <span data-lang-es="Abrir Galería de Campo (6)" data-lang-en="Open Field Gallery (6)">Abrir Galería de Campo (6)</span>
+                            </a>
+                            <a href="proceso.html" class="text-[11px] text-mezcal-light/60 hover:text-mezcal-gold">Escultura 3D →</a>
+                        </div>
+                    </article>
+
+                    <!-- Escena 02: Horno Cónico de Tierra (Reel en vivo + enlace a filtro Palenque) -->
+                    <article data-filmstrip-card class="snap-center shrink-0 w-[85vw] sm:w-[370px] glass-card glass-card-hover rounded-3xl overflow-hidden border border-mezcal-gold/25 flex flex-col">
+                        <div class="relative h-72 overflow-hidden cursor-pointer group"
+                             data-lightbox-video="assets/video/%F0%9F%94%A5%20Entre%20fuego%2C%20tierra%20y%20tradici%C3%B3n%20nace%20algo%20m%C3%A1s%20que%20mezcal%E2%80%A6%20nace%20una%20experiencia.En%20cada%20horno%20.mp4"
+                             data-lightbox-caption="Capítulo 02: Entre fuego, tierra y tradición nace algo más que mezcal — Horneado tradicional en El Gramal.">
+                            <video muted loop playsinline preload="metadata" onmouseover="this.play()" onmouseout="this.pause()" class="w-full h-full object-cover">
+                                <source src="assets/video/%F0%9F%94%A5%20Entre%20fuego%2C%20tierra%20y%20tradici%C3%B3n%20nace%20algo%20m%C3%A1s%20que%20mezcal%E2%80%A6%20nace%20una%20experiencia.En%20cada%20horno%20.mp4#t=0.5" type="video/mp4">
+                            </video>
+                            <div class="absolute inset-0 bg-gradient-to-t from-mezcal-dark via-mezcal-dark/20 to-transparent flex flex-col justify-between p-5">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] uppercase tracking-widest bg-mezcal-gold text-mezcal-dark font-bold px-3 py-1 rounded-full flex items-center gap-1.5">
+                                        <i class="fa-solid fa-play"></i> 02 · Video Reel
+                                    </span>
+                                    <span class="text-[10px] font-mono text-mezcal-light/80 bg-mezcal-dark/80 px-2.5 py-1 rounded-full">Fuego y Piedra</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-serif text-xl font-bold text-mezcal-light">Horno de Piedra Volcánica</h3>
+                                    <p class="text-xs text-mezcal-light/75">Cocción subterránea y destilación en cobre</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-mezcal-dark/90 border-t border-mezcal-light/10 flex items-center justify-between">
+                            <a href="proceso.html?filter=palenque#galeria-multimedia" class="text-xs font-bold text-mezcal-gold hover:underline flex items-center gap-1.5">
+                                <i class="fa-solid fa-fire-flame-curved"></i>
+                                <span data-lang-es="Abrir Galería de Palenque" data-lang-en="Open Palenque Gallery">Abrir Galería de Palenque</span>
+                            </a>
+                            <a href="proceso.html" class="text-[11px] text-mezcal-light/60 hover:text-mezcal-gold">Escultura 3D →</a>
+                        </div>
+                    </article>
+
+                    <!-- Escena 03: Estudio Espadín Joven (Foto Primer Plano + enlace a galería de etiqueta) -->
+                    <article data-filmstrip-card class="snap-center shrink-0 w-[85vw] sm:w-[370px] glass-card glass-card-hover rounded-3xl overflow-hidden border border-mezcal-gold/25 flex flex-col">
+                        <a href="mezcal-espadin.html" class="relative h-72 overflow-hidden group block">
+                            <img src="assets/img/botellasPrimerPlano/espadin/EspadinPP03.jpeg"
+                                 alt="Mezcal Espadín Joven 750 ml en barra tradicional"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-mezcal-dark via-transparent to-transparent flex flex-col justify-between p-5">
+                                <span class="self-start text-[10px] uppercase tracking-widest bg-mezcal-charcoal/90 text-mezcal-gold border border-mezcal-gold/40 font-bold px-3 py-1 rounded-full">
+                                    <i class="fa-solid fa-wine-bottle mr-1"></i> 03 · Estudio Espadín
+                                </span>
+                                <div>
+                                    <h3 class="font-serif text-xl font-bold text-mezcal-light group-hover:text-mezcal-gold transition-colors">Mezcal Espadín Joven</h3>
+                                    <p class="text-xs text-mezcal-light/75">4 fotografías en primer plano · 45% Alc. Vol.</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="p-4 bg-mezcal-dark/90 border-t border-mezcal-light/10 flex items-center justify-between">
+                            <a href="mezcal-espadin.html" class="text-xs font-bold text-mezcal-gold hover:underline flex items-center gap-1.5">
+                                <i class="fa-solid fa-camera"></i>
+                                <span data-lang-es="Estudio Espadín (4 fotos)" data-lang-en="Espadín Studio (4 photos)">Estudio Espadín (4 fotos)</span>
+                            </a>
+                            <a href="proceso.html?filter=botellas#galeria-multimedia" class="text-[11px] text-mezcal-light/60 hover:text-mezcal-gold">Ver todas →</a>
+                        </div>
+                    </article>
+
+                    <!-- Escena 04: Estudio Ensamble Maestro -->
+                    <article data-filmstrip-card class="snap-center shrink-0 w-[85vw] sm:w-[370px] glass-card glass-card-hover rounded-3xl overflow-hidden border border-mezcal-gold/25 flex flex-col">
+                        <a href="mezcal-ensamble.html" class="relative h-72 overflow-hidden group block">
+                            <img src="assets/img/botellasPrimerPlano/ensamble/EnsamblePP02.jpeg"
+                                 alt="Mezcal Ensamble Artesanal 750 ml"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-mezcal-dark via-transparent to-transparent flex flex-col justify-between p-5">
+                                <span class="self-start text-[10px] uppercase tracking-widest bg-mezcal-charcoal/90 text-mezcal-gold border border-mezcal-gold/40 font-bold px-3 py-1 rounded-full">
+                                    <i class="fa-solid fa-layer-group mr-1"></i> 04 · Estudio Ensamble
+                                </span>
+                                <div>
+                                    <h3 class="font-serif text-xl font-bold text-mezcal-light group-hover:text-mezcal-gold transition-colors">Ensamble de Magueyes</h3>
+                                    <p class="text-xs text-mezcal-light/75">3 fotografías en primer plano · Alquimia del Maestro</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="p-4 bg-mezcal-dark/90 border-t border-mezcal-light/10 flex items-center justify-between">
+                            <a href="mezcal-ensamble.html" class="text-xs font-bold text-mezcal-gold hover:underline flex items-center gap-1.5">
+                                <i class="fa-solid fa-camera"></i>
+                                <span data-lang-es="Estudio Ensamble (3 fotos)" data-lang-en="Ensamble Studio (3 photos)">Estudio Ensamble (3 fotos)</span>
+                            </a>
+                            <a href="proceso.html?filter=botellas#galeria-multimedia" class="text-[11px] text-mezcal-light/60 hover:text-mezcal-gold">Ver todas →</a>
+                        </div>
+                    </article>
+
+                    <!-- Escena 05: Estudio Silvestre y Curados -->
+                    <article data-filmstrip-card class="snap-center shrink-0 w-[85vw] sm:w-[370px] glass-card glass-card-hover rounded-3xl overflow-hidden border border-mezcal-gold/25 flex flex-col">
+                        <a href="mezcal-silvestre.html" class="relative h-72 overflow-hidden group block">
+                            <img src="assets/img/botellasPrimerPlano/silvestre/SilvestresPP04.jpeg"
+                                 alt="Mezcal Silvestre Edición Limitada"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-mezcal-dark via-transparent to-transparent flex flex-col justify-between p-5">
+                                <span class="self-start text-[10px] uppercase tracking-widest bg-mezcal-charcoal/90 text-mezcal-gold border border-mezcal-gold/40 font-bold px-3 py-1 rounded-full">
+                                    <i class="fa-solid fa-gem mr-1"></i> 05 · Silvestre y Curados
+                                </span>
+                                <div>
+                                    <h3 class="font-serif text-xl font-bold text-mezcal-light group-hover:text-mezcal-gold transition-colors">Silvestre y Curados</h3>
+                                    <p class="text-xs text-mezcal-light/75">11 fotografías de estudio en alta resolución</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="p-4 bg-mezcal-dark/90 border-t border-mezcal-light/10 flex items-center justify-between">
+                            <a href="mezcal-silvestre.html" class="text-xs font-bold text-mezcal-gold hover:underline flex items-center gap-1.5">
+                                <i class="fa-solid fa-camera"></i>
+                                <span data-lang-es="Estudio Silvestre (7 fotos)" data-lang-en="Silvestre Studio (7 photos)">Estudio Silvestre (7 fotos)</span>
+                            </a>
+                            <a href="curados-mezcal.html" class="text-[11px] text-mezcal-light/60 hover:text-mezcal-gold">Curados (4) →</a>
+                        </div>
+                    </article>
+
+                    <!-- Escena 06: Convención Nacional del Mezcal 2025 -->
+                    <article data-filmstrip-card class="snap-center shrink-0 w-[85vw] sm:w-[370px] glass-card glass-card-hover rounded-3xl overflow-hidden border border-mezcal-gold/25 flex flex-col">
+                        <a href="proceso.html?filter=eventos#galeria-multimedia" class="relative h-72 overflow-hidden group block">
+                            <img src="assets/img/SaveClip.App_568716180_17853993618556343_8619234791447435069_n.jpg"
+                                 alt="Mil Sensaciones en la Convención Nacional del Mezcal 2025"
+                                 loading="lazy"
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-mezcal-dark via-transparent to-transparent flex flex-col justify-between p-5">
+                                <span class="self-start text-[10px] uppercase tracking-widest bg-mezcal-charcoal/90 text-mezcal-gold border border-mezcal-gold/40 font-bold px-3 py-1 rounded-full">
+                                    <i class="fa-solid fa-award mr-1"></i> 06 · Convención 2025
+                                </span>
+                                <div>
+                                    <h3 class="font-serif text-xl font-bold text-mezcal-light group-hover:text-mezcal-gold transition-colors">Convención Nacional</h3>
+                                    <p class="text-xs text-mezcal-light/75">Embajadores del mezcal de El Gramal en eventos</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="p-4 bg-mezcal-dark/90 border-t border-mezcal-light/10 flex items-center justify-between">
+                            <a href="proceso.html?filter=eventos#galeria-multimedia" class="text-xs font-bold text-mezcal-gold hover:underline flex items-center gap-1.5">
+                                <i class="fa-solid fa-images"></i>
+                                <span data-lang-es="Ver Galería de Eventos" data-lang-en="See Events Gallery">Ver Galería de Eventos</span>
+                            </a>
+                            <a href="proceso.html?filter=videos#galeria-multimedia" class="text-[11px] text-mezcal-light/60 hover:text-mezcal-gold">11 Videos →</a>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Barra de progreso del carrete horizontal -->
+                <div class="mt-3 flex items-center gap-4">
+                    <div class="h-1 flex-1 bg-mezcal-charcoal rounded-full overflow-hidden">
+                        <div id="filmstrip-progress-bar" class="h-full bg-gradient-to-r from-mezcal-agave-light via-mezcal-gold to-mezcal-copper transition-all duration-200" style="width: 18%"></div>
+                    </div>
+                    <span class="text-[11px] uppercase tracking-widest text-mezcal-light/60" data-lang-es="Desliza o usa las flechas para recorrer las galerías" data-lang-en="Swipe or use arrows to browse galleries">Desliza o usa las flechas para recorrer las galerías</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             BANNER DEL PROCESO Y PALENQUE + SUSCRIPCIÓN NEWSLETTER (RF-08, RF-13)
+             =================================================================== -->
+        <section class="py-24 bg-mezcal-charcoal border-t border-mezcal-light/10">
+            <div class="container mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="section-text-backdrop bg-mezcal-dark/75 backdrop-blur-md p-8 md:p-10 rounded-3xl border border-mezcal-gold/20 shadow-2xl reveal">
+                    <span class="text-xs uppercase tracking-[0.25em] text-mezcal-agave-light font-semibold block mb-2" data-lang-es="Del Maguey a la Copa" data-lang-en="From Agave to Glass">Del Maguey a la Copa</span>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-mezcal-gold mb-4" data-lang-es="El Arte de Nuestro Palenque" data-lang-en="The Art of Our Palenque">El Arte de Nuestro Palenque</h2>
+                    <p class="text-mezcal-light/80 font-light leading-relaxed mb-6" data-lang-es="Conoce paso a paso cómo seleccionamos los mejores magueyes en El Gramal, la cocción en horno cónico de tierra, la fermentación natural y la doble destilación." data-lang-en="Learn step by step how we select the finest agaves in El Gramal, roast them in conical earthen ovens, ferment naturally, and double distill.">
+                        Conoce paso a paso cómo seleccionamos los mejores magueyes en El Gramal, la cocción en horno cónico de tierra, la fermentación natural y la doble destilación.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="proceso.html" class="px-7 py-3 bg-mezcal-agave hover:bg-mezcal-agave-light text-white font-semibold rounded-full text-xs uppercase tracking-wider transition-colors">
+                            <span data-lang-es="Ver Proceso y Galería del Palenque" data-lang-en="View Process & Palenque Gallery">Ver Proceso y Galería del Palenque</span>
+                        </a>
+                        <a href="contacto.html" class="px-7 py-3 border border-mezcal-gold/50 hover:border-mezcal-gold text-mezcal-gold rounded-full text-xs uppercase tracking-wider transition-colors">
+                            <span data-lang-es="Bares, Restaurantes e Importadores (EE. UU.)" data-lang-en="Bars, Restaurants & US Importers">Bares, Restaurantes e Importadores (EE. UU.)</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Newsletter RF-13 -->
+                <div class="glass-card p-8 md:p-10 rounded-2xl border border-mezcal-gold/25 reveal delay-100">
+                    <h3 class="font-serif text-2xl font-bold text-mezcal-light mb-2" data-lang-es="Club de Lotes Limitados" data-lang-en="Limited Batch Club">Club de Lotes Limitados</h3>
+                    <p class="text-sm text-mezcal-light/70 mb-6" data-lang-es="Suscríbete para recibir notificaciones de nuevos lotes de Espadín, próximos lanzamientos (Ensambles, Silvestre y Curados) y eventos en Oaxaca." data-lang-en="Subscribe to receive notifications of new Espadín batches, upcoming releases (Blends, Wild & Infused), and events in Oaxaca.">
+                        Suscríbete para recibir notificaciones de nuevos lotes de Espadín, próximos lanzamientos (Ensambles, Silvestre y Curados) y eventos en Oaxaca.
+                    </p>
+                    <form class="space-y-3" onsubmit="event.preventDefault(); showFormFeedback('newsletter-msg', '¡Gracias por suscribirte a Mil Sensaciones! Te avisaremos de nuestros próximos lotes.', 'Thank you for subscribing to Mil Sensaciones! We will notify you of our upcoming batches.'); this.reset();">
+                        <div class="mezcal-field">
+                            <label for="nl-email" class="sr-only">Correo electrónico</label>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <input id="nl-email" type="email" required autocomplete="email"
+                                       data-placeholder-es="Tu correo electrónico..."
+                                       data-placeholder-en="Your email address..."
+                                       placeholder="Tu correo electrónico..."
+                                       class="mezcal-input flex-1 bg-mezcal-charcoal border border-mezcal-light/20 rounded-lg px-4 py-3 text-sm text-mezcal-light focus:outline-none focus:border-mezcal-gold">
+                                <button type="submit" class="px-6 py-3 bg-mezcal-gold text-mezcal-dark font-bold text-xs uppercase tracking-wider rounded-lg hover:bg-mezcal-light transition-colors">
+                                    <span data-lang-es="Suscribirme" data-lang-en="Subscribe">Suscribirme</span>
+                                </button>
+                            </div>
+                            <p class="field-error-msg" data-lang-es="Ingresa un correo electrónico válido." data-lang-en="Please enter a valid email address.">Ingresa un correo electrónico válido.</p>
+                        </div>
+                    </form>
+                    <div id="newsletter-msg" class="mt-4 hidden p-3 rounded-lg text-xs font-semibold"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================
+             PIE DE PÁGINA GLOBAL
+             =================================================================== -->
+        <footer class="bg-mezcal-dark pt-16 pb-10 border-t border-mezcal-light/10 text-sm">
+            <div class="container mx-auto px-6 lg:px-12">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                    <div class="md:col-span-2">
+                        <h3 class="font-serif text-2xl font-bold text-mezcal-gold mb-3 tracking-widest">MIL SENSACIONES</h3>
+                        <p class="text-mezcal-light/70 text-sm mb-4 max-w-md" data-lang-es="Mezcal artesanal oaxaqueño de tercera generación familiar. Maestro Mezcalero Damián Olivera Díaz. Producido con respeto a la tierra en El Gramal, Nejapa de Madero, Yautepec, Oaxaca." data-lang-en="Third-generation family artisanal Oaxacan mezcal. Master Mezcalero Damián Olivera Díaz. Crafted with respect for the land in El Gramal, Nejapa de Madero, Yautepec, Oaxaca.">
+                            Mezcal artesanal oaxaqueño de tercera generación familiar. Maestro Mezcalero Damián Olivera Díaz. Producido con respeto a la tierra en El Gramal, Nejapa de Madero, Yautepec, Oaxaca.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="https://www.instagram.com/mezcalmilsensaciones/" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-mezcal-charcoal flex items-center justify-center text-mezcal-light hover:bg-mezcal-gold hover:text-mezcal-dark transition-colors" aria-label="Instagram">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="https://www.facebook.com/profile.php?id=61581942955039" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-mezcal-charcoal flex items-center justify-center text-mezcal-light hover:bg-mezcal-gold hover:text-mezcal-dark transition-colors" aria-label="Facebook">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                            <a href="https://wa.me/5219510000000?text=Hola%20Mezcal%20Mil%20Sensaciones,%20me%20gustar%C3%ADa%20solicitar%20informaci%C3%B3n." target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-mezcal-charcoal flex items-center justify-center text-mezcal-light hover:bg-green-600 hover:text-white transition-colors" aria-label="WhatsApp">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-serif text-sm font-bold uppercase tracking-widest text-mezcal-gold mb-4" data-lang-es="Navegación" data-lang-en="Navigation">Navegación</h4>
+                        <ul class="space-y-2.5 text-mezcal-light/70 text-xs">
+                            <li><a href="index.html" class="hover:text-mezcal-gold transition-colors" data-lang-es="Inicio" data-lang-en="Home">Inicio</a></li>
+                            <li><a href="historia.html" class="hover:text-mezcal-gold transition-colors" data-lang-es="Historia y Maestro Mezcalero" data-lang-en="Story & Master Mezcalero">Historia y Maestro Mezcalero</a></li>
+                            <li><a href="mezcales.html" class="hover:text-mezcal-gold transition-colors" data-lang-es="Catálogo y Fichas Técnicas" data-lang-en="Catalog & Technical Sheets">Catálogo y Fichas Técnicas</a></li>
+                            <li><a href="proceso.html" class="hover:text-mezcal-gold transition-colors" data-lang-es="Proceso Artesanal y Galería" data-lang-en="Artisanal Process & Gallery">Proceso Artesanal y Galería</a></li>
+                            <li><a href="contacto.html" class="hover:text-mezcal-gold transition-colors" data-lang-es="Dónde Comprar y Contacto" data-lang-en="Where to Buy & Contact">Dónde Comprar y Contacto</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-serif text-sm font-bold uppercase tracking-widest text-mezcal-gold mb-4" data-lang-es="Origen y Contacto" data-lang-en="Origin & Contact">Origen y Contacto</h4>
+                        <ul class="space-y-2.5 text-mezcal-light/70 text-xs">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-location-dot text-mezcal-gold mt-1"></i>
+                                <span>El Gramal, Nejapa de Madero, Yautepec, Oaxaca, México.</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-certificate text-mezcal-gold"></i>
+                                <span>NOM-070-SCFI-2016 · IMPI</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-globe text-mezcal-gold"></i>
+                                <span data-lang-es="Distribución: Oaxaca (MX) y EE. UU." data-lang-en="Distribution: Oaxaca (MX) & USA">Distribución: Oaxaca (MX) y EE. UU.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="border-t border-mezcal-light/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-mezcal-light/50">
+                    <p>&copy; 2026 Mezcal Mil Sensaciones · <span data-lang-es="Equipo de Desarrollo:" data-lang-en="Development Team:">Equipo de Desarrollo:</span> <strong class="text-mezcal-gold">Ing. en Computación Jose Ramon Aragon Toledo</strong>.</p>
+                    <div class="flex space-x-4">
+                        <a href="#privacidad" class="open-privacy-modal hover:text-mezcal-gold transition-colors" data-lang-es="Aviso de Privacidad" data-lang-en="Privacy Policy">Aviso de Privacidad</a>
+                        <span>·</span>
+                        <span class="font-semibold text-mezcal-light/70" data-lang-es="EVITA EL EXCESO" data-lang-en="DRINK RESPONSIBLY">EVITA EL EXCESO</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Botón Flotante WhatsApp Business (RF-12) -->
+        <a href="https://wa.me/5219510000000?text=Hola%20Mezcal%20Mil%20Sensaciones,%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20mezcales."
+           target="_blank" rel="noopener"
+           aria-label="WhatsApp Business"
+           class="fixed bottom-6 right-6 z-40 bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-xl hover:bg-green-500 hover:scale-110 transition-all duration-300">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- ===================================================================
+         MODAL NATIVO DE FICHA TÉCNICA COMPLETA (10 ATRIBUTOS + PDF) (RF-06, RF-07)
+         =================================================================== -->
+    <dialog id="tech-sheet-dialog" closedby="any" class="mezcal-dialog" aria-labelledby="sheet-title">
+        <div class="p-6 md:p-8">
+            <div class="flex justify-between items-start border-b border-mezcal-gold/30 pb-4 mb-6">
+                <div>
+                    <span id="sheet-badge" class="text-[11px] bg-mezcal-agave px-3 py-1 rounded-full text-white font-semibold uppercase tracking-wider inline-block mb-2">Lanzamiento Actual</span>
+                    <h2 id="sheet-title" class="font-serif text-2xl md:text-3xl font-bold text-mezcal-gold">Mil Sensaciones — Mezcal Espadín</h2>
+                </div>
+                <form method="dialog">
+                    <button type="submit" class="text-mezcal-light/60 hover:text-mezcal-gold text-2xl px-2" aria-label="Cerrar">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-6">
+                <div class="bg-mezcal-charcoal/80 p-3.5 rounded-lg border border-white/10">
+                    <span class="text-xs text-mezcal-gold uppercase font-semibold block" data-lang-es="1. Tipo de Agave" data-lang-en="1. Agave Type">1. Tipo de Agave</span>
+                    <p id="sheet-agave" class="text-mezcal-light/90 mt-1"></p>
+                </div>
+                <div class="bg-mezcal-charcoal/80 p-3.5 rounded-lg border border-white/10">
+                    <span class="text-xs text-mezcal-gold uppercase font-semibold block" data-lang-es="2. Maestro Mezcalero" data-lang-en="2. Master Mezcalero">2. Maestro Mezcalero</span>
+                    <p id="sheet-maestro" class="text-mezcal-light/90 mt-1"></p>
+                </div>
+                <div class="bg-mezcal-charcoal/80 p-3.5 rounded-lg border border-white/10">
+                    <span class="text-xs text-mezcal-gold uppercase font-semibold block" data-lang-es="3. Región y Comunidad de Origen" data-lang-en="3. Region & Community of Origin">3. Región y Comunidad de Origen</span>
+                    <p id="sheet-origen" class="text-mezcal-light/90 mt-1"></p>
+                </div>
+                <div class="bg-mezcal-charcoal/80 p-3.5 rounded-lg border border-white/10">
+                    <span class="text-xs text-mezcal-gold uppercase font-semibold block" data-lang-es="4. Graduación Alcohólica" data-lang-en="4. Alcohol by Volume (ABV)">4. Graduación Alcohólica</span>
+                    <p id="sheet-abv" class="text-mezcal-light/90 mt-1"></p>
+                </div>
+                <div class="bg-mezcal-charcoal/80 p-3.5 rounded-lg border border-white/10 md:col-span-2">
+                    <span class="text-xs text-mezcal-gold uppercase font-semibold block" data-lang-es="5. Proceso de Elaboración Artesanal" data-lang-en="5. Artisanal Production Process">5. Proceso de Elaboración Artesanal</span>
+                    <p id="sheet-proceso" class="text-mezcal-light/90 mt-1"></p>
+                </div>
+                <div class="bg-mezcal-charcoal/80 p-3.5 rounded-lg border border-white/10 md:col-span-2">
+                    <span class="text-xs text-mezcal-gold uppercase font-semibold block" data-lang-es="6. Notas de Cata (Vista, Nariz y Boca)" data-lang-en="6. Tasting Notes (Sight, Nose & Palate)">6. Notas de Cata (Vista, Nariz y Boca)</span>
+                    <p id="sheet-notas" class="text-mezcal-light/90 mt-1"></p>
+                </div>
+                <div class="bg-mezcal-charcoal/80 p-3.5 rounded-lg border border-white/10">
+                    <span class="text-xs text-mezcal-gold uppercase font-semibold block" data-lang-es="7. Presentaciones Disponibles" data-lang-en="7. Available Sizes">7. Presentaciones Disponibles</span>
+                    <p id="sheet-presentacion" class="text-mezcal-light/90 mt-1"></p>
+                </div>
+                <div class="bg-mezcal-charcoal/80 p-3.5 rounded-lg border border-white/10">
+                    <span class="text-xs text-mezcal-gold uppercase font-semibold block" data-lang-es="8. Botellas por Lote" data-lang-en="8. Bottles per Batch">8. Botellas por Lote</span>
+                    <p id="sheet-lote" class="text-mezcal-light/90 mt-1"></p>
+                </div>
+                <div class="bg-mezcal-charcoal/80 p-3.5 rounded-lg border border-white/10 md:col-span-2">
+                    <span class="text-xs text-mezcal-gold uppercase font-semibold block" data-lang-es="9. Código NOM y Registro" data-lang-en="9. NOM Code & Registration">9. Código NOM y Registro</span>
+                    <p id="sheet-nom" class="text-mezcal-light/90 mt-1"></p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-end gap-3 pt-4 border-t border-white/10">
+                <button id="btn-print-sheet" type="button" class="px-5 py-2.5 bg-mezcal-gold text-mezcal-dark font-bold rounded-lg text-xs uppercase tracking-wider hover:bg-mezcal-light transition-colors flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-download"></i>
+                    <span data-lang-es="Descargar / Imprimir Ficha PDF" data-lang-en="Download / Print PDF Sheet">Descargar / Imprimir Ficha PDF</span>
+                </button>
+                <a href="contacto.html" class="px-5 py-2.5 bg-mezcal-agave text-white font-semibold rounded-lg text-xs uppercase tracking-wider hover:bg-mezcal-agave-light transition-colors text-center">
+                    <span data-lang-es="Solicitar Cotización / Lote" data-lang-en="Request Quote / Batch Info">Solicitar Cotización / Lote</span>
+                </a>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- ===================================================================
+         MODAL NATIVO DE AVISO DE PRIVACIDAD (RF-15)
+         =================================================================== -->
+    <dialog id="privacy-dialog" closedby="any" class="mezcal-dialog" aria-labelledby="privacy-title">
+        <div class="p-6 md:p-8">
+            <div class="flex justify-between items-center border-b border-mezcal-gold/30 pb-4 mb-4">
+                <h2 id="privacy-title" class="font-serif text-2xl font-bold text-mezcal-gold" data-lang-es="Aviso de Privacidad Integral (LFPDPPP)" data-lang-en="Privacy Policy (LFPDPPP Mexico)">Aviso de Privacidad Integral (LFPDPPP)</h2>
+                <form method="dialog">
+                    <button type="submit" class="text-mezcal-light/60 hover:text-mezcal-gold text-2xl px-2" aria-label="Cerrar">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="space-y-3 text-xs md:text-sm text-mezcal-light/80 leading-relaxed max-h-96 overflow-y-auto pr-2">
+                <p data-lang-es="En cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP), Mezcal Mil Sensaciones, con origen en El Gramal, Nejapa de Madero, Yautepec, Oaxaca, México, es responsable del tratamiento de los datos personales recabados en este sitio web." data-lang-en="In compliance with the Mexican Federal Law on Protection of Personal Data Held by Private Parties (LFPDPPP), Mezcal Mil Sensaciones, located in El Gramal, Nejapa de Madero, Yautepec, Oaxaca, Mexico, is responsible for processing personal data collected on this website.">
+                    En cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP), Mezcal Mil Sensaciones, con origen en El Gramal, Nejapa de Madero, Yautepec, Oaxaca, México, es responsable del tratamiento de los datos personales recabados en este sitio web.
+                </p>
+                <p data-lang-es="Finalidades del tratamiento: Sus datos (nombre, correo electrónico, teléfono y empresa) serán utilizados exclusivamente para responder consultas comerciales de consumidores finales, bares, restaurantes e importadores internacionales, así como para el envío de novedades de lotes si usted se suscribe voluntariamente a nuestro boletín." data-lang-en="Purpose of processing: Your data (name, email, phone, and company) will be used exclusively to respond to commercial inquiries from consumers, bars, restaurants, and international importers, as well as to send batch updates if you voluntarily subscribe to our newsletter.">
+                    Finalidades del tratamiento: Sus datos (nombre, correo electrónico, teléfono y empresa) serán utilizados exclusivamente para responder consultas comerciales de consumidores finales, bares, restaurantes e importadores internacionales, así como para el envío de novedades de lotes si usted se suscribe voluntariamente a nuestro boletín.
+                </p>
+                <p class="text-mezcal-gold font-semibold" data-lang-es="Consumo Responsable: Este sitio es exclusivo para mayores de 18 años. EL ABUSO EN EL CONSUMO DE ESTE PRODUCTO ES NOCIVO PARA LA SALUD. EVITA EL EXCESO." data-lang-en="Responsible Consumption: This site is exclusively for individuals 18 years or older. DRINK RESPONSIBLY.">
+                    Consumo Responsable: Este sitio es exclusivo para mayores de 18 años. EL ABUSO EN EL CONSUMO DE ESTE PRODUCTO ES NOCIVO PARA LA SALUD. EVITA EL EXCESO.
+                </p>
+            </div>
+        </div>
+    </dialog>
+
+        <!-- GSAP 3.13 + Plugins (ScrollTrigger, SplitText, Flip) + Lenis Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+    <!-- Animación de partículas desactivada por rendimiento: -->
+    <!-- <script src="assets/js/particles-stage.js?v=12"></script> -->
+    <script src="assets/js/motion.js?v=12"></script>
+    <script src="assets/js/main.js?v=12"></script>
+    <!-- ===================================================================
+         CESTA DE COMPRAS SLIDEBAR (FLUID LIQUID GLASS UI)
+         =================================================================== -->
+    <div id="cart-backdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[110] hidden transition-opacity duration-300"></div>
+    <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md glass-panel-fluid z-[120] translate-x-full shadow-[0_0_50px_rgba(0,0,0,0.9)] flex flex-col border-l border-mezcal-gold/30">
+        <!-- Liquid Blobs decorativos de fondo -->
+        <div class="liquid-blob w-56 h-56 bg-mezcal-agave top-10 right-5"></div>
+        <div class="liquid-blob w-64 h-64 bg-mezcal-gold bottom-16 left-2" style="animation-delay: -3s;"></div>
+
+        <!-- Encabezado de la Cesta -->
+        <div class="p-6 border-b border-mezcal-gold/20 flex items-center justify-between relative z-10">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-basket-shopping text-2xl text-mezcal-gold"></i>
+                <h3 class="font-serif text-xl font-bold text-mezcal-light tracking-wide">Tu Cesta</h3>
+                <span class="cart-count-badge bg-mezcal-agave text-white text-xs font-bold px-2.5 py-0.5 rounded-full hidden">0</span>
+            </div>
+            <button id="close-cart-btn" type="button" class="text-mezcal-light/70 hover:text-mezcal-gold text-2xl p-2 transition-colors touch-target" aria-label="Cerrar cesta">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Lista de Productos en la Cesta -->
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4 relative z-10">
+            <!-- Inyectado dinámicamente por JS -->
+        </div>
+
+        <!-- Pie de la Cesta con Total y Checkout -->
+        <div class="p-6 border-t border-mezcal-gold/20 bg-mezcal-dark/80 backdrop-blur-lg relative z-10 space-y-4">
+            <div class="flex justify-between items-center text-sm">
+                <span class="text-mezcal-light/70 uppercase tracking-wider text-xs">Total Estimado</span>
+                <span id="cart-total" class="font-serif text-2xl font-bold text-mezcal-gold">$0 MXN</span>
+            </div>
+            <p class="text-[11px] text-mezcal-light/50">Incluye envío seguro en empaque artesanal de madera y sellos NOM-070.</p>
+            <div class="flex flex-col gap-2.5">
+                <a href="contacto.html" id="checkout-btn" class="w-full py-3.5 bg-mezcal-gold hover:bg-mezcal-light text-mezcal-dark font-bold text-center rounded-xl text-xs uppercase tracking-wider transition-all duration-300 shadow-lg">
+                    Proceder al Pago / Coordinar Pedido
+                </a>
+                <button type="button" onclick="window.location.href='mezcales.html'" class="w-full py-2.5 bg-transparent border border-mezcal-light/30 hover:border-mezcal-gold text-mezcal-light text-xs rounded-xl transition-colors">
+                    Seguir explorando mezcales
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ===================================================================
+         CINTILLA DE COOKIES (FLUID GLASS CONSENT BANNER)
+         =================================================================== -->
+    <aside id="cookie-banner" class="fixed bottom-4 left-4 right-4 md:left-8 md:max-w-xl z-[90] glass-panel-fluid p-5 rounded-2xl shadow-2xl border border-mezcal-gold/30 hidden-banner">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-mezcal-gold/15 flex items-center justify-center shrink-0 text-mezcal-gold text-lg">
+                <i class="fa-solid fa-cookie-bite"></i>
+            </div>
+            <div class="flex-1 text-xs text-mezcal-light/85 leading-relaxed">
+                <p><strong>Privacidad y Experiencia:</strong> Usamos cookies técnicas y analíticas para recordar tu verificación de edad (+18), tus preferencias de idioma (ES/EN) y los productos de tu cesta.</p>
+            </div>
+        </div>
+        <div class="flex justify-end gap-2.5 mt-4 pt-3 border-t border-white/10">
+            <button id="reject-cookies-btn" type="button" class="px-3.5 py-1.5 text-xs text-mezcal-light/70 hover:text-mezcal-gold transition-colors">
+                Solo esenciales
+            </button>
+            <button id="accept-cookies-btn" type="button" class="px-5 py-2 bg-mezcal-agave hover:bg-mezcal-agave-light text-white text-xs font-bold rounded-lg transition-colors shadow">
+                Aceptar todas
+            </button>
+        </div>
+    </aside>
+
+</body>
+</html>

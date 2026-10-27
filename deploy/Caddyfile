@@ -1,0 +1,27 @@
+# /etc/caddy/Caddyfile en el VPS.
+# Caddy obtiene y renueva el certificado HTTPS de Let's Encrypt solo.
+milsensaciones.com, www.milsensaciones.com {
+	encode zstd gzip
+
+	# Archivos del sitio: Caddy los entrega directo, sin pasar por Go.
+	root * /opt/milsensaciones/frontend
+	@static path /assets/*
+	header @static Cache-Control "public, max-age=604800"
+
+	# La API la atiende el servidor en Go.
+	handle /api/* {
+		reverse_proxy 127.0.0.1:8080
+	}
+
+	handle {
+		try_files {path} {path}.html /index.html
+		file_server
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+}

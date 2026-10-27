@@ -1,0 +1,6 @@
+# Binarios de Go
+server/bin/
+*.exe
+
+# Variables de entorno con secretos
+.env

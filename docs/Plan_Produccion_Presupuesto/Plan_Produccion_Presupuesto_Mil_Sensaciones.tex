@@ -1,0 +1,386 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[margin=2.2cm,top=2.5cm,bottom=2.5cm,headheight=14pt]{geometry}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{draftwatermark}
+\usepackage{hyperref}
+\usepackage{pifont}
+
+% ==============================================================================
+% PALETA DE COLORES CORPORATIVA MEZCALERA
+% ==============================================================================
+\definecolor{MezcalDark}{HTML}{0C0C0B}
+\definecolor{MezcalCharcoal}{HTML}{1A1A18}
+\definecolor{MezcalAgave}{HTML}{4B6043}
+\definecolor{MezcalAgaveLight}{HTML}{6C8663}
+\definecolor{MezcalGold}{HTML}{D4AF37}
+\definecolor{MezcalEarth}{HTML}{8B5A2B}
+\definecolor{MezcalLight}{HTML}{F9F8F5}
+\definecolor{BorderGray}{HTML}{E5E1DA}
+
+% ==============================================================================
+% CONFIGURACIÓN DE MARCA DE AGUA
+% ==============================================================================
+\SetWatermarkText{\textbf{Ing. en Computación Jose Ramon Aragon Toledo}}
+\SetWatermarkScale{0.22}
+\SetWatermarkColor[gray]{0.91}
+\SetWatermarkAngle{45}
+
+% ==============================================================================
+% ENCABEZADOS Y PIES DE PÁGINA
+% ==============================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\footrulewidth}{0.6pt}
+\fancyhead[L]{\textcolor{MezcalAgave}{\small\textbf{Propuesta Técnica y Plan de Producción Web (8 Semanas)}}}
+\fancyhead[R]{\textcolor{MezcalGold}{\small\textbf{Mezcal Artesanal Mil Sensaciones}}}
+\fancyfoot[L]{\textcolor{gray}{\footnotesize Elaborado por: Ing. en Computación Jose Ramon Aragon Toledo — \texttt{aatr010423@gmail.com}}}
+\fancyfoot[R]{\textcolor{MezcalCharcoal}{\footnotesize Página \thepage}}
+
+% ==============================================================================
+% FORMATO DE TÍTULOS
+% ==============================================================================
+\titleformat{\section}
+  {\color{MezcalAgave}\normalfont\Large\bfseries}
+  {\thesection.}{0.8em}{}[\titlerule]
+
+\titleformat{\subsection}
+  {\color{MezcalEarth}\normalfont\large\bfseries}
+  {\thesubsection.}{0.6em}{}
+
+\titleformat{\subsubsection}
+  {\color{MezcalCharcoal}\normalfont\normalsize\bfseries}
+  {\thesubsubsection.}{0.5em}{}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=MezcalEarth,
+    urlcolor=MezcalAgave,
+    citecolor=MezcalGold
+}
+
+% ==============================================================================
+% CAJAS ESTILIZADAS
+% ==============================================================================
+\newtcolorbox{resumenbox}[1]{
+    colback=MezcalLight,
+    colframe=MezcalAgave,
+    fonttitle=\bfseries\color{white},
+    title=#1,
+    arc=4mm,
+    boxrule=1pt,
+    left=4mm, right=4mm, top=3mm, bottom=3mm,
+    enhanced,
+    drop shadow=black!15!white
+}
+
+\newtcolorbox{goldbox}[1]{
+    colback=MezcalLight,
+    colframe=MezcalGold,
+    fonttitle=\bfseries\color{MezcalDark},
+    title=#1,
+    arc=4mm,
+    boxrule=1.2pt,
+    left=4mm, right=4mm, top=3mm, bottom=3mm,
+    enhanced,
+    drop shadow=black!15!white
+}
+
+\begin{document}
+
+% ==============================================================================
+% PORTADA / ENCABEZADO PRINCIPAL
+% ==============================================================================
+\begin{center}
+    {\scshape\Large Mezcal Artesanal de Oaxaca}\\[0.2cm]
+    {\Huge\textbf{\color{MezcalAgave}PLAN DE DESARROLLO TÉCNICO}}\\[0.15cm]
+    {\Large\textbf{\color{MezcalGold}Y ESQUEMA COMERCIAL DE IMPLEMENTACIÓN EN PRODUCCIÓN}}\\[0.3cm]
+    {\large\textbf{Plataforma Web E-Commerce \& Gestión Digital — Mil Sensaciones}}\\[0.4cm]
+    \rule{0.85\textwidth}{1.5pt}\\[0.3cm]
+    \begin{tabular}{rl}
+        \textbf{Cliente / Marca:} & Mezcal Mil Sensaciones (El Gramal, Nejapa de Madero, Oaxaca) \\
+        \textbf{Maestro Mezcalero:} & Damián Olivera Díaz \\
+        \textbf{Ingeniero Responsable:} & Ing. en Computación Jose Ramon Aragon Toledo \\
+        \textbf{Título / Clave DGP:} & Ingeniero en Computación — Clave DGP: 521344 \\
+        \textbf{Correo de Contacto:} & \texttt{aatr010423@gmail.com} \\
+        \textbf{Duración Estimada:} & 8 Semanas (4 Quincenas) \\
+        \textbf{Inversión Total:} & \$7,550.00 MXN (\$1,550.00 Infraestructura + \$6,000.00 Desarrollo) \\
+        \textbf{Estado del Proyecto:} & Prototipo interactivo aprobado para transición a producción
+    \end{tabular}
+    \\[0.3cm]
+    \rule{0.85\textwidth}{1.5pt}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{resumenbox}{Resumen Ejecutivo de la Propuesta}
+El presente documento formaliza el plan de trabajo de ingeniería de software, arquitectura en la nube y esquema económico a \textbf{8 semanas} para llevar el prototipo funcional de \textbf{Mezcal Artesanal Mil Sensaciones} a un entorno de \textbf{producción comercial 24/7 de alta disponibilidad}.
+
+La solución contempla el despliegue de una plataforma web integral con landing page inmersiva, catálogo y páginas independientes por variante de mezcal, cesta de compra reactiva con Fluid UI, sistema de autenticación multi-rol (Cliente, Administrador y Punto de Venta POS), trazabilidad de pedidos, pagos en línea (tarjeta, OXXO y SPEI), facturación electrónica CFDI 4.0, automatizaciones de mensajería (WhatsApp y correo transaccional) y cumplimiento legal estricto (NOM-070, LFPDPPP y Ley de Mayoría de Edad +18).
+\end{resumenbox}
+
+% ==============================================================================
+% SECCIÓN 1: ESQUEMA DE COBRO Y FINANCIAMIENTO
+% ==============================================================================
+\section{Esquema de Cobro y Presupuesto de Implementación (8 Semanas)}
+
+El costo total pactado para el desarrollo completo, configuración de infraestructura y puesta en marcha en producción durante las \textbf{8 semanas} es de \textbf{\$7,550.00 MXN (Siete mil quinientos cincuenta pesos 00/100 M.N.)}, estructurado de forma transparente en dos conceptos:
+
+\subsection{Desglose de Costos}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.0cm}r}
+\toprule
+\rowcolor{MezcalAgave!15}
+\textbf{Concepto} & \textbf{Descripción Técnica \& Destino} & \textbf{Modalidad de Pago} & \textbf{Monto (MXN)} \\
+\midrule
+\textbf{1. Infraestructura, Dominio \& Hosting} & 
+Dominio oficial \texttt{.com} por 1 año, servidor VPS en la Ciudad de México por 12 meses para el backend en Go y un fondo de contingencia cambiaria. El SSL/TLS, DNS, CDN, almacenamiento de videos, correo transaccional y la API de WhatsApp usan planes gratuitos. Desglose exacto en la sección~\ref{sec:infra}. &
+Pago único inicial al arrancar el proyecto (destinado a hosting y dominio) &
+\textbf{\$1,550.00} \\
+\midrule
+\textbf{2. Sueldo / Honorarios de Desarrollo} & 
+Ingeniería de software de los 12 módulos funcionales y del pipeline de animaciones cinemáticas en loop a lo largo de 8 semanas: landing page animada con botella protagonista en rotación/loop y videos verticales al 40\%, catálogo y páginas individuales de mezcal, carrito slidebar Fluid UI, sistema de cuentas, dashboard administrativo y POS, seguimiento de pedidos, apartados legales, chatbot de WhatsApp, chat directo en plataforma, sistema de correos electrónicos, pagos en línea y facturación electrónica CFDI 4.0. & 
+Cubierto quincenalmente durante las 8 semanas (4 quincenas de \$1,500.00) &
+\textbf{\$6,000.00} \\
+\midrule
+\rowcolor{MezcalGold!20}
+\multicolumn{3}{l}{\textbf{TOTAL DEL PROYECTO LLAVE EN MANO (8 SEMANAS):}} & \textbf{\$7,550.00 MXN} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Desglose Exacto de Infraestructura para Producción con Go}
+\label{sec:infra}
+
+El backend se compila en \textbf{Go} como un solo binario ligero. Esto permite operar la API, la base de datos PostgreSQL y el proxy HTTPS (Caddy con certificados Let's Encrypt automáticos) en un servidor pequeño de 1~GB de RAM, con un consumo estimado menor a 400~MB. Los videos y respaldos se sirven desde almacenamiento de objetos con transferencia gratuita, para no saturar el servidor.
+
+\noindent\textbf{¿Para qué sirve el servidor VPS?} Es la computadora rentada en la Ciudad de México donde opera todo lo que funciona detrás del sitio. Sin él, la página sería solo un catálogo de consulta, sin cuentas, pedidos, dashboard ni chatbot.
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Sitio web (frontend):} las páginas HTML, estilos y scripts del sitio. Cloudflare guarda una copia en caché y la entrega desde su red, por lo que el servidor casi no recibe carga por las visitas.
+    \item \textbf{API en Go:} cuentas de Cliente, Administrador y POS, carrito, pedidos, seguimiento de envíos, dashboard y terminal de punto de venta.
+    \item \textbf{Base de datos PostgreSQL:} productos, lotes, inventario, pedidos, clientes y conversaciones del chat.
+    \item \textbf{Automatizaciones:} recibe y responde los mensajes del chatbot de WhatsApp, mantiene el chat directo en tiempo real, envía los correos transaccionales, recibe las confirmaciones de pago de la pasarela y solicita el timbrado de las facturas.
+    \item \textbf{Proxy HTTPS (Caddy):} sirve el sitio con candado de seguridad y renueva el certificado de forma automática.
+\end{itemize}
+
+\noindent\textbf{Capacidad estimada.} El plan de 1~GB soporta con holgura el volumen de arranque de una marca artesanal: miles de visitas al mes, decenas de usuarios navegando al mismo tiempo y el uso diario del dashboard y del POS. La carga pesada (videos e imágenes) sale de Cloudflare y no del servidor. Para evitar caídas por falta de memoria se configura un archivo de intercambio (\textit{swap}) de 1~GB y se ajusta PostgreSQL a bajo consumo. Si el uso de CPU o RAM supera el 80\% de forma sostenida, el servidor se escala al plan de 2~GB sin reinstalar nada.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.6cm}r}
+\toprule
+\rowcolor{MezcalAgave!15}
+\textbf{Concepto} & \textbf{Proveedor y Especificación} & \textbf{Precio Lista} & \textbf{Monto (MXN)} \\
+\midrule
+Dominio \texttt{milsensaciones.com} (1 año) & Cloudflare Registrar, precio al costo con privacidad WHOIS incluida. Comprar antes del 1 de noviembre de 2026, cuando sube la tarifa del registro \texttt{.com}. & US\$10.46 + IVA = US\$12.13 & \$223.62 \\
+\midrule
+Servidor VPS (12 meses) & Vultr Cloud Compute, región Ciudad de México: 1 vCPU, 1~GB RAM, 25~GB SSD, 1~TB de transferencia e IPv4 incluida. Cubre las 8 semanas de desarrollo y los primeros 10 meses en producción. & US\$5.00/mes + IVA = US\$5.80/mes (\$106.89) & \$1,282.68 \\
+\midrule
+WhatsApp Business Platform & API oficial de Meta (Cloud API). Los primeros 1,000 mensajes de servicio de cada mes son gratis, suficiente para el volumen inicial del chatbot. Solo se paga si se rebasa ese límite o se envían plantillas de marketing. & Gratis hasta 1,000 msj/mes & \$0.00 \\
+\midrule
+DNS, CDN, SSL y protección DDoS básica & Cloudflare plan Free. Certificado del servidor con Let's Encrypt vía Caddy. & Gratis & \$0.00 \\
+\midrule
+Almacenamiento de videos y respaldos & Cloudflare R2 plan gratuito: 10~GB de almacenamiento y salida de datos sin costo. Respaldo diario automático de PostgreSQL. & Gratis & \$0.00 \\
+\midrule
+Correo transaccional y corporativo & Resend plan Free (3,000 correos/mes, 100 por día) con SPF, DKIM y DMARC. Cloudflare Email Routing para recibir \textit{contacto@} y \textit{ventas@} en la bandeja del cliente. & Gratis & \$0.00 \\
+\midrule
+Fondo de contingencia cambiaria & Absorbe variaciones del tipo de cambio y comisiones del banco por cargos en dólares. & --- & \$43.70 \\
+\midrule
+\rowcolor{MezcalGold!20}
+\multicolumn{3}{l}{\textbf{TOTAL INFRAESTRUCTURA:}} & \textbf{\$1,550.00 MXN} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent\textbf{Bases del cálculo:} tipo de cambio de \$18.43 MXN por dólar (cierre interbancario de Banxico del 19 de octubre de 2026) e IVA del 16\% sobre servicios digitales de proveedores extranjeros. Precios consultados el 26 de octubre de 2026. Si algún proveedor no cobra IVA, la diferencia se suma al fondo de contingencia.
+
+\subsubsection{Costos Recurrentes Después del Mes 12 (a cargo del cliente)}
+
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Servidor VPS:} \$106.89 MXN al mes (US\$5.80 con IVA).
+    \item \textbf{Renovación del dominio (octubre de 2027):} cerca de \$238.80 MXN al año, con la tarifa \texttt{.com} vigente a partir de noviembre de 2026.
+    \item \textbf{WhatsApp:} los primeros 1,000 mensajes de servicio de cada mes son gratis. Después, cerca de \$0.18 MXN por mensaje de utilidad o servicio y US\$0.0397 + IVA por mensaje de marketing.
+    \item \textbf{Comisiones de la pasarela de pago:} sin renta mensual. Se cobra una comisión por cada venta en línea, de alrededor de 3\% a 4\% más una cuota fija y el IVA, según el método de pago. Se descuenta en automático de cada cobro.
+    \item \textbf{Timbrado de facturas (CFDI):} entre \$0.50 y \$2.00 MXN por factura emitida, según el proveedor (PAC) y el paquete que contrate el cliente.
+    \item \textbf{Escalamiento opcional:} si el tráfico crece, el servidor sube al plan de 2~GB de RAM por US\$10.00 + IVA al mes, sin reinstalar nada.
+\end{itemize}
+
+\subsection{Calendario de Pagos Quincenales}
+
+Para facilitar la planeación financiera de Mezcal Mil Sensaciones durante las \textbf{8 semanas (4 quincenas)} de ejecución, el presupuesto se cubre de la siguiente manera:
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{Pago Inicial de Infraestructura — Día 1 (\$1,550.00 MXN):} Destinado exclusivamente a la compra inmediata del dominio oficial y de 12 meses del servidor VPS, según la sección~\ref{sec:infra}.
+    \item \textbf{Primera Quincena — Final de Semana 2 (\$1,500.00 MXN):} Contra entrega del entorno de producción activo, Landing Page optimizada, Catálogo y Páginas Independientes de las 4 expresiones de mezcal y Carrito de Compras Slidebar.
+    \item \textbf{Segunda Quincena — Final de Semana 4 (\$1,500.00 MXN):} Contra entrega del Sistema de Cuentas (Login multi-rol), Dashboard del Administrador, Terminal de Punto de Venta (POS) y Sistema de Seguimiento de Pedidos.
+    \item \textbf{Tercera Quincena — Final de Semana 6 (\$1,500.00 MXN):} Contra entrega del Chatbot de Automatización por WhatsApp, Chat Directo en Plataforma con Vendedores/Administradores, Sistema de Correos Electrónicos y Apartados Legales completos.
+    \item \textbf{Cuarta Quincena — Final de Semana 8 (\$1,500.00 MXN):} Contra entrega de los Pagos en Línea, la Facturación Electrónica CFDI 4.0, las pruebas finales y el lanzamiento (sumando exactamente los \textbf{\$6,000.00 MXN} de honorarios).
+\end{enumerate}
+
+% ==============================================================================
+% SECCIÓN 2: DETALLE TÉCNICO DE MÓDULOS CRUCIALES PARA PRODUCCIÓN
+% ==============================================================================
+\section{Especificación de Módulos Cruciales para Producción}
+
+Para transformar el prototipo actual en un sistema comercial de grado productivo, se detallan a continuación las tareas de ingeniería de cada módulo:
+
+\subsection{Módulo 1: Landing Page Inmersiva, Animaciones Cinemáticas en Loop con IA y Adaptabilidad Móvil}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Pipeline de Animación de Elemento Protagonista (Botellas en Loop con IA):} Siguiendo la metodología de diseño agéntico con Google Antigravity, generación de imagen aislada y video \textit{loopable} (Gemini / Nano Banana + Google Flow / Veo 3.1):
+    \begin{enumerate}[label=\textbf{\alph*)}]
+        \item \textbf{Separación de Maqueta y Elemento Protagonista:} Se estructura el layout base (tipografía oficial \textit{Mezcal Mil SENSACIONES}, divisor botánico y paleta de tonos naturales: \textit{tierra, verde maguey y madera}) independiente de la botella animada.
+        \item \textbf{Aislamiento de Botellas sobre Fondo Sólido 100\% Oscuro:} A partir de fotografías nítidas de cada botella de 750~ml con su etiqueta oficial, se genera mediante IA de imagen la botella centrada sobre fondo negro/madera profundo puro sin textos exteriores, preparando dos variantes (con \textit{glow} cálido ámbar/verde agave y sin \textit{glow}) en proporción controlada (16:9 para Hero y 9:16 para tarjetas).
+        \item \textbf{Conversión a Video Loopable Continuo (Inicio = Fin) a 720p:} Se procesa la imagen de la botella en motores generativos de video (Google Flow / Veo 3.1) fijando el mismo fotograma de inicio y fin para obtener una rotación suave en su propio eje o destellos de humo/fuego sin saltos de corte, exportado en formato ligero \texttt{.mp4}/\texttt{.webm} a \textbf{720p sin audio}.
+        \item \textbf{Integración Multicapa (\texttt{object-fit: cover}) y Enmascarado de Esquinas:} Reproducción automática silenciosa (\texttt{autoplay muted loop playsinline}) tanto en el Hero como en la capa intermedia al 40\% de opacidad bajo cajas de texto translúcidas, incluyendo un bloque/máscara CSS del color exacto del fondo para ocultar cualquier marca de agua o borde del generador de IA.
+        \item \textbf{Escenario 3D de Partículas Reactivo al Scroll (\textit{Morphing} 3D estilo Mediatómica):} Lienzo fijo acelerado por hardware (\texttt{particles-stage.js}) con miles de partículas y física de resortes (\textit{spring-damping}) + desenfoque de profundidad (\textit{bokeh depth-of-field}) que transforma su geometría 3D en tiempo real al hacer scroll entre secciones: \textit{1) Roseta de Maguey Espadín 3D}, \textit{2) Átomo Orbital de las 3 Generaciones}, \textit{3) Botella Artesanal 3D de 750~ml}, \textit{4) Horno Cónico y Vórtice de Fuego}, \textit{5) Alambique de Cobre y Serpentín}, y \textit{6) Copa/Veladora Mezcalera con Cruz de Oaxaca}, sincronizado con las 4 paletas de colores.
+    \end{enumerate}
+    \item \textbf{Verificación de Mayoría de Edad (+18):} Control de acceso legal persistente en almacenamiento del navegador con desenfoque dinámico de fondo (\texttt{backdrop-filter}).
+    \item \textbf{Tipografía Oficial del Reel Protegida:} Composición en 3 niveles (\textit{Mezcal} en caligráfica \texttt{Great Vibes} + \textit{Mil} + \textit{SENSACIONES} en serif \texttt{Cormorant Garamond} con \texttt{whitespace-nowrap}) que garantiza que el nombre de la marca jamás se corte en sílabas en pantallas móviles.
+\end{itemize}
+
+\subsection{Módulo 2: Catálogo General y Páginas Independientes por Variante de Mezcal}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Páginas Dedicadas e Independientes:} 
+    \begin{itemize}
+        \item \textbf{Mezcal Espadín Joven 750 ml} (\texttt{mezcal-espadin.html}): Agave Angustifolia Haw, 45\% Alc. Vol., notas de cata y maridaje.
+        \item \textbf{Ensamble Maestro de Agaves 750 ml} (\texttt{mezcal-ensamble.html}): Micro-lote de 300 botellas, 47\% Alc. Vol., co-cocción y co-fermentación.
+        \item \textbf{Mezcal Silvestre de Montaña 750 ml} (\texttt{mezcal-silvestre.html}): Agaves recolectados en cerros de Yautepec, 48\% Alc. Vol.
+        \item \textbf{Curados de Mezcal con Frutas 750 ml} (\texttt{curados-mezcal.html}): Maceración natural con maracuyá y frutas de temporada, 38\% Alc. Vol.
+    \end{itemize}
+    \item \textbf{Fichas Técnicas Oficiales de 10 Atributos:} Generación e impresión directa en PDF de especificaciones conforme a la NOM-070-SCFI-2016.
+    \item \textbf{Galerías Fotográficas y de Video:} Visualización en alta resolución de botellas en primer plano y proceso en el palenque mediante modal nativo (\texttt{<dialog>}).
+\end{itemize}
+
+\subsection{Módulo 3: Carrito de Compras Slidebar (Fluid UI \& Liquid Glass)}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Experiencia de Usuario:} Despliegue lateral suave con efecto de cristal líquido, control de cantidades por botella y cálculo instantáneo de subtotales y totales en MXN.
+    \item \textbf{Persistencia y Conversión:} Sincronización automática con la base de datos de pedidos, pasarela de pago o envío directo de la orden estructurada a WhatsApp.
+\end{itemize}
+
+\subsection{Módulo 4: Sistema de Cuentas y Autenticación Multi-Rol}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Portal de Acceso (\texttt{login.html}):} Registro e inicio de sesión con contraseñas cifradas (algoritmos \texttt{bcrypt} / \texttt{Argon2}), recuperación de cuenta por correo y manejo seguro de sesiones (JWT).
+    \item \textbf{Perfiles Diferenciados:} Separación estricta de permisos para \textbf{Clientes}, \textbf{Administradores} y \textbf{Vendedores de Punto de Venta (POS)}.
+\end{itemize}
+
+\subsection{Módulo 5: Dashboard del Administrador y Punto de Venta (POS)}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Panel Administrativo Central:} Gestión de inventario de botellas por lote, alta/edición de productos y precios, métricas de ingresos mensuales, control de kilogramos de maguey en horno y estado de marbetes CRM.
+    \item \textbf{Terminal POS para Vendedores:} Caja rápida táctil para ventas presenciales en el palenque de El Gramal o en ferias/convenciones mezcaleras.
+\end{itemize}
+
+\subsection{Módulo 6: Sistema de Seguimiento de Pedidos y Trazabilidad}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Rastreo en Tiempo Real:} Consulta del estado del pedido desde la cuenta del cliente (\textit{Orden Recibida $\rightarrow$ En Empaque Artesanal $\rightarrow$ En Tránsito con Guía de Paquetería $\rightarrow$ Entregado}).
+    \item \textbf{Trazabilidad de Lote:} Vinculación de cada pedido con el lote específico destilado por el Maestro Damián Olivera Díaz.
+\end{itemize}
+
+\subsection{Módulo 7: Apartados de Políticas de Privacidad, Términos de Servicio y Condiciones}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Política de Privacidad Integral:} Redacción y despliegue conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y cintilla interactiva de consentimiento de cookies.
+    \item \textbf{Términos de Servicio y Términos y Condiciones de Venta:} Regulación de políticas de envío nacional, acuerdos con bares/importadores, devoluciones por daño en transporte y restricción de venta exclusiva a mayores de 18 años.
+\end{itemize}
+
+\subsection{Módulo 8: Chatbot de Automatización por WhatsApp}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Flujos Conversacionales 24/7:} Atención automatizada en WhatsApp Business para cotizaciones de botellas individuales, precios de mayoreo para bares/restaurantes y atención a importadores en EE.~UU.
+    \item \textbf{Recepción Automática de Carritos:} Formato estructurado de órdenes provenientes de la cesta web para cierre inmediato de venta.
+\end{itemize}
+
+\subsection{Módulo 9: Chat Directo en Plataforma con Vendedores y Administradores}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Widget de Chat en Vivo en el Sitio Web:} Ventana flotante integrada en todas las páginas donde el visitante puede conversar en tiempo real sin salir del sitio.
+    \item \textbf{Consola de Respuesta en el Dashboard:} Los vendedores y administradores reciben y contestan los mensajes directamente desde su panel de control con historial de conversación.
+\end{itemize}
+
+\subsection{Módulo 10: Sistema de Correos Electrónicos Corporativos y Transaccionales}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Cuentas Corporativas y Servidor SMTP:} Configuración de cuentas oficiales del dominio (\textit{contacto@milsensaciones.com}, \textit{ventas@milsensaciones.com}) con autenticación antispam (SPF, DKIM y DMARC).
+    \item \textbf{Notificaciones Automáticas:} Envío automático de correos de bienvenida, confirmación de compra, actualización de guía de envío, envío de facturas y boletín del Club de Lotes Limitados.
+\end{itemize}
+
+\subsection{Módulo 11: Pagos en Línea (Tarjeta, OXXO y SPEI)}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Checkout Seguro de la Pasarela:} Integración con Mercado Pago Checkout Pro (o Stripe como alternativa). El cliente paga con tarjeta de crédito o débito, efectivo en OXXO o transferencia SPEI en la página segura de la pasarela. Los datos de la tarjeta nunca pasan por el servidor del sitio.
+    \item \textbf{Confirmación Automática:} La pasarela notifica cada pago al backend en Go (webhook con firma verificada) y el pedido cambia solo a \textit{Pago Confirmado}. Los pagos en OXXO quedan como \textit{Pago Pendiente} y el inventario se aparta hasta su vencimiento.
+    \item \textbf{Reembolsos y Conciliación:} Los reembolsos y cancelaciones se reflejan en el dashboard, con el reporte de ventas cobradas y comisiones. El pago manual por WhatsApp (transferencia o efectivo) sigue disponible como opción.
+\end{itemize}
+
+\subsection{Módulo 12: Facturación Electrónica CFDI 4.0}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Portal de Autofacturación:} El cliente solicita su factura desde su cuenta o con el folio del pedido, captura RFC, razón social, régimen fiscal, código postal y uso del CFDI, y recibe el PDF y el XML por correo.
+    \item \textbf{Timbrado con PAC Autorizado:} Conexión por API con un Proveedor Autorizado de Certificación del SAT (Facturama o Facturapi) usando el Certificado de Sello Digital (CSD) del cliente. Desglose de IVA e IEPS conforme a la configuración fiscal que defina el contador del cliente.
+    \item \textbf{Gestión desde el Dashboard:} Consulta, reenvío y cancelación de facturas, y emisión de la factura global a \textit{público en general} por las ventas que no solicitaron factura.
+\end{itemize}
+
+% ==============================================================================
+% SECCIÓN 3: CRONOGRAMA DE TRABAJO (8 SEMANAS)
+% ==============================================================================
+\section{Cronograma de Desarrollo a 8 Semanas (4 Quincenas)}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{cp{4.4cm}Xp{3.0cm}}
+\toprule
+\rowcolor{MezcalAgave!15}
+\textbf{Semana} & \textbf{Fase / Módulos} & \textbf{Entregables Técnicos en Producción} & \textbf{Esquema de Pago} \\
+\midrule
+\textbf{Semana 1} & Infraestructura, Hosting, Dominio y Landing Animada IA & Compra de dominio oficial, configuración del servidor VPS en CDMX con el backend en Go, generación de video \textit{loopable} 720p de la botella principal con IA (Flow/Veo) y despliegue de Landing Page inmersiva con capa de video al 40\%. & \textbf{Inicio:} \$1,550.00 MXN (Hosting y Dominio) \\
+\midrule
+\textbf{Semana 2} & Catálogo, Loops de las 4 Expresiones y Carrito Slidebar & Puesta en línea de las 4 páginas independientes de mezcal con sus animaciones/loops de botella, fichas PDF de 10 atributos y cesta de compras interactiva con Fluid UI. & \textbf{1.ª Quincena:} \$1,500.00 MXN \\
+\midrule
+\textbf{Semana 3} & Sistema de Cuentas y Base de Datos en Producción & Base de datos PostgreSQL con API en Go, portal de Login con cifrado de contraseñas y control de sesiones para Cliente, Administrador y Vendedor POS. & --- \\
+\midrule
+\textbf{Semana 4} & Dashboard de Administrador, POS y Seguimiento de Pedidos & Panel administrativo de inventarios/lotes, terminal táctil POS para el palenque y módulo de rastreo de pedidos con guías de envío. & \textbf{2.ª Quincena:} \$1,500.00 MXN \\
+\midrule
+\textbf{Semana 5} & Chatbot de WhatsApp y Chat Directo en Plataforma & Configuración del bot automatizado de WhatsApp Business y desarrollo del chat en tiempo real dentro de la plataforma con bandeja para vendedores. & --- \\
+\midrule
+\textbf{Semana 6} & Sistema de Correos y Marco Legal & Configuración de correos transaccionales SMTP y páginas de Privacidad, Términos de Servicio y Condiciones. & \textbf{3.ª Quincena:} \$1,500.00 MXN \\
+\midrule
+\textbf{Semana 7} & Pagos en Línea & Integración de la pasarela (tarjeta, OXXO y SPEI), confirmación automática por webhook, apartado de inventario y reembolsos desde el dashboard. & --- \\
+\midrule
+\textbf{Semana 8} & Facturación CFDI 4.0 y Lanzamiento Final & Portal de autofacturación, timbrado con PAC, factura global y cancelaciones, pruebas finales de compra y facturación, y liberación. & \textbf{4.ª Quincena:} \$1,500.00 MXN \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ==============================================================================
+% FIRMAS DE CONFORMIDAD
+% ==============================================================================
+\vspace{0.2cm}
+\begin{goldbox}{Conformidad y Aprobación del Plan de Trabajo (8 Semanas)}
+Al suscribir el presente documento, ambas partes acuerdan el alcance técnico de los 12 módulos descritos para el paso a producción en un plazo de \textbf{8 semanas} y el esquema económico total de \textbf{\$7,550.00 MXN} (\textbf{\$1,550.00 MXN} iniciales exclusivos para infraestructura, y \textbf{\$6,000.00 MXN} de sueldo de desarrollo cubiertos quincenalmente en 4 exhibiciones).
+\end{goldbox}
+
+\vspace{0.5cm}
+
+\noindent
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}X p{1cm} >{\centering\arraybackslash}X}
+    \textbf{Por Mezcal Mil Sensaciones} & & \textbf{Por el Equipo de Desarrollo} \\[1.2cm]
+    \rule{6.2cm}{0.8pt} & & \rule{6.2cm}{0.8pt} \\
+    \textbf{Maestro Mezcalero Damián Olivera Díaz} & & \textbf{Ing. en Computación Jose Ramon Aragon Toledo} \\
+    Representante / Productor General & & Ingeniero en Computación — Clave DGP: 521344 \\
+    El Gramal, Nejapa de Madero, Oaxaca & & \texttt{aatr010423@gmail.com}
+\end{tabularx}
+
+\end{document}

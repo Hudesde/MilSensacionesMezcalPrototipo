@@ -1,0 +1,33 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{Historial de Cambios del Documento}{2}{section*.2}%
+\contentsline {section}{\numberline {1}Introducción}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Propósito del Documento}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Alcance del Producto (Fase 1 vs. Fase 2)}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Exclusiones Explícitas de la Fase 1}{3}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Público Objetivo y Mercados}{3}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Definiciones, Acrónimos y Abreviaturas}{3}{subsection.1.5}%
+\contentsline {subsection}{\numberline {1.6}Documentos de Referencia}{5}{subsection.1.6}%
+\contentsline {subsection}{\numberline {1.7}Supuestos y Dependencias}{5}{subsection.1.7}%
+\contentsline {section}{\numberline {2}Descripción General del Sistema}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Perspectiva del Producto y Referencias Visuales}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Usuarios, Roles y Permisos}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Arquitectura y Stack Tecnológico}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Restricciones Operativas y de Capacidad}{7}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Requerimientos Funcionales (RF)}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Criterios de Aceptación}{11}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Detalle Obligatorio de la Ficha de Producto (10 Atributos)}{12}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Requerimientos No Funcionales (RNF)}{13}{section.4}%
+\contentsline {section}{\numberline {5}Registro del Cuestionario de Levantamiento (Cuestionario Original)}{15}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Sección 1 — La Marca}{15}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Sección 2 — Los Productos}{16}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Sección 3 — El Sitio Web}{16}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Sección 4 — Diseño y Estilo Visual}{17}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Sección 5 — Mercado y Clientes}{17}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Secciones 6, 7 y 8 — Técnico, Prioridades, Contenido y Tiempos}{18}{subsection.5.6}%
+\contentsline {section}{\numberline {6}Formulario de Cierre de Levantamiento (Preguntas y Datos Pendientes)}{19}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Parte A: Preguntas del Cuestionario Original que Quedaron sin Responder}{19}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Parte B: Recolección de Textos Corporativos y Registros Oficiales}{21}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Parte C: Fichas Técnicas Completas por Producto (10 Atributos Obligatorios)}{21}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Parte D: Datos de Contacto, Ubicación y Cumplimiento Legal}{23}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Parte E: Checklist de Entrega de Archivos Multimedia}{23}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Parte F: Decisiones Comerciales Pendientes para la Plataforma de Ventas}{23}{subsection.6.6}%

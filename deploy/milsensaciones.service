@@ -1,0 +1,27 @@
+# /etc/systemd/system/milsensaciones.service en el VPS.
+# Mantiene la API encendida y la reinicia si se cae o si reinicia el servidor.
+[Unit]
+Description=Mil Sensaciones API (Go)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=milsensaciones
+Group=milsensaciones
+WorkingDirectory=/opt/milsensaciones
+ExecStart=/opt/milsensaciones/bin/api
+EnvironmentFile=-/opt/milsensaciones/.env
+Environment=PORT=8080
+Environment=SITE_DIR=/opt/milsensaciones/frontend
+Restart=always
+RestartSec=3
+
+# Endurecimiento básico
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/opt/milsensaciones
+
+[Install]
+WantedBy=multi-user.target

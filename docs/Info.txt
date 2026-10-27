@@ -1,0 +1,26 @@
+Sí, Stripe permite procesar pagos para la venta de mezcal y bebidas alcohólicas, siempre que el negocio cumpla con los marcos regulatorios locales y las políticas de industrias restringidas.
+
+A diferencia de productos estrictamente prohibidos (como drogas ilícitas, réplicas o armas), el alcohol entra en la categoría de actividad regulada / restringida.
+
+Para operar sin riesgo de suspensión o bloqueo de cuenta, es necesario cumplir con ciertos lineamientos técnicos y legales:
+
+1. Requisitos legales en México
+RFC y actividad económica: La persona física con actividad empresarial o moral debe tener dada de alta la actividad correspondiente a la producción, distribución o comercialización al por menor/mayor de bebidas alcohólicas ante el SAT.
+
+Marbetes y cumplimiento fiscal: Cumplir con el pago de impuestos correspondientes (IVA e IEPS) y contar con botellas que porten los marbetes fiscales del SAT.
+
+Normativa del mezcal: Cumplir con la NOM-070-SCFI-2016 (Denominación de Origen Mezcal) y certificación del organismo evaluador correspondiente (ej. COMERCAM / CIDAM).
+
+2. Requisitos de la tienda en línea (Políticas de Stripe)
+Verificación de edad: La plataforma de e-commerce debe incluir un filtro de mayoría de edad (18+ años en México) antes de la navegación o durante el proceso de compra (checkout).
+
+Términos y condiciones visibles: Especificar claramente la política de venta exclusiva a mayores de edad, políticas de envío, cancelaciones y reembolsos.
+
+Paquetería y entrega: Usar servicios de envío que permitan el traslado legal de alcohol y que idealmente requieran firma o verificación de identificación oficial al entregar el paquete.
+
+3. Venta internacional / Exportación
+Si se planea vender mezcal a clientes fuera de México (por ejemplo, EE. UU. o la Unión Europea), no basta con que Stripe acepte la tarjeta extranjera:
+
+La exportación de alcohol está sujeta a normativas aduanales estrictas (como el registro ante la FDA y licencias TTB en EE. UU.).
+
+Stripe prohíbe el envío transfronterizo si no se cuenta con los permisos de importación y distribución vigentes en el país de destino.
