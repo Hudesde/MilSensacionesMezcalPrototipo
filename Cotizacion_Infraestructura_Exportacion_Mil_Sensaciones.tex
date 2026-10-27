@@ -1,0 +1,453 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[margin=1.7cm,top=2.0cm,bottom=2.0cm,headheight=14pt]{geometry}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{draftwatermark}
+\usepackage{hyperref}
+
+% ==============================================================================
+% PALETA DE COLORES CORPORATIVA MEZCALERA
+% ==============================================================================
+\definecolor{MezcalDark}{HTML}{0C0C0B}
+\definecolor{MezcalCharcoal}{HTML}{1A1A18}
+\definecolor{MezcalAgave}{HTML}{4B6043}
+\definecolor{MezcalAgaveLight}{HTML}{6C8663}
+\definecolor{MezcalGold}{HTML}{D4AF37}
+\definecolor{MezcalGoldDark}{HTML}{AA820A}
+\definecolor{MezcalEarth}{HTML}{8B5A2B}
+\definecolor{MezcalLight}{HTML}{F9F8F5}
+\definecolor{BorderGray}{HTML}{E5E1DA}
+
+% ==============================================================================
+% CONFIGURACIÓN DE MARCA DE AGUA
+% ==============================================================================
+\SetWatermarkText{\textbf{Ing. en Computación Jose Ramon Aragon Toledo}}
+\SetWatermarkScale{0.18}
+\SetWatermarkColor[gray]{0.93}
+\SetWatermarkAngle{45}
+
+% ==============================================================================
+% ENCABEZADOS Y PIES DE PÁGINA
+% ==============================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+\fancyhead[L]{\textcolor{MezcalAgave}{\small\textbf{Cotización Formal: Fase Inicial de Infraestructura Digital \& Exportación}}}
+\fancyhead[R]{\textcolor{MezcalGold}{\small\textbf{Mezcal Artesanal Mil Sensaciones}}}
+\fancyfoot[L]{\textcolor{gray}{\footnotesize Ing. en Computación Jose Ramon Aragon Toledo — \texttt{aatr010423@gmail.com}}}
+\fancyfoot[R]{\textcolor{MezcalCharcoal}{\footnotesize Página \thepage\ de 5}}
+
+% ==============================================================================
+% FORMATO DE TÍTULOS
+% ==============================================================================
+\titleformat{\section}
+  {\color{MezcalAgave}\normalfont\large\bfseries}
+  {\thesection.}{0.5em}{}[\titlerule]
+
+\titleformat{\subsection}
+  {\color{MezcalEarth}\normalfont\normalsize\bfseries}
+  {\thesubsection.}{0.4em}{}
+
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+\titlespacing*{\subsection}{0pt}{6pt}{3pt}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=MezcalEarth,
+    urlcolor=MezcalAgave,
+    citecolor=MezcalGold
+}
+
+% ==============================================================================
+% CAJAS ESTILIZADAS
+% ==============================================================================
+\newtcolorbox{resumenbox}[1]{
+    colback=MezcalLight,
+    colframe=MezcalAgave,
+    fonttitle=\bfseries\color{white},
+    title=#1,
+    arc=2.5mm,
+    boxrule=0.8pt,
+    left=3.5mm, right=3.5mm, top=2.5mm, bottom=2.5mm,
+    enhanced,
+    drop shadow=black!10!white
+}
+
+\newtcolorbox{goldbox}[1]{
+    colback=MezcalLight,
+    colframe=MezcalGold,
+    fonttitle=\bfseries\color{MezcalDark},
+    title=#1,
+    arc=2.5mm,
+    boxrule=0.9pt,
+    left=3.5mm, right=3.5mm, top=2.5mm, bottom=2.5mm,
+    enhanced,
+    drop shadow=black!10!white
+}
+
+\newtcolorbox{infobox}[1]{
+    colback=white,
+    colframe=MezcalEarth,
+    fonttitle=\bfseries\color{white},
+    title=#1,
+    arc=2mm,
+    boxrule=0.7pt,
+    left=3mm, right=3mm, top=2mm, bottom=2mm,
+    enhanced
+}
+
+\begin{document}
+
+% ==============================================================================
+% PÁGINA 1: PORTADA EJECUTIVA Y ENCUADRE GENERAL
+% ==============================================================================
+\begin{center}
+    {\scshape\small Mezcal Artesanal de Oaxaca — Tradición y Herencia Familiar de 3 Generaciones}\\[0.15cm]
+    {\LARGE\textbf{\color{MezcalAgave}COTIZACIÓN DE INFRAESTRUCTURA INICIAL}}\\[0.1cm]
+    {\Large\textbf{\color{MezcalGold}HOSTING ANUAL, DOMINIO OFICIAL BONIFICADO \& SERVICIOS CLOUD}}\\[0.1cm]
+    {\normalsize\textbf{\color{MezcalEarth}CONFORME AL PLAN MAESTRO DE PRODUCCIÓN (\$7,000.00 MXN TOTAL)}}\\[0.15cm]
+    {\footnotesize\textbf{\color{gray}Y GUÍA REGULATORIA DE PERMISOS PARA VENTA Y EXPORTACIÓN A EE. UU.}}\\[0.25cm]
+    \rule{\textwidth}{1.2pt}\\[0.15cm]
+    \footnotesize
+    \begin{tabularx}{\textwidth}{rX rX}
+        \textbf{Folio de Cotización:} & \texttt{COT-MS-2026-INFRA} & \textbf{Fecha de Emisión:} & 23 de octubre de 2026 \\
+        \textbf{Cliente / Marca:} & Mezcal Mil Sensaciones & \textbf{Vigencia de Oferta:} & 30 días naturales \\
+        \textbf{Ubicación de Origen:} & El Gramal, Nejapa de Madero, Oax. & \textbf{Moneda:} & Pesos Mexicanos (MXN) \\
+        \textbf{Maestro Mezcalero:} & Damián Olivera Díaz & \textbf{Ingeniero Titular:} & Jose Ramon Aragon Toledo \\
+        \textbf{Cédula Prof. / DGP:} & 521344 (Ing. en Computación) & \textbf{Correo de Contacto:} & \texttt{aatr010423@gmail.com} \\
+    \end{tabularx}
+    \\[0.15cm]
+    \rule{\textwidth}{1.2pt}
+\end{center}
+
+\vspace{0.15cm}
+
+\begin{resumenbox}{Alineación Estricta con el Plan Maestro de Producción y Presupuesto}
+\small
+El presente documento desglosa formalmente el destino, alcance y especificaciones del \textbf{Pago Inicial de Infraestructura del Día 1}, estipulado en exactamente \textbf{\$2,000.00 MXN (Dos mil pesos 00/100 M.N.)} dentro del \textit{Plan de Producción y Presupuesto de Mezcal Mil Sensaciones} (inversión total de \$7,000.00 MXN a 6 semanas).
+
+Este importe inicial se destina íntegramente a:
+\begin{enumerate}[leftmargin=1.2cm,topsep=2pt,itemsep=3pt]
+    \item \textbf{Alojamiento Cloud Anual y Dominio Oficial:} Servidor Cloud SSD NVMe de alta velocidad por 12 meses, \textbf{1 año de Dominio Oficial bonificado (GRATIS)}, certificados de seguridad SSL/TLS de por vida y cuentas de correo corporativo institucional.
+    \item \textbf{Aprovisionamiento y Despliegue en Servidor:} Hardening de Linux, proxy inverso de alto rendimiento, configuración DNS (SPF/DKIM/DMARC) y puesta a punto de la arquitectura ligera en \textbf{Golang (Go)}.
+    \item \textbf{Sin Sobrecostos de Ingeniería:} Los desarrollos de los 10 módulos funcionales (catálogo, carrito slidebar, login multi-rol, dashboard POS, seguimiento de pedidos, pasarelas de pago y chatbot) \textbf{están cubiertos dentro de los \$5,000.00 MXN de honorarios diferidos quincenalmente}, sin cargos adicionales sorpresa.
+\end{enumerate}
+\end{resumenbox}
+
+\vspace{0.3cm}
+
+\begin{infobox}{Objetivos de la Fase Inicial de Infraestructura (Día 1)}
+\small
+\begin{itemize}[leftmargin=1.0cm,topsep=2pt,itemsep=2.5pt]
+    \item \textbf{Activación Inmediata del Dominio y Servidor:} Registrar el nombre oficial de la marca y poner en línea el servidor el Día 1 para iniciar las pruebas de carga y la configuración de correos corporativos.
+    \item \textbf{Arquitectura Ligera en Golang (Go):} Servir la web completa desde un único binario nativo que consume menos de 35~MB de RAM, garantizando tiempos de respuesta menores a 50~ms y cero caídas de servidor.
+    \item \textbf{Preparación para el Mercado Internacional:} Establecer la base técnica (CDN global, SSL y correos autenticados) para conectar con clientes en México y compradores B2B en Estados Unidos.
+\end{itemize}
+\end{infobox}
+
+\clearpage
+
+% ==============================================================================
+% PÁGINA 2: INFRAESTRUCTURA CLOUD Y DOMINIO BONIFICADO
+% ==============================================================================
+\section{Infraestructura Cloud, Hosting Anual y Dominio Oficial Bonificado}
+
+Para garantizar un tiempo de carga inferior a 2 segundos en México y en el extranjero, soportar picos de visitas y asegurar un 99.9\% de disponibilidad operativa, se cotiza el siguiente paquete de infraestructura anual:
+
+\vspace{0.15cm}
+
+\noindent
+\footnotesize
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3.6cm} X c c r}
+\toprule
+\rowcolor{MezcalAgave!15}
+Componente & Especificación Técnica y Alcance & Periodo & Inclusión & Inversión (MXN) \\
+\midrule
+Hosting Cloud SSD de Alto Rendimiento & 
+Servidor Cloud con almacenamiento SSD NVMe de alta velocidad, transferencia mensual no medida, soporte nativo para binarios compilados en Golang, bases de datos embebidas (SQLite WAL) y respaldos automáticos semanales. & 
+1 Año (12 meses) & 
+Servicio Principal & 
+\$1,400.00 \\
+\midrule
+Dominio Web Oficial (.com / .com.mx) & 
+Registro de nombre de dominio oficial de marca (ej. \texttt{mezcalmilsensaciones.com}) con delegación de DNS primarias y protección de identidad WHOIS. & 
+1 Año (12 meses) & 
+\textbf{BONIFICADO} & 
+\textbf{\$0.00} \\
+\midrule
+Certificado de Seguridad SSL/TLS Wildcard & 
+Cifrado bancario HTTPS de 256 bits para protección de pagos, formularios y datos de clientes, con renovación automatizada de por vida. & 
+Permanente & 
+Incluido & 
+\$0.00 \\
+\midrule
+Correos Corporativos Profesionales & 
+Hasta 5 buzones empresariales (ej. \texttt{contacto@...}, \texttt{ventas@...}, \texttt{direccion@...}) con protocolos IMAP/SMTP/Webmail y almacenamiento cloud. & 
+1 Año (12 meses) & 
+Incluido & 
+\$0.00 \\
+\midrule
+Red de Entrega de Contenido (CDN) y WAF & 
+Aceleración perimetral Cloudflare con nodos en EE. UU. y México, mitigación contra ataques DDoS, compresión Brotli y protocolo HTTP/3. & 
+1 Año & 
+Incluido & 
+\$0.00 \\
+\midrule
+Servicios de Aprovisionamiento y DNS (Día 1) & 
+Instalación de Linux Server, configuración de firewall (\texttt{ufw}), llaves SSH, registros SPF/DKIM/DMARC anti-spam y configuración de proxy inverso. & 
+Pago único inicial & 
+Puesta a punto & 
+\$600.00 \\
+\midrule
+\rowcolor{MezcalGold!20}
+\multicolumn{4}{l}{\textbf{TOTAL DE LA FASE INICIAL DE INFRAESTRUCTURA (PAGO INICIAL DÍA 1):}} & \textbf{\$2,000.00 MXN} \\
+\bottomrule
+\end{tabularx}
+
+\vspace{0.4cm}
+
+\begin{infobox}{Garantías y Alcance del Paquete de Alojamiento y Dominio Anual}
+\footnotesize
+\begin{itemize}[leftmargin=0.9cm,topsep=1.5pt,itemsep=2pt]
+    \item \textbf{Dominio Oficial Bonificado al 100\%:} El registro del dominio web (\texttt{.com} o \texttt{.com.mx}) se incluye sin costo adicional durante los primeros 12 meses al contratar el paquete de alojamiento anual.
+    \item \textbf{Propiedad Total del Cliente:} Tanto el dominio oficial como el acceso a la consola de hosting y DNS quedan registrados a nombre del cliente / representante legal de Mezcal Mil Sensaciones.
+    \item \textbf{Capacidad de Crecimiento sin Penalizaciones:} La infraestructura cuenta con escalabilidad elástica para soportar campañas de marketing digital, menciones en medios o temporadas altas sin caídas de servicio.
+\end{itemize}
+\end{infobox}
+
+\clearpage
+
+% ==============================================================================
+% PÁGINA 3: ARTICULACIÓN CON EL PLAN MAESTRO DE PRODUCCIÓN ($7,000 TOTAL)
+% ==============================================================================
+\section{Articulación con el Plan Maestro de Producción y Esquema de Pagos}
+
+Para brindar certeza total a Mezcal Mil Sensaciones, la siguiente tabla detalla cómo se articula la inversión inicial de infraestructura (\$2,000.00 MXN) con el plan de desarrollo de 6 semanas (\$5,000.00 MXN diferidos en 3 quincenas):
+
+\vspace{0.15cm}
+
+\noindent
+\footnotesize
+\begin{tabularx}{\textwidth}{p{3.2cm} X p{3.2cm} r}
+\toprule
+\rowcolor{MezcalAgave!15}
+Hito / Momento de Pago & Alcance Técnico Entregado en Producción & Modalidad & Importe (MXN) \\
+\midrule
+\textbf{Pago Inicial — Día 1 (Esta Cotización)} & 
+Compra inmediata de hosting cloud por 1 año, registro de dominio oficial bonificado (gratis), certificados SSL, 5 correos corporativos, configuración DNS y servidor activo. & 
+Pago único inicial de infraestructura & 
+\textbf{\$2,000.00} \\
+\midrule
+\textbf{1.ª Quincena (Semana 2)} & 
+Landing Page inmersiva terminada, catálogo y páginas individuales de las 4 expresiones de mezcal, fichas PDF y cesta de compras reactiva con Fluid UI. & 
+Honorarios de desarrollo (1.ª entrega) & 
+\$1,666.67 \\
+\midrule
+\textbf{2.ª Quincena (Semana 4)} & 
+Sistema de autenticación multi-rol (Cliente, Administrador y Punto de Venta POS), dashboard administrativo y sistema de seguimiento de pedidos en tiempo real. & 
+Honorarios de desarrollo (2.ª entrega) & 
+\$1,666.67 \\
+\midrule
+\textbf{3.ª Quincena (Semana 6)} & 
+Chatbot de WhatsApp automatizado, chat directo en plataforma con vendedores, pasarela de pagos Stripe/PayPal, sistema de correos y apartados legales. & 
+Honorarios de desarrollo (Entrega final) & 
+\$1,666.66 \\
+\midrule
+\rowcolor{MezcalGold!20}
+\multicolumn{3}{l}{\textbf{INVERSIÓN TOTAL DEL PROYECTO LLAVE EN MANO (6 SEMANAS):}} & \textbf{\$7,000.00 MXN} \\
+\bottomrule
+\end{tabularx}
+
+\vspace{0.35cm}
+
+\begin{goldbox}{Resumen Presupuestal de la Fase Inicial (Día 1)}
+\footnotesize
+\begin{tabularx}{\textwidth}{X r}
+    \textbf{Concepto Presupuestal Inicial} & \textbf{Importe (MXN)} \\
+    \midrule
+    Hosting Cloud SSD NVMe de Alta Velocidad (12 meses de servicio): & \$1,400.00 MXN \\
+    Dominio Web Oficial (.com o .com.mx por 12 meses): & \textbf{\$0.00 MXN (GRATIS)} \\
+    Certificado SSL/TLS Wildcard, CDN Cloudflare y Correos Corporativos: & \textbf{\$0.00 MXN (INCLUIDO)} \\
+    Aprovisionamiento, Hardening Linux, DNS SPF/DKIM y Puesta a Punto en Go: & \$600.00 MXN \\
+    \midrule
+    \rowcolor{MezcalGold!20}
+    \textbf{\normalsize\color{MezcalDark}TOTAL PAGO INICIAL DE INFRAESTRUCTURA (DÍA 1):} & \textbf{\large\color{MezcalAgave}\$2,000.00 MXN} \\
+\end{tabularx}
+\end{goldbox}
+
+\vspace{0.25cm}
+
+\begin{infobox}{Beneficios Directos de la Arquitectura Seleccionada (Golang + Cloud Hosting)}
+\footnotesize
+\begin{itemize}[leftmargin=0.9cm,topsep=1.5pt,itemsep=2pt]
+    \item \textbf{Cero dependencias pesadas:} Toda la web se ejecuta desde un único binario ejecutable que consume menos de 35~MB de memoria RAM, garantizando velocidad extrema y cero caídas por librerías rotas.
+    \item \textbf{Tiempo de respuesta instantáneo:} Entrega de fichas técnicas, catálogo e imágenes en menos de 50~ms gracias al caching perimetral de Cloudflare.
+    \item \textbf{Sin gastos ocultos de mantenimiento:} Al ser una arquitectura en binario nativo, no requiere pagar servicios mensuales adicionales de base de datos ni servidores de aplicaciones complejos.
+\end{itemize}
+\end{infobox}
+
+\clearpage
+
+% ==============================================================================
+% PÁGINA 4: MATRIZ DE REQUISITOS Y PERMISOS DE EXPORTACIÓN (MÉXICO Y EE. UU.)
+% ==============================================================================
+\section{Matriz Integral de Permisos y Regulaciones para Venta y Exportación}
+
+Para comercializar y exportar legalmente mezcal artesanal hacia mercados internacionales (especialmente Estados Unidos, el principal importador mundial), se debe cumplir con el marco regulatorio en \textbf{México} (país de origen) y en el \textbf{País de Destino (EE. UU.)}. 
+
+\textit{Nota: Los costos descritos a continuación corresponden a derechos y trámites ante organismos oficiales de gobierno y certificadoras externas, independientes de los honorarios técnicos del desarrollo web.}
+
+\vspace{0.15cm}
+
+\noindent
+\footnotesize
+\begin{tabularx}{\textwidth}{>{\bfseries}p{2.8cm} p{2.8cm} X >{\raggedleft\arraybackslash}p{2.8cm}}
+\toprule
+\rowcolor{MezcalAgave!15}
+Trámite / Permiso & Dependencia / Organismo & Finalidad y Requisitos Clave & Costo Aprox. Derechos \\
+\midrule
+\multicolumn{4}{l}{\cellcolor{MezcalLight}\textbf{\color{MezcalEarth}A. Marco Regulatorio Obligatorio en Territorio Mexicano (País de Origen)}} \\
+\midrule
+Padrón de Exportadores Sectorial (Sector 1) & 
+SAT / SHCP & 
+Obligatorio para exportar bebidas alcohólicas. Requiere RFC activo, e.firma vigente, opinión 32-D positiva e inventario trazable. & 
+\textbf{GRATUITO} (En portal SAT) \\
+\midrule
+Certificación de Palenque y Envasador & 
+Organismo Certificador (COMERCAM / CIDAM) & 
+Inspección periódica del palenque en El Gramal y planta envasadora para certificar cumplimiento de la \textbf{NOM-070-SCFI-2016}. & 
+\$8,000 – \$14,000 MXN (Anual / palenque) \\
+\midrule
+Certificado de Lote y Análisis Químico & 
+Laboratorio acreditado ante la EMA & 
+Análisis cromatográfico por lote de exportación (medición de metanol, alcoholes superiores, furfural y metales pesados). & 
+\$2,500 – \$4,200 MXN (Por lote muestreado) \\
+\midrule
+Certificado de Autenticidad (CAEM) & 
+Consejo Regulador del Mezcal (CRM) & 
+Documento oficial que acredita que el mezcal exportado cumple con la Denominación de Origen Mezcal (DOM). & 
+\$1,500 – \$2,800 MXN (Por embarque) \\
+\midrule
+Registro de Marca Oficial (Clase 33) & 
+IMPI (\texttt{impi.gob.mx}) & 
+Protección del nombre comercial "Mil Sensaciones" ante plagio en la categoría de bebidas alcohólicas (vigencia de 10 años). & 
+\$3,126.41 MXN (Tarifa oficial IMPI) \\
+\midrule
+Código de Barras Internacional & 
+GS1 México (\texttt{gs1mexico.org}) & 
+Asignación de código de barras global EAN-13 / UPC para comercialización en aduanas, tiendas de retail y bodegas. & 
+\$1,800 – \$3,200 MXN (Membresía anual) \\
+\midrule
+\multicolumn{4}{l}{\cellcolor{MezcalLight}\textbf{\color{MezcalEarth}B. Requisitos Federales en el País de Destino (Estados Unidos)}} \\
+\midrule
+Registro de Instalación FDA (Food Facility) & 
+Food and Drug Administration (FDA) & 
+Registro obligatorio de la fábrica/palenque bajo el \textit{Bioterrorism Act}. Requiere contar con un \textbf{U.S. Agent} registrado en EE. UU. & 
+Trámite FDA Gratuito (Agente: \$250–\$450 USD/año) \\
+\midrule
+Aprobación de Etiquetas TTB (COLA) & 
+Alcohol and Tobacco Tax and Trade Bureau (TTB) & 
+\textit{Certificate of Label Approval}. Aprobación digital de la etiqueta frontal y trasera en inglés (advertencia sanitaria del cirujano y \% Alc./Vol.). & 
+\textbf{GRATUITO} (Trámite digital ante TTB) \\
+\midrule
+Importador con Licencia Federal TTB & 
+Alcohol and Tobacco Tax and Trade Bureau (TTB) & 
+En EE. UU. rige el sistema de 3 niveles (\textit{Three-Tier System}). La destilería mexicana debe comercializar a través de un \textbf{Importador con Licencia Federal TTB}. & 
+Comisión pactada con el importador / socio \\
+\bottomrule
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\begin{infobox}{Estrategia Recomendada: Exportación Eficiente sin Descapitalizarse}
+\footnotesize
+\begin{enumerate}[leftmargin=0.9cm,topsep=1.5pt,itemsep=2pt]
+    \item \textbf{Paso Inmediato en México (Inversión Controlada):} Registrar la marca en el IMPI (\$3,126 MXN), tramitar el Padrón de Exportadores Sectorial en el SAT (gratuito) y registrar los códigos de barras GS1.
+    \item \textbf{Vía Comercial en EE. UU. (Alianza Estratégica con Importador):} En lugar de constituir una empresa importadora propia en EE. UU. (que exige fianzas de miles de dólares y licencias estatales en cada estado), el camino más rentable para marcas oaxaqueñas es \textbf{asociarse con un Importador con Licencia Federal TTB ya establecido} o un distribuidor boutique de mezcal artesanal.
+    \item \textbf{La Plataforma Web Bilingüe como Llave B2B:} El sitio web oficial cotizado, con sus fichas técnicas descargables en PDF y modo 100\% en inglés, es la carta de presentación fundamental que exigen los importadores extranjeros para evaluar lotes y cerrar contratos de compra por volumen.
+\end{enumerate}
+\end{infobox}
+
+\clearpage
+
+% ==============================================================================
+% PÁGINA 5: RESUMEN GLOBAL, CONDICIONES COMERCIALES Y FIRMAS
+% ==============================================================================
+\section{Cuadro Comparativo Global de Inversión y Destino de Recursos}
+
+Para máxima transparencia administrativa, la siguiente tabla distingue con claridad qué rubros corresponden a la \textbf{inversión digital del proyecto web} y cuáles corresponden a \textbf{derechos oficiales de gobierno / certificadoras}:
+
+\vspace{0.15cm}
+
+\noindent
+\footnotesize
+\begin{tabularx}{\textwidth}{p{4.2cm} X p{2.8cm} r}
+\toprule
+\rowcolor{MezcalAgave!15}
+Concepto General & Descripción del Destino del Recurso & Beneficiario / Entidad & Inversión (MXN) \\
+\midrule
+\textbf{1. Pago Inicial de Infraestructura (Día 1)} & Hosting Cloud SSD 12 meses + Dominio Oficial GRATIS + SSL + Setup & Proveedor Cloud / Dominio & \textbf{\$2,000.00} \\
+\textbf{2. Honorarios de Desarrollo (6 semanas)} & Ingeniería de software de los 10 módulos en 3 quincenas (\$1,666.67 c/u) & Ing. de Software & \$5,000.00 \\
+\midrule
+\rowcolor{MezcalGold!20}
+\multicolumn{3}{l}{\textbf{TOTAL DE LA PLATAFORMA WEB INTEGRAL (LLAVE EN MANO):}} & \textbf{\$7,000.00 MXN} \\
+\midrule
+\textit{3. Trámites Oficiales (Opcional por Etapas)} & Registro IMPI (\$3,126), Padrón SAT (\$0), GS1 México (\$1,800), COMERCAM & Dependencias de Gobierno & Según calendario \\
+\bottomrule
+\end{tabularx}
+
+\vspace{0.3cm}
+
+\section{Condiciones Comerciales, Garantías y Métodos de Pago}
+
+\footnotesize
+\begin{itemize}[leftmargin=1.0cm,itemsep=2.5pt]
+    \item \textbf{Condición de Pago Inicial (\$2,000.00 MXN):} Pago único al Día 1 para compra inmediata del hosting anual, registro del dominio web oficial a nombre del cliente y configuración de los servidores en la nube.
+    \item \textbf{Plazo de Puesta en Marcha del Entorno Digital:} 48 a 72 horas para dominio y hosting activo; entrega completa de la plataforma comercial en 6 semanas conforme al calendario de hitos pactado.
+    \item \textbf{Garantía y Soporte Técnico Incluido:} 12 meses de monitoreo de disponibilidad del servidor (SLA 99.9\%), renovación automática de certificados SSL y copias de seguridad periódicas programadas.
+    \item \textbf{Métodos de Pago Aceptados:} Transferencia electrónica bancaria vía SPEI, depósito en ventanilla bancaria/OXXO o pago en línea con tarjeta de débito/crédito.
+\end{itemize}
+
+\vspace{0.6cm}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \textbf{Por el Prestador de Servicios Técnicos:}\\[1.3cm]
+    \rule{0.85\textwidth}{0.5pt}\\
+    \textbf{Ing. en Computación Jose Ramon Aragon Toledo}\\
+    Cédula Profesional / Clave DGP: 521344\\
+    Ingeniero de Software \& Arquitecto Cloud\\
+    Correo: \texttt{aatr010423@gmail.com}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \textbf{Por el Cliente / Aceptación de la Oferta:}\\[1.3cm]
+    \rule{0.85\textwidth}{0.5pt}\\
+    \textbf{Mezcal Artesanal Mil Sensaciones}\\
+    Representante Legal / Maestro Mezcalero\\
+    El Gramal, Nejapa de Madero, Yautepec, Oaxaca\\
+    Fecha de Aceptación: \rule{3.0cm}{0.4pt}
+\end{minipage}
+
+\vspace{0.4cm}
+
+\begin{center}
+    \tiny\textcolor{gray}{Documento generado conforme a los estándares de ingeniería de software IEEE 830 y normativas comerciales vigentes. Oaxaca, México, 2026.}
+\end{center}
+
+\end{document}
